@@ -1,3 +1,6 @@
 
+from core.usecase.parse import ParseXboxPricesAndNotify
 
-print("xD")
+uc = ParseXboxPricesAndNotify()
+
+uc.execute()
