@@ -10,7 +10,8 @@ class XboxGame:
     price_regular: float
     promotion_price: float
 
-class XboxStoreParser(ABC):
+class XboxStorePromotionsCheckService(ABC):
     @abstractmethod
-    def parse(self) -> list[XboxGame]:
+    def check_promotions(self, game_names: list[str]) -> XboxGame | None:
         pass
+
