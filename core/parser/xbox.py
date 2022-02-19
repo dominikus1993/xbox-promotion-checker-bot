@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import Iterable
+
 
 @dataclass
 class XboxGame:
     title: str
-    price: str
     link: str
     image: str
     price_regular: float
@@ -12,5 +13,5 @@ class XboxGame:
 
 class XboxStoreParser(ABC):
     @abstractmethod
-    def parse(self) -> list[XboxGame]:
+    def parse(self) -> Iterable[XboxGame]:
         pass
