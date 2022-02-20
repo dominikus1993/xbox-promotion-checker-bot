@@ -8,8 +8,8 @@ class XboxGame:
     title: str
     link: str
     image: str
-    price_regular: float
-    promotion_price: float
+    old_price: float | None
+    price: float | None
 
 class XboxStoreParser(ABC):
     @abstractmethod
