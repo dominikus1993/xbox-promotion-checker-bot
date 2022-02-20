@@ -65,6 +65,6 @@ def parse() -> list[XboxGame]:
 
 def parse_all():
     with Pool(os.cpu_count()) as p:
-        games = p.map(__parse, [__get_xbox_url(page) for page in range(1, 5)])
+        games = p.map(__parse, [__get_xbox_url(page) for page in range(1, 7)])
         return [game for game_list in games for game in game_list]
 
