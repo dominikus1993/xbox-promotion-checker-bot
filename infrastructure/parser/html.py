@@ -43,7 +43,7 @@ def __create_xbox_game(item: Any) -> XboxGame | None:
 
     link_element = item.find("a")
     image = link_element.find("div", {"class": "c-channel-placement-image"}).find("picture").find("img").get("src")
-    link = link_element.get("href")
+    link = link_element.get("href").replace("/p/", "/games/store/")
     title = product_placement.find("h3", {"class": "c-subheading-6"}).text
     return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
 

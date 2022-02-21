@@ -18,5 +18,5 @@ def fake_parse():
 
 class TestXboxStorePromotionsCheckService(unittest.TestCase):
     def test_checking_promotion(self):
-        subject = check_promotions(fake_parse, ["title1", "title2"])
+        subject = check_promotions(fake_parse, ["title1", "title2"])()
         self.assertEqual(list(subject), [XboxGame("title1", "link", "image", 100, 50), XboxGame("title2", "link", "image", 100, 90), XboxGame("title3", "link", "image", 100, 10)])
