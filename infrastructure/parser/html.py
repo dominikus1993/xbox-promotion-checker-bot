@@ -41,10 +41,11 @@ def __create_xbox_game(item: Any) -> XboxGame | None:
     if price is None or old_price is None:
         return None
 
-    link = item.find("a")
-    image = link.find("div", {"class": "c-channel-placement-image"}).find("picture").find("img").get("src")
+    link_element = item.find("a")
+    image = link_element.find("div", {"class": "c-channel-placement-image"}).find("picture").find("img").get("src")
+    link = link_element.get("href")
     title = product_placement.find("h3", {"class": "c-subheading-6"}).text
-    return XboxGame(title, link.get("href"), image, old_price, price)
+    return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
 
 def __parse(url: str) -> Iterable[XboxGame]:
     html = requests.get(url)

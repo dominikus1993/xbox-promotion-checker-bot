@@ -1,6 +1,9 @@
 
+from core.services.provider import check_promotions
 from core.usecase.parse import ParseXboxPricesAndNotify
+from infrastructure.parser.html import parse_all
 
-uc = ParseXboxPricesAndNotify()
+promotions = check_promotions(parse_all, ["Cyberpunk 2077"])
 
-uc.execute()
+for game in promotions:
+    print(game)

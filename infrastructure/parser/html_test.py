@@ -17,7 +17,7 @@ class TestHtmlXboxStoreParser(unittest.TestCase):
                 self.assertIsNot(igame.price, 0)
                 self.assertIsNotNone(igame.old_price)
                 self.assertIsNotNone(igame.price)
-                
+
     def test_parse_all(self):
         games = [item for item in parse_all()]
         self.assertGreater(len(games), 0)
