@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from tkinter import FLAT
 import unittest
 
 from core.utils.price import count_discount
@@ -10,8 +9,8 @@ class _TestData:
     promotion: float
     discount: float
 
-class TestHtmlXboxStoreParser(unittest.TestCase):
-    def test_parse(self):
+class TestCountDiscount(unittest.TestCase):
+    def test_count_discount(self):
         data = [_TestData(100, 50, 50), _TestData(100, 100, 0), _TestData(100, 0, 100), _TestData(0, 0, 0), _TestData(25, 20, 20)]
         for d in data:
             with self.subTest(td=d):

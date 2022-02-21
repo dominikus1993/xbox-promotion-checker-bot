@@ -2,7 +2,7 @@ import os
 from typing import Any, Iterable
 from bs4 import BeautifulSoup
 import requests
-from core.parser.xbox import XboxGame, XboxStoreParser
+from core.parser.xbox import XboxGame
 from multiprocessing import Pool
 
 __CURRENCY = "zł"
@@ -46,25 +46,23 @@ def __create_xbox_game(item: Any) -> XboxGame | None:
     title = product_placement.find("h3", {"class": "c-subheading-6"}).text
     return XboxGame(title, link.get("href"), image, old_price, price)
 
-def __parse(url: str) -> list[XboxGame]:
+def __parse(url: str) -> Iterable[XboxGame]:
     html = requests.get(url)
     soup = BeautifulSoup(html.text, "html.parser")
     items = soup.find_all("div", {"class": "m-channel-placement-item"})
     if items is None or len(items) == 0:
-        return []
-    result = []
+        return
     for item in items:
         game = __create_xbox_game(item)
         if game is not None:
-            result.append(game)
-    
-    return result
+            yield game
 
-def parse() -> list[XboxGame]:
+
+def parse() -> Iterable[XboxGame]:
     return __parse(__get_xbox_url(1))
 
-def parse_all():
-    with Pool(os.cpu_count()) as p:
-        games = p.map(__parse, [__get_xbox_url(page) for page in range(1, 7)])
-        return [game for game_list in games for game in game_list]
+def parse_all() -> Iterable[XboxGame]:
+    for page in range(1, 7):
+        for game in __parse(__get_xbox_url(page)):
+            yield game
 
