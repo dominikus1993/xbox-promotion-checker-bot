@@ -39,3 +39,7 @@ def check_rating(game: XboxGame) -> GameRating | None:
         return GameRating(game, __parse_rating(res[1]), __parse_rating(res[0]))
 
     return None
+
+def is_ok_game(game: XboxGame) -> bool:
+    rating = check_rating(game)
+    return rating is not None and rating.is_ok_game()
