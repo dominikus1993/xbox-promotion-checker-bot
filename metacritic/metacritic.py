@@ -14,6 +14,9 @@ class GameRating:
     user_rating: float
     reviews: float
 
+    def is_ok_game(self) -> bool:
+        return self.user_rating > 8 and self.reviews > 80
+
 def check_rating(game: XboxGame) -> GameRating | None:
     search_term = game.title.lower().replace(" ", "-")
     html = requests.get(f"https://www.metacritic.com/game/xbox-one/{search_term}", headers = {'User-Agent': 'Mozilla/5.0'})

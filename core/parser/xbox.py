@@ -19,6 +19,9 @@ class XboxGame:
             return 0
         return count_discount(self.old_price, self.price)
 
+    def is_big_promotion(self):
+        return self.count_discount() > 70
+
 class XboxStoreParser(ABC):
     @abstractmethod
     def parse(self) -> Iterable[XboxGame]:
