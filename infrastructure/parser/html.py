@@ -67,3 +67,9 @@ def parse_all() -> Iterable[XboxGame]:
         for game in __parse(__get_xbox_url(page)):
             yield game
 
+
+class XboxGameParser:
+    def __call__(self, *args: Any, **kwds: Any) -> Iterable[XboxGame]:
+        for page in range(1, 7):
+            for game in __parse(__get_xbox_url(page)):
+                yield game
