@@ -15,7 +15,7 @@ class GameRating:
     reviews: float
 
     def is_ok_game(self) -> bool:
-        return self.user_rating > 8 and self.reviews > 80
+        return self.user_rating > 8 or self.reviews > 80
 
 def check_rating(game: XboxGame) -> GameRating | None:
     search_term = game.title.lower().replace(" ", "-")
