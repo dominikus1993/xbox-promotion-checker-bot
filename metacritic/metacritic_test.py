@@ -1,5 +1,5 @@
 import unittest
-from core.parser.xbox import XboxGame
+from core.data.game import XboxGame
 
 from metacritic.metacritic import check_rating
 

@@ -1,9 +1,7 @@
-import os
 from typing import Any, Iterable
 from bs4 import BeautifulSoup
 import requests
-from core.parser.xbox import XboxGame
-from multiprocessing import Pool
+from core.data.game import XboxGame
 
 __CURRENCY = "zł"
 __XBOX_URL = "https://www.microsoft.com/pl-pl/store/deals/games/xbox"
