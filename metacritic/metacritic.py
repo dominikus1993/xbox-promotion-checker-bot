@@ -23,8 +23,11 @@ def check_rating(game: XboxGame) -> GameRating | None:
         return None
         
     for rating_el in ratings:
-        if search_term in rating_el.get("href"):
-            res.append(rating_el.find("div", {"class": "metascore_w"}).text)
+        if search_term not in rating_el.get("href"):
+            continue
+        element = rating_el.find("div", {"class": "metascore_w"})
+        if element is not None:
+            res.append(element.text)
 
     if len(res) == 2:
         return GameRating(__parse_rating(res[1]), __parse_rating(res[0]))
