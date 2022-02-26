@@ -33,7 +33,7 @@ class Game:
 
     def is_ok_game(self) -> bool:
         if self.user_ratings is None or self.reviews is None:
-            return True
+            return False
         return self.user_ratings > 8 or self.reviews > 80
 
     def count_discount(self):
