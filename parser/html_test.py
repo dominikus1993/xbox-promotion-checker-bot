@@ -1,11 +1,19 @@
 import unittest
+from core.data.game import GameRating, XboxGame
 
-from infrastructure.parser.html import parse, parse_all
+from parser.html import GameRatingProvider, XboxStoreParser
+
+
+class FakeRatingProvider(GameRatingProvider):
+    def provide_rating(self, game: XboxGame) -> GameRating | None:
+        return None 
+
 
 
 class TestHtmlXboxStoreParser(unittest.TestCase):
     def test_parse(self):
-        games = [item for item in parse()]
+        parser = XboxStoreParser(FakeRatingProvider())
+        games = parser.parse()
         self.assertGreater(len(games), 0)
         for igame in games:
             with self.subTest(game=igame):
@@ -19,7 +27,8 @@ class TestHtmlXboxStoreParser(unittest.TestCase):
                 self.assertIsNotNone(igame.price)
 
     def test_parse_all(self):
-        games = [item for item in parse_all()]
+        parser = XboxStoreParser(FakeRatingProvider())
+        games = parser.parse_all()
         self.assertGreater(len(games), 0)
         for igame in games:
             with self.subTest(game=igame):
