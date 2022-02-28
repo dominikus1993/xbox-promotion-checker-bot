@@ -1,17 +1,15 @@
 from abc import ABC, abstractmethod
+import asyncio
 from asyncio.log import logger
 import itertools
-import logging
-from multiprocessing import Pool
-from multiprocessing import Queue
-from typing import Any, Iterable
+from typing import Any, Coroutine
+import aiohttp
 from bs4 import BeautifulSoup
-import requests
 from core.data.game import Game, GameRating, XboxGame
 
 class GameRatingProvider(ABC):
     @abstractmethod
-    def provide_rating(self, game: XboxGame) -> GameRating | None:
+    async def provide_rating(self, game: XboxGame) -> GameRating | None:
         pass
 
 class XboxStoreParser:
@@ -62,27 +60,28 @@ class XboxStoreParser:
         title = product_placement.find("h3", {"class": "c-subheading-6"}).text
         return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
     
-    def __parse(self, url: str, ):
+    async def __parse(self, url: str, session: aiohttp.ClientSession):
         print(f"Parsing {url}")
-        html = requests.get(url)
-        soup = BeautifulSoup(html.text, "html.parser")
-        items = soup.find_all("div", {"class": "m-channel-placement-item"})
-        if items is None or len(items) == 0:
-            return []
-        
-        result: list[Game] = []
-        for item in items:
-            xbox_game = self.__create_xbox_game(item)
-            if xbox_game is not None:
-                rating = self.__provider.provide_rating(xbox_game)
-                game = Game.from_xbox_game(xbox_game, rating)
-                result.append(game)
-        return result
+        async with session.get(url) as response:
+            soup = BeautifulSoup(await response.text(), "html.parser")
+            items = soup.find_all("div", {"class": "m-channel-placement-item"})
+            if items is None or len(items) == 0:
+                return []
 
-    def __parse_all(self, q: Queue): 
-        
+            result: list[Game] = []
+            for item in items:
+                xbox_game = self.__create_xbox_game(item)
+                if xbox_game is not None:
+                    rating = self.__provider.provide_rating(xbox_game)
+                    game = Game.from_xbox_game(xbox_game, await rating)
+                    result.append(game)
+            return result
 
-    def parse_all(self) -> list[Game]:
-        with Pool(processes=4) as pool:
-            result = pool.map(self.__parse, itertools.repeat(self.__XBOX_URL, 4))
-            return list(itertools.chain.from_iterable(result))
+
+    async def parse_all(self) -> list[Game]:
+        logger.info('Parsing all games')
+        async with aiohttp.ClientSession() as session:
+            tasks = [t for t in [self.__parse(self.__get_xbox_url(i), session) for i in range(1, 7)] if t is not None]
+            results = await asyncio.gather(*tasks)
+            return list(itertools.chain(*results))
+        
