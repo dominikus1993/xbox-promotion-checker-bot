@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import asyncio
-from asyncio.log import logger
 import itertools
+import logging
 from typing import Any, Coroutine
 import aiohttp
 from bs4 import BeautifulSoup
@@ -60,26 +60,24 @@ class XboxStoreParser:
         title = product_placement.find("h3", {"class": "c-subheading-6"}).text
         return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
     
+    async def __create_game(self, item: XboxGame): 
+        return Game.from_xbox_game(item, await self.__provider.provide_rating(item))
+
     async def __parse(self, url: str, session: aiohttp.ClientSession):
-        print(f"Parsing {url}")
+        logging.info(f"Parsing {url}")
         async with session.get(url) as response:
             soup = BeautifulSoup(await response.text(), "html.parser")
             items = soup.find_all("div", {"class": "m-channel-placement-item"})
             if items is None or len(items) == 0:
                 return []
-
-            result: list[Game] = []
-            for item in items:
-                xbox_game = self.__create_xbox_game(item)
-                if xbox_game is not None:
-                    rating = self.__provider.provide_rating(xbox_game)
-                    game = Game.from_xbox_game(xbox_game, await rating)
-                    result.append(game)
-            return result
+            games = [x for x in map(self.__create_xbox_game, items) if x is not None]
+            tasks = [self.__create_game(game) for game in games]
+            results = await asyncio.gather(*tasks)
+            return results
 
 
     async def parse_all(self) -> list[Game]:
-        logger.info('Parsing all games')
+        logging.info('Parsing all games')
         async with aiohttp.ClientSession() as session:
             tasks = [t for t in [self.__parse(self.__get_xbox_url(i), session) for i in range(1, 7)] if t is not None]
             results = await asyncio.gather(*tasks)
