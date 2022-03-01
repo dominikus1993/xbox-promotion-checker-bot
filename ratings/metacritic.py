@@ -18,10 +18,11 @@ class MetacriticRatingProvider(GameRatingProvider):
                 if response.status != 200:
                     return None
                 soup = BeautifulSoup(await response.text(), "html.parser")
-                res = []
                 ratings = soup.find_all("a", {"class": "metascore_anchor"}, recursive=True)
                 if len(ratings) == 0:
                     return None
+                
+                res = []
                 for rating_el in ratings:
                     if search_term not in rating_el.get("href"):
                         continue
