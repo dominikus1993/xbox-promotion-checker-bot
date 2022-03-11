@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import asyncio
 import itertools
 import logging
-from typing import Any, Coroutine
+from typing import Any
 import aiohttp
 from bs4 import BeautifulSoup
 from core.data.game import Game, GameRating, XboxGame
@@ -82,4 +82,3 @@ class XboxStoreParser:
             tasks = [t for t in [self.__parse(self.__get_xbox_url(i), session) for i in range(1, 7)] if t is not None]
             results = await asyncio.gather(*tasks)
             return list(itertools.chain(*results))
-        
