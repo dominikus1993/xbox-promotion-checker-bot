@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from parser.html import GameRatingProvider
+from games.html import GameRatingProvider
 import aiohttp
 from bs4 import BeautifulSoup
 from core.data.game import GameRating, XboxGame

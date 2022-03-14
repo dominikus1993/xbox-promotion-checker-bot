@@ -1,7 +1,7 @@
 import unittest
 from core.data.game import GameRating, XboxGame
 from unittest import IsolatedAsyncioTestCase
-from parser.html import GameRatingProvider, XboxStoreParser
+from games.html import GameRatingProvider, XboxStoreParser
 
 
 class FakeRatingProvider(GameRatingProvider):
