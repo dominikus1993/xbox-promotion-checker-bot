@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import pprint
 from utils.price import count_discount
 
 
@@ -18,6 +19,9 @@ class Game:
     image: str
     old_price: float | None
     price: float | None
+
+    def get_normalized_title(self):
+        return self.title.lower()
 
     @staticmethod
     def from_xbox_game(xbox_game: XboxGame) -> 'Game':
