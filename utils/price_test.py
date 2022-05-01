@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import unittest
 
-from core.utils.price import count_discount
+from utils.price import count_discount
 
 @dataclass
 class _TestData:

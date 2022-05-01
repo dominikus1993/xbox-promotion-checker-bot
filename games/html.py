@@ -1,23 +1,12 @@
-from abc import ABC, abstractmethod
 import asyncio
 import itertools
 import logging
 from typing import Any
 import aiohttp
 from bs4 import BeautifulSoup
-from core.data.game import Game, GameRating, XboxGame
-
-class GameRatingProvider(ABC):
-    @abstractmethod
-    async def provide_rating(self, game: XboxGame) -> GameRating | None:
-        pass
+from data.game import Game, XboxGame
 
 class XboxStoreParser:
-    __provider: GameRatingProvider
-
-    def __init__(self, provider: GameRatingProvider):
-        self.__provider = provider
-
     __CURRENCY = "zł"
     __XBOX_URL = "https://www.microsoft.com/pl-pl/store/deals/games/xbox"
     
@@ -60,9 +49,6 @@ class XboxStoreParser:
         title = product_placement.find("h3", {"class": "c-subheading-6"}).text
         return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
     
-    async def __create_game(self, item: XboxGame): 
-        return Game.from_xbox_game(item, await self.__provider.provide_rating(item))
-
     async def __parse(self, url: str, session: aiohttp.ClientSession):
         logging.info(f"Parsing {url}")
         async with session.get(url) as response:
@@ -71,9 +57,7 @@ class XboxStoreParser:
             if items is None or len(items) == 0:
                 return []
             games = [x for x in map(self.__create_xbox_game, items) if x is not None]
-            tasks = [self.__create_game(game) for game in games]
-            results = await asyncio.gather(*tasks)
-            return results
+            return [Game.from_xbox_game(game) for game in games]
 
 
     async def parse_all(self) -> list[Game]:
