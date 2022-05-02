@@ -1,13 +1,14 @@
 
 
 from data.game import Game
+from games.loader import GamesLoader
 from services.games import GameFilter
 
 
 class CsvGamesFilter(GameFilter):
     games_that_i_want = []
-    def __init__(self, games: list[str]) -> None:
-        self.games_that_i_want = games
+    def __init__(self, loader: GamesLoader) -> None:
+        self.games_that_i_want = loader.load()
 
     def predicate(self, game: Game) -> bool:
         if not game.is_big_promotion():
