@@ -7,8 +7,6 @@ from games.html import XboxStoreParser
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-def search_title(games: list[str],)
-
 async def main():
     parser = XboxStoreParser()
     logging.info("Start")
