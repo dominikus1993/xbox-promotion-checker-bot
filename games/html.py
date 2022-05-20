@@ -44,7 +44,15 @@ class XboxStoreParser:
             return None
     
         link_element = item.find("a")
-        image = link_element.find("div", {"class": "c-channel-placement-image"}).find("picture").find("img").get("src")
+        if link_element is None:
+            return None
+        image_div = link_element.find("div", {"class": "c-channel-placement-image"})
+        if image_div is None:
+            return None
+        picture_element = image_div.find("picture")
+        if picture_element is None:
+            return None
+        image = picture_element.find("img").get("src")
         link = link_element.get("href").replace("/p/", "/games/store/")
         title = product_placement.find("h3", {"class": "c-subheading-6"}).text
         return XboxGame(title, f"https://www.xbox.com{link}", image, old_price, price)
