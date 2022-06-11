@@ -1,6 +1,6 @@
-package model
+package data
 
-type XboxGame struct {
+type XboxStoreGame struct {
 	Title    string
 	Link     string
 	Image    string
