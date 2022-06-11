@@ -3,6 +3,8 @@ package html
 import (
 	"context"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
@@ -14,8 +16,31 @@ type XboxStoreHtmlParser struct {
 	XboxStoreUrl string
 }
 
-func parsePrice(selection *goquery.Selection) string {
-	return selection.Text()
+// def __parse_old_price(self, price_placement: Any, currency: str) -> float | None:
+// price = price_placement.find("s")
+// if price == "" or price is None:
+// 	return None
+// return self.__try_parse_float(price.text.replace(currency, "").replace(",", ".").strip())
+
+func parseOldPrice(price_placement *goquery.Selection, currency string) (float64, error) {
+	price := price_placement.Find("s")
+	if price.Length() == 0 {
+		return 0, nil
+	}
+	cr
+	return parseFloat(price.Text().Replace(currency, "").Replace(",", ".").TrimSpace())
+}
+
+func parsePrice(selection *goquery.Selection) (*float64, error) {
+	price := selection.Find("span[itemprop=price]").AttrOr("content", "")
+	if price == "" {
+		return nil, fmt.Errorf("price is empty")
+	}
+	priceFloat, err := strconv.ParseFloat(strings.Replace(price, ",", ".", 1), 64)
+	if err != nil {
+		return nil, fmt.Errorf("price is not float")
+	}
+	return &priceFloat, nil
 }
 
 func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
@@ -32,9 +57,15 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 	go func() {
 		c := colly.NewCollector()
 		c.OnHTML("div .m-channel-placement-item", func(e *colly.HTMLElement) {
-			product_placement := e.DOM.Find("div .m-channel-placement-item")
+			product_placement := e.DOM.Find("div .c-channel-placement-content")
 			price_placement := product_placement.Find("div .c-channel-placement-price")
 			prices := price_placement.Find("div .c-price")
+			price, err := parsePrice(prices)
+			if err != nil {
+				return
+			}
+			link := e.DOM.Find("a").AttrOr("href", "")
+			result <- data.NewXboxStoreGame("xD", link, "xD", price, nil)
 
 		})
 		c.OnError(func(r *colly.Response, err error) {
