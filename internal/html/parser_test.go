@@ -17,6 +17,7 @@ func TestParsingFirstPage(t *testing.T) {
 	for _, game := range subject {
 		assert.NotEmpty(t, game.Title)
 		assert.NotEmpty(t, game.Link)
-		assert.NotEmpty(t, game.Image)
+		assert.NotEmpty(t, game.OldPrice)
+		assert.NotEmpty(t, game.Price)
 	}
 }

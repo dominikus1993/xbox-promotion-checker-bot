@@ -22,13 +22,18 @@ type XboxStoreHtmlParser struct {
 // 	return None
 // return self.__try_parse_float(price.text.replace(currency, "").replace(",", ".").strip())
 
-func parseOldPrice(price_placement *goquery.Selection, currency string) (float64, error) {
+func parseOldPrice(price_placement *goquery.Selection, currency string) (*float64, error) {
 	price := price_placement.Find("s")
 	if price.Length() == 0 {
-		return 0, nil
+		return nil, fmt.Errorf("oldprice is empty")
 	}
-	cr
-	return parseFloat(price.Text().Replace(currency, "").Replace(",", ".").TrimSpace())
+	priceWithoutCurrency := strings.Replace(price.Text(), currency, "", 1)
+	priceStr := strings.Replace(priceWithoutCurrency, ",", ".", 1)
+	priceFloat, err := strconv.ParseFloat(strings.TrimSpace(priceStr), 64)
+	if err != nil {
+		return nil, err
+	}
+	return &priceFloat, nil
 }
 
 func parsePrice(selection *goquery.Selection) (*float64, error) {
@@ -64,8 +69,13 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 			if err != nil {
 				return
 			}
+			oldPrice, err := parseOldPrice(price_placement, "zł")
+			if err != nil {
+				return
+			}
 			link := e.DOM.Find("a").AttrOr("href", "")
-			result <- data.NewXboxStoreGame("xD", link, "xD", price, nil)
+			title := product_placement.Find("div .c-subheading-6").Text()
+			result <- data.NewXboxStoreGame(title, strings.Replace(link, "/p/", "/games/store/", 1), price, oldPrice)
 
 		})
 		c.OnError(func(r *colly.Response, err error) {
