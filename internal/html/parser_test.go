@@ -21,3 +21,17 @@ func TestParsingFirstPage(t *testing.T) {
 		assert.NotEmpty(t, game.Price)
 	}
 }
+
+func TestParsingAllPages(t *testing.T) {
+	parser := XboxStoreHtmlParser{XboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
+	result := parser.Parse(context.Background())
+	subject := gotolkit.ToSlice(result)
+	assert.NotNil(t, subject)
+	assert.NotEmpty(t, subject)
+	for _, game := range subject {
+		assert.NotEmpty(t, game.Title)
+		assert.NotEmpty(t, game.Link)
+		assert.NotEmpty(t, game.OldPrice)
+		assert.NotEmpty(t, game.Price)
+	}
+}

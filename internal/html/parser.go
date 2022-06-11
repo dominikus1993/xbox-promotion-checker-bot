@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	gotolkit "github.com/dominikus1993/go-toolkit"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/gocolly/colly/v2"
 	log "github.com/sirupsen/logrus"
@@ -91,9 +92,9 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 }
 
 func (parser *XboxStoreHtmlParser) Parse(ctx context.Context) <-chan data.XboxStoreGame {
-	result := make(chan data.XboxStoreGame)
-	go func() {
-
-	}()
-	return result
+	streams := make([]<-chan data.XboxStoreGame, 0)
+	for i := 1; i <= 7; i++ {
+		streams = append(streams, parser.parsePage(ctx, i))
+	}
+	return gotolkit.FanIn(ctx, streams...)
 }
