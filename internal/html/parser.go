@@ -14,14 +14,12 @@ import (
 )
 
 type XboxStoreHtmlParser struct {
-	XboxStoreUrl string
+	xboxStoreUrl string
 }
 
-// def __parse_old_price(self, price_placement: Any, currency: str) -> float | None:
-// price = price_placement.find("s")
-// if price == "" or price is None:
-// 	return None
-// return self.__try_parse_float(price.text.replace(currency, "").replace(",", ".").strip())
+func NewXboxStoreHtmlParser(xboxStoreUrl string) *XboxStoreHtmlParser {
+	return &XboxStoreHtmlParser{xboxStoreUrl: xboxStoreUrl}
+}
 
 func parseOldPrice(price_placement *goquery.Selection, currency string) (*float64, error) {
 	price := price_placement.Find("s")
@@ -51,10 +49,10 @@ func parsePrice(selection *goquery.Selection) (*float64, error) {
 
 func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 	if page == 1 {
-		return parser.XboxStoreUrl
+		return parser.xboxStoreUrl
 	}
 	skipItems := (page - 1) * 90
-	return fmt.Sprintf("%s?s=store&skipitems=%d", parser.XboxStoreUrl, skipItems)
+	return fmt.Sprintf("%s?s=store&skipitems=%d", parser.xboxStoreUrl, skipItems)
 }
 
 func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-chan data.XboxStoreGame {
@@ -91,7 +89,7 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 	return result
 }
 
-func (parser *XboxStoreHtmlParser) Parse(ctx context.Context) <-chan data.XboxStoreGame {
+func (parser *XboxStoreHtmlParser) Provide(ctx context.Context) <-chan data.XboxStoreGame {
 	streams := make([]<-chan data.XboxStoreGame, 0)
 	for i := 1; i <= 7; i++ {
 		streams = append(streams, parser.parsePage(ctx, i))

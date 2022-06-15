@@ -9,7 +9,7 @@ import (
 )
 
 func TestParsingFirstPage(t *testing.T) {
-	parser := XboxStoreHtmlParser{XboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
+	parser := XboxStoreHtmlParser{xboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
 	result := parser.parsePage(context.Background(), 1)
 	subject := gotolkit.ToSlice(result)
 	assert.NotNil(t, subject)
@@ -23,8 +23,8 @@ func TestParsingFirstPage(t *testing.T) {
 }
 
 func TestParsingAllPages(t *testing.T) {
-	parser := XboxStoreHtmlParser{XboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
-	result := parser.Parse(context.Background())
+	parser := XboxStoreHtmlParser{xboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
+	result := parser.Provide(context.Background())
 	subject := gotolkit.ToSlice(result)
 	assert.NotNil(t, subject)
 	assert.NotEmpty(t, subject)

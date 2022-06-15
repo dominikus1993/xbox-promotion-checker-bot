@@ -8,6 +8,10 @@ import (
 type PriceFilter struct {
 }
 
+func NewPriceFilter() *PriceFilter {
+	return &PriceFilter{}
+}
+
 func calculatePromotionPercentage(oldPrice, price *float64) float64 {
 	if oldPrice == nil || price == nil {
 		return 0

@@ -14,7 +14,7 @@ type TxtFileFilter struct {
 	gamesThatIWantBuy []string
 }
 
-func NewCsvFile(filePath string) (*TxtFileFilter, error) {
+func NewTxtFileFilter(filePath string) (*TxtFileFilter, error) {
 	f, err := os.Open(filePath)
 
 	if err != nil {
@@ -26,7 +26,7 @@ func NewCsvFile(filePath string) (*TxtFileFilter, error) {
 	scanner := bufio.NewScanner(f)
 	gamesThatIWantBuy := make([]string, 0)
 	for scanner.Scan() {
-		gamesThatIWantBuy = append(gamesThatIWantBuy, scanner.Text())
+		gamesThatIWantBuy = append(gamesThatIWantBuy, strings.ToLower(scanner.Text()))
 	}
 
 	if err := scanner.Err(); err != nil {
