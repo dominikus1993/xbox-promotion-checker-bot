@@ -9,7 +9,7 @@ require (
 	github.com/k0kubun/pp/v3 v3.1.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.7.2
-	github.com/urfave/cli/v2 v2.8.1
+	github.com/urfave/cli/v2 v2.10.0
 )
 
 require (
@@ -31,8 +31,8 @@ require (
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	golang.org/x/net v0.0.0-20220607020251-c690dde0001d // indirect
-	golang.org/x/sys v0.0.0-20220610221304-9f5ed59c137d // indirect
+	golang.org/x/net v0.0.0-20220617184016-355a448f1bc9 // indirect
+	golang.org/x/sys v0.0.0-20220615213510-4f61da869c0c // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
