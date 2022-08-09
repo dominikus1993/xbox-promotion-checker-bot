@@ -15,7 +15,7 @@ import (
 const xboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox"
 
 func XboxGamePromotionParser(context *cli.Context) error {
-	log.Info("starting xbox game promotion parser")
+	log.Infoln("starting xbox game promotion parser")
 	fileFilter, err := files.NewTxtFileFilter("./games.txt")
 	if err != nil {
 		return fmt.Errorf("%w, failed to create file filter", err)
