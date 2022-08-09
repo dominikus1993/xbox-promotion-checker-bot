@@ -22,7 +22,7 @@ func calculatePromotionPercentage(oldPrice, price *float64) float64 {
 func (f *PriceFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
 	return channels.Filter(games, func(game data.XboxStoreGame) bool {
 		if game.Price != nil && game.OldPrice != nil {
-			return calculatePromotionPercentage(game.OldPrice, game.Price) >= 75
+			return calculatePromotionPercentage(game.OldPrice, game.Price) >= 50
 		}
 		return false
 	})

@@ -10,8 +10,20 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:   "xbox-promotion-bot",
-		Usage:  "parse xbox game promotions",
+		Name:  "xbox-promotion-bot",
+		Usage: "parse xbox game promotions",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:     "webhooktoken",
+				Usage:    "discord webhook token",
+				Required: true,
+			},
+			&cli.StringFlag{
+				Name:     "webhookid",
+				Usage:    "discord webhhook id",
+				Required: true,
+			},
+		},
 		Action: cmd.XboxGamePromotionParser,
 	}
 	err := app.Run(os.Args)

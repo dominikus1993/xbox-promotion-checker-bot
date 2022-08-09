@@ -15,8 +15,10 @@ func TestParsingFirstPage(t *testing.T) {
 	assert.NotNil(t, subject)
 	assert.NotEmpty(t, subject)
 	for _, game := range subject {
+		link, err := game.GetLink()
+		assert.NoError(t, err)
 		assert.NotEmpty(t, game.Title)
-		assert.NotEmpty(t, game.Link)
+		assert.NotEmpty(t, link)
 		assert.NotEmpty(t, game.OldPrice)
 		assert.NotEmpty(t, game.Price)
 	}
@@ -29,8 +31,10 @@ func TestParsingAllPages(t *testing.T) {
 	assert.NotNil(t, subject)
 	assert.NotEmpty(t, subject)
 	for _, game := range subject {
+		link, err := game.GetLink()
+		assert.NoError(t, err)
 		assert.NotEmpty(t, game.Title)
-		assert.NotEmpty(t, game.Link)
+		assert.NotEmpty(t, link)
 		assert.NotEmpty(t, game.OldPrice)
 		assert.NotEmpty(t, game.Price)
 	}
