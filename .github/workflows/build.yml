@@ -3,7 +3,7 @@ name: Build DevNEwsBot CLI Image
 on:
   push:
     branches:    
-      - master
+      - main
       - 'release/**'
     tags:        
       - v1
