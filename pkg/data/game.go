@@ -1,16 +1,20 @@
 package data
 
-import "net/url"
+import (
+	"net/url"
+
+	"github.com/dustin/go-humanize"
+)
 
 type XboxStoreGame struct {
 	Title    string
 	link     string
-	Price    *float64
-	OldPrice *float64
+	price    float64
+	oldPrice float64
 }
 
 func (g *XboxStoreGame) GetLink() (string, error) {
-	uri, err := url.JoinPath("https://www.xbox.com/", g.link)
+	uri, err := url.JoinPath("https://www.microsoft.com/", g.link)
 	if err != nil {
 		return "", err
 	}
@@ -18,11 +22,23 @@ func (g *XboxStoreGame) GetLink() (string, error) {
 	return uri, nil
 }
 
-func NewXboxStoreGame(title, link string, price, oldPrice *float64) XboxStoreGame {
+func (g *XboxStoreGame) CalculatePromotionPercentage() float64 {
+	return 100 - (g.price / g.oldPrice * 100)
+}
+
+func (g *XboxStoreGame) GetPrice() string {
+	return humanize.FormatFloat("#,###.##", g.price)
+}
+
+func (g *XboxStoreGame) GetOldPrice() string {
+	return humanize.FormatFloat("#,###.##", g.oldPrice)
+}
+
+func NewXboxStoreGame(title, link string, price, oldPrice float64) XboxStoreGame {
 	return XboxStoreGame{
 		Title:    title,
 		link:     link,
-		Price:    price,
-		OldPrice: oldPrice,
+		price:    price,
+		oldPrice: oldPrice,
 	}
 }
