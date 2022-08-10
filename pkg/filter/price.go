@@ -17,5 +17,3 @@ func (f *PriceFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxSt
 		return game.CalculatePromotionPercentage() >= 10
 	})
 }
-
-// https://discord.com/api/webhooks/898845993615884319/LllRxd2Ueu5gk4-uQGtgE1QEm6A-ZZt0F5lDyFgaXAjOmKKNE11_3ppqJ86rsBrkgdP9
