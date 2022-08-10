@@ -6,6 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.8.0
 	github.com/bwmarrin/discordgo v0.25.0
 	github.com/dominikus1993/go-toolkit v0.0.4
+	github.com/dustin/go-humanize v1.0.0
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/k0kubun/pp/v3 v3.1.0
 	github.com/sirupsen/logrus v1.9.0
@@ -20,7 +21,6 @@ require (
 	github.com/antchfx/xpath v1.2.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
