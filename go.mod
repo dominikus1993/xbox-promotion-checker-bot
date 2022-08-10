@@ -4,11 +4,12 @@ go 1.19
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0
+	github.com/bwmarrin/discordgo v0.25.0
 	github.com/dominikus1993/go-toolkit v0.0.4
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/k0kubun/pp/v3 v3.1.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.8.0
 	github.com/urfave/cli/v2 v2.11.1
 )
 
@@ -17,7 +18,6 @@ require (
 	github.com/antchfx/htmlquery v1.2.5 // indirect
 	github.com/antchfx/xmlquery v1.3.12 // indirect
 	github.com/antchfx/xpath v1.2.1 // indirect
-	github.com/bwmarrin/discordgo v0.25.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
