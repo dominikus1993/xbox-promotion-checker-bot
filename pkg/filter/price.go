@@ -14,6 +14,6 @@ func NewPriceFilter() *PriceFilter {
 
 func (f *PriceFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
 	return channels.Filter(games, func(game data.XboxStoreGame) bool {
-		return game.CalculatePromotionPercentage() >= 10
+		return game.CalculatePromotionPercentage() >= 50
 	})
 }
