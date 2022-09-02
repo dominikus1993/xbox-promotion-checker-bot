@@ -11,7 +11,7 @@ require (
 	github.com/k0kubun/pp/v3 v3.1.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.0
-	github.com/urfave/cli/v2 v2.11.2
+	github.com/urfave/cli/v2 v2.14.0
 )
 
 require (
