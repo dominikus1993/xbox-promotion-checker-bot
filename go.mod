@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0
-	github.com/bwmarrin/discordgo v0.26.0
+	github.com/bwmarrin/discordgo v0.26.1
 	github.com/dominikus1993/go-toolkit v0.0.4
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gocolly/colly/v2 v2.1.0
