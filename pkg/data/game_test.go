@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestParsingFirstPage(t *testing.T) {
+func TestPErcentageCalculation(t *testing.T) {
 	data := []struct {
 		game     XboxStoreGame
 		expected float64
@@ -18,6 +18,23 @@ func TestParsingFirstPage(t *testing.T) {
 
 	for _, d := range data {
 		result := d.game.CalculatePromotionPercentage()
+		assert.Equal(t, d.expected, result)
+	}
+}
+
+func TestFormatPercentage(t *testing.T) {
+	data := []struct {
+		game     XboxStoreGame
+		expected string
+	}{
+		{game: NewXboxStoreGame("", "", 10.0, 20.0), expected: "50.00"},
+		{game: NewXboxStoreGame("", "", 10.0, 10.0), expected: "0.00"},
+		{game: NewXboxStoreGame("", "", 10.0, 100.0), expected: "90.00"},
+		{game: NewXboxStoreGame("", "", 134.99, 269.99), expected: "50.00"},
+	}
+
+	for _, d := range data {
+		result := d.game.FormatPromotionPercentage()
 		assert.Equal(t, d.expected, result)
 	}
 }

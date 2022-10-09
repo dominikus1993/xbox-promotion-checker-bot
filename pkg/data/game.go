@@ -26,6 +26,11 @@ func (g *XboxStoreGame) CalculatePromotionPercentage() float64 {
 	return 100 - (g.price / g.oldPrice * 100)
 }
 
+func (g *XboxStoreGame) FormatPromotionPercentage() string {
+	percentage := 100 - (g.price / g.oldPrice * 100)
+	return humanize.FormatFloat("#,###.##", percentage)
+}
+
 func (g *XboxStoreGame) GetPrice() string {
 	return humanize.FormatFloat("#,###.##", g.price)
 }
