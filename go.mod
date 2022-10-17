@@ -8,7 +8,7 @@ require (
 	github.com/dominikus1993/go-toolkit v0.0.4
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gocolly/colly/v2 v2.1.0
-	github.com/k0kubun/pp/v3 v3.1.0
+	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.0
 	github.com/urfave/cli/v2 v2.19.2
@@ -27,8 +27,8 @@ require (
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
-	github.com/mattn/go-colorable v0.1.12 // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
