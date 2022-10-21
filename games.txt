@@ -12,3 +12,4 @@ Ragnarok
 Deathloop
 Diablo
 Bannerlord
+Gotham
