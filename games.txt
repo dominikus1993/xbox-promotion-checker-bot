@@ -14,3 +14,4 @@ Diablo
 Bannerlord
 Gotham
 ATOM RPG
+Grim Dawn
