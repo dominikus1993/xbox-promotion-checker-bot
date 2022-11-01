@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var fakeError = fmt.Errorf("Error")
+var errFake = fmt.Errorf("Error")
 
 type fakeOkXboxGameWriter struct {
 	executed bool
@@ -32,7 +32,7 @@ func (writer *fakeErrorXboxGameWriter) Write(games <-chan data.XboxStoreGame) er
 	for range games {
 		writer.executed = true
 	}
-	return fakeError
+	return errFake
 }
 
 func TestBroadcastingGames(t *testing.T) {
