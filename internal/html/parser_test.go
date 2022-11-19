@@ -27,6 +27,14 @@ func TestParsingFirstPage(t *testing.T) {
 	}
 }
 
+func TestGetSecondPageUrl(t *testing.T) {
+	parser := XboxStoreHtmlParser{xboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
+	subject := parser.getXboxPageUrl(2)
+	assert.NotNil(t, subject)
+	assert.NotEmpty(t, subject)
+	assert.Equal(t, "https://www.microsoft.com/pl-pl/store/deals/games/xbox?skipitems=90", subject)
+}
+
 func TestParsingAllPages(t *testing.T) {
 	parser := XboxStoreHtmlParser{xboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox"}
 	result := parser.Provide(context.Background())

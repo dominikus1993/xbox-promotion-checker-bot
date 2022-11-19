@@ -52,7 +52,7 @@ func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 		return parser.xboxStoreUrl
 	}
 	skipItems := (page - 1) * 90
-	return fmt.Sprintf("%s?s=store&skipitems=%d", parser.xboxStoreUrl, skipItems)
+	return fmt.Sprintf("%s?skipitems=%d", parser.xboxStoreUrl, skipItems)
 }
 
 func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-chan data.XboxStoreGame {
