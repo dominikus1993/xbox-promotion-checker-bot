@@ -99,12 +99,12 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 		parser.collector.OnHTML("div.card", func(e *colly.HTMLElement) {
 			card_placement := e.DOM.Find("div.card-body")
 			price_placement := card_placement.Find("p[aria-hidden='true']")
+			title, link := getTitleAndLink(card_placement)
 			oldPrice, promotionPrice, err := parsePrices(price_placement)
 			if err != nil {
-				log.WithError(err).Errorln("failed to parse price")
+				log.WithField("url", e.Request.URL).WithField("title", title).WithError(err).Warnln("failed to parse price")
 				return
 			}
-			title, link := getTitleAndLink(card_placement)
 			result <- data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
 
 		})
