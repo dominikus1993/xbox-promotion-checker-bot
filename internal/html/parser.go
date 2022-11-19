@@ -36,20 +36,6 @@ func replaceIncorrectChars(text, replacement string, params ...string) string {
 	return result
 }
 
-func parseOldPrice(price_placement *goquery.Selection, currency string) (float64, error) {
-	price := price_placement.Text()
-	if len(price) == 0 {
-		return 0.0, fmt.Errorf("oldprice is empty")
-	}
-	priceWithoutCurrency := strings.Replace(price, currency, "", 1)
-	priceStr := strings.Replace(priceWithoutCurrency, ",", ".", 1)
-	priceFloat, err := strconv.ParseFloat(strings.TrimSpace(priceStr), 64)
-	if err != nil {
-		return 0.0, err
-	}
-	return priceFloat, nil
-}
-
 func parsePrice(selection *goquery.Selection, currency string) (float64, error) {
 	price := selection.Text()
 	if len(price) == 0 {
@@ -74,7 +60,7 @@ func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 
 func parsePrices(element *goquery.Selection) (regularPrice data.RegularPrice, promotionPrice data.PromotionPrice, err error) {
 	regularPriceE := element.Find("span.text-line-through")
-	regularPrice, err = parseOldPrice(regularPriceE, polishCurrency)
+	regularPrice, err = parsePrice(regularPriceE, polishCurrency)
 	if err != nil {
 		return
 	}
@@ -82,7 +68,10 @@ func parsePrices(element *goquery.Selection) (regularPrice data.RegularPrice, pr
 	promotionPriceE := element.Find("span.font-weight-semibold")
 	promotionPrice, err = parsePrice(promotionPriceE, polishCurrency)
 	return
+}
 
+func isIngGamePassOrEaAccess(element *goquery.Selection) bool {
+	return len(element.Find("span.text-line-through").Text()) == 0
 }
 
 func getTitleAndLink(element *goquery.Selection) (title data.Title, link data.Link) {
@@ -100,9 +89,13 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 			card_placement := e.DOM.Find("div.card-body")
 			price_placement := card_placement.Find("p[aria-hidden='true']")
 			title, link := getTitleAndLink(card_placement)
+			if isIngGamePassOrEaAccess(price_placement) {
+				log.WithField("url", e.Request.URL).WithField("link", link).WithField("title", title).Warnln("Is In GamePass or EaAccess")
+				return
+			}
 			oldPrice, promotionPrice, err := parsePrices(price_placement)
 			if err != nil {
-				log.WithField("url", e.Request.URL).WithField("title", title).WithError(err).Warnln("failed to parse price")
+				log.WithField("url", e.Request.URL).WithField("link", link).WithField("title", title).WithError(err).Warnln("failed to parse price")
 				return
 			}
 			result <- data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
