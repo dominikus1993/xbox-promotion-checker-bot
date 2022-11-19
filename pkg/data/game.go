@@ -6,11 +6,18 @@ import (
 	"github.com/dustin/go-humanize"
 )
 
+type PromotionPrice = float64
+
+type RegularPrice = float64
+
+type Title = string
+type Link = string
+
 type XboxStoreGame struct {
-	Title    string
-	link     string
-	price    float64
-	oldPrice float64
+	Title    Title
+	link     Link
+	price    PromotionPrice
+	oldPrice RegularPrice
 }
 
 func (g *XboxStoreGame) GetLink() (string, error) {
@@ -39,7 +46,7 @@ func (g *XboxStoreGame) GetOldPrice() string {
 	return humanize.FormatFloat("#,###.##", g.oldPrice)
 }
 
-func NewXboxStoreGame(title, link string, price, oldPrice float64) XboxStoreGame {
+func NewXboxStoreGame(title Title, link Link, price PromotionPrice, oldPrice RegularPrice) XboxStoreGame {
 	return XboxStoreGame{
 		Title:    title,
 		link:     link,

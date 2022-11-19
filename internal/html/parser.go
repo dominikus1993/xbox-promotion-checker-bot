@@ -13,20 +13,35 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+const polishCurrency = "zł"
+
 type XboxStoreHtmlParser struct {
 	xboxStoreUrl string
+	collector    *colly.Collector
 }
 
-func NewXboxStoreHtmlParser(xboxStoreUrl string) *XboxStoreHtmlParser {
-	return &XboxStoreHtmlParser{xboxStoreUrl: xboxStoreUrl}
+func NewXboxStoreHtmlParser(xboxStoreUrl string, collector *colly.Collector) *XboxStoreHtmlParser {
+	return &XboxStoreHtmlParser{xboxStoreUrl: xboxStoreUrl, collector: collector}
+}
+
+func replaceIncorrectChars(text, replacement string, params ...string) string {
+	if len(params) == 0 {
+		return text
+	}
+	var result string = text
+
+	for _, txt := range params {
+		result = strings.Replace(result, txt, "", 1)
+	}
+	return result
 }
 
 func parseOldPrice(price_placement *goquery.Selection, currency string) (float64, error) {
-	price := price_placement.Find("s")
-	if price.Length() == 0 {
+	price := price_placement.Text()
+	if len(price) == 0 {
 		return 0.0, fmt.Errorf("oldprice is empty")
 	}
-	priceWithoutCurrency := strings.Replace(price.Text(), currency, "", 1)
+	priceWithoutCurrency := strings.Replace(price, currency, "", 1)
 	priceStr := strings.Replace(priceWithoutCurrency, ",", ".", 1)
 	priceFloat, err := strconv.ParseFloat(strings.TrimSpace(priceStr), 64)
 	if err != nil {
@@ -35,14 +50,16 @@ func parseOldPrice(price_placement *goquery.Selection, currency string) (float64
 	return priceFloat, nil
 }
 
-func parsePrice(selection *goquery.Selection) (float64, error) {
-	price := selection.Find("span[itemprop=price]").AttrOr("content", "")
-	if price == "" {
+func parsePrice(selection *goquery.Selection, currency string) (float64, error) {
+	price := selection.Text()
+	if len(price) == 0 {
 		return 0.0, fmt.Errorf("price is empty")
 	}
-	priceFloat, err := strconv.ParseFloat(strings.Replace(price, ",", ".", 1), 64)
+	priceWithoutCurrency := replaceIncorrectChars(price, "", currency, "+")
+	priceStr := strings.Replace(priceWithoutCurrency, ",", ".", 1)
+	priceFloat, err := strconv.ParseFloat(strings.TrimSpace(priceStr), 64)
 	if err != nil {
-		return 0.0, fmt.Errorf("price is not float")
+		return 0.0, err
 	}
 	return priceFloat, nil
 }
@@ -55,35 +72,50 @@ func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 	return fmt.Sprintf("%s?skipitems=%d", parser.xboxStoreUrl, skipItems)
 }
 
+func parsePrices(element *goquery.Selection) (regularPrice data.RegularPrice, promotionPrice data.PromotionPrice, err error) {
+	regularPriceE := element.Find("span.text-line-through")
+	regularPrice, err = parseOldPrice(regularPriceE, polishCurrency)
+	if err != nil {
+		return
+	}
+
+	promotionPriceE := element.Find("span.font-weight-semibold")
+	promotionPrice, err = parsePrice(promotionPriceE, polishCurrency)
+	return
+
+}
+
+func getTitleAndLink(element *goquery.Selection) (title data.Title, link data.Link) {
+	el := element.Find("h3.base").Find("a")
+	link = el.AttrOr("href", "")
+	title = el.Text()
+	return
+}
+
 func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-chan data.XboxStoreGame {
 	result := make(chan data.XboxStoreGame)
 	pageUrl := parser.getXboxPageUrl(page)
 	go func() {
-		c := colly.NewCollector()
-		c.OnHTML("div .m-channel-placement-item", func(e *colly.HTMLElement) {
-			product_placement := e.DOM.Find("div .c-channel-placement-content")
-			price_placement := product_placement.Find("div .c-channel-placement-price")
-			prices := price_placement.Find("div .c-price")
-			price, err := parsePrice(prices)
+		parser.collector.OnHTML("div.card", func(e *colly.HTMLElement) {
+			card_placement := e.DOM.Find("div.card-body")
+			price_placement := card_placement.Find("p[aria-hidden='true']")
+			oldPrice, promotionPrice, err := parsePrices(price_placement)
 			if err != nil {
+				log.WithError(err).Errorln("failed to parse price")
 				return
 			}
-			oldPrice, err := parseOldPrice(price_placement, "zł")
-			if err != nil {
-				return
-			}
-			link := e.DOM.Find("a").AttrOr("href", "")
-			title := product_placement.Find("div .c-subheading-6").Text()
-			result <- data.NewXboxStoreGame(title, link, price, oldPrice)
+			title, link := getTitleAndLink(card_placement)
+			result <- data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
 
 		})
-		c.OnError(func(r *colly.Response, err error) {
+		parser.collector.OnError(func(r *colly.Response, err error) {
 			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")
 		})
-		err := c.Visit(pageUrl)
+		err := parser.collector.Visit(pageUrl)
 		if err != nil {
 			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")
 		}
+		parser.collector.Wait()
 		close(result)
 	}()
 	return result

@@ -31,6 +31,6 @@ func XboxGamePromotionParser(context *cli.Context) error {
 	}
 	consoleW := console.NewConsoleXboxGameWriter()
 	broadcaster := broadcast.NewBroadcastXboxGameWriter(discord, consoleW)
-	provider := html.NewXboxStoreHtmlParser(xboxStoreUrl)
+	provider := html.NewXboxStoreHtmlParser(xboxStoreUrl, html.NewCollyCollector())
 	return service.NewXboxGamePromotionParser(provider, broadcaster, priceFilter, fileFilter).Parse(context.Context)
 }
