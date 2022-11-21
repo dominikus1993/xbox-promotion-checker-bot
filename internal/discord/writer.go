@@ -5,6 +5,8 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+	"github.com/hashicorp/go-multierror"
+	"github.com/samber/lo"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -27,6 +29,7 @@ func NewDiscordXboxGameWriter(webhookID, webhookToken string) (*DiscordXboxGameW
 }
 
 func (w *DiscordXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
+	var result error
 	embeds := make([]*discordgo.MessageEmbed, 0)
 	for game := range games {
 		link, err := game.GetLink()
@@ -45,11 +48,13 @@ func (w *DiscordXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
 		return nil
 	}
 
-	msg := discordgo.WebhookParams{Content: "Witam serdecznie, oto nowe gry w promocji", Embeds: embeds}
-	_, err := w.client.WebhookExecute(w.webhookID, w.webhookToken, true, &msg)
-	if err != nil {
-		return fmt.Errorf("error while sending webhook: %w", err)
+	chunks := lo.Chunk(embeds, 9)
+	for _, chunkE := range chunks {
+		msg := discordgo.WebhookParams{Content: "Witam serdecznie, oto nowe gry w promocji", Embeds: chunkE}
+		_, err := w.client.WebhookExecute(w.webhookID, w.webhookToken, true, &msg)
+		if err != nil {
+			result = multierror.Append(result, fmt.Errorf("error while sending webhook: %w", err))
+		}
 	}
-
-	return nil
+	return result
 }
