@@ -48,7 +48,8 @@ func (w *DiscordXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
 		return nil
 	}
 
-	chunks := lo.Chunk(embeds, 9)
+	uniqueEmbeds := lo.UniqBy(embeds, func(embed *discordgo.MessageEmbed) string { return embed.URL })
+	chunks := lo.Chunk(uniqueEmbeds, 9)
 	for _, chunkE := range chunks {
 		msg := discordgo.WebhookParams{Content: "Witam serdecznie, oto nowe gry w promocji", Embeds: chunkE}
 		_, err := w.client.WebhookExecute(w.webhookID, w.webhookToken, true, &msg)
