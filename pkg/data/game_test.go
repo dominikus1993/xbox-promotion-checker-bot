@@ -47,5 +47,5 @@ func TestGetLink(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	assert.Equal(t, "https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", subject)
+	assert.Equal(t, "https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", subject.String())
 }

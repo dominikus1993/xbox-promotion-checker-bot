@@ -39,7 +39,7 @@ func (w *DiscordXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
 		embeds = append(embeds, &discordgo.MessageEmbed{
 			Title:       game.Title,
 			Description: fmt.Sprintf("Witam gra potaniala z %s do %s co daje promke %s procent", game.GetOldPrice(), game.GetPrice(), game.FormatPromotionPercentage()),
-			URL:         link,
+			URL:         link.String(),
 			Color:       0x00ff00,
 		})
 	}

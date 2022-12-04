@@ -2,9 +2,12 @@ package data
 
 import (
 	"net/url"
+	"strings"
 
 	"github.com/dustin/go-humanize"
 )
+
+const baseMicrosoftPath = "https://www.microsoft.com/"
 
 type PromotionPrice = float64
 
@@ -20,13 +23,25 @@ type XboxStoreGame struct {
 	oldPrice RegularPrice
 }
 
-func (g *XboxStoreGame) GetLink() (string, error) {
-	uri, err := url.JoinPath("https://www.microsoft.com/", g.link)
+func joinPath(uri string) (string, error) {
+	if strings.HasPrefix(uri, baseMicrosoftPath) {
+		return uri, nil
+	}
+	return url.JoinPath("https://www.microsoft.com/", uri)
+}
+
+func (g *XboxStoreGame) GetLink() (*url.URL, error) {
+
+	uri, err := joinPath(g.link)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return uri, nil
+	u, err := url.ParseRequestURI(uri)
+	if err != nil {
+		return nil, err
+	}
+	return u, nil
 }
 
 func (g *XboxStoreGame) CalculatePromotionPercentage() float64 {
