@@ -8,10 +8,12 @@ require (
 	github.com/dominikus1993/go-toolkit v0.0.4
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gocolly/colly/v2 v2.1.0
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/k0kubun/pp/v3 v3.2.0
+	github.com/samber/lo v1.35.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
-	github.com/urfave/cli/v2 v2.23.5
+	github.com/urfave/cli/v2 v2.23.7
 	golang.org/x/sync v0.1.0
 )
 
@@ -28,14 +30,12 @@ require (
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
-	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
-	github.com/samber/lo v1.35.0 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
