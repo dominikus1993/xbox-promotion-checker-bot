@@ -1,11 +1,9 @@
 Crusader Kings
-Biomutant
 Starfield
 Stellaris
 tiny tina
 Elden Ring
 Skyrim
-fallout
 dying light 2
 Ragnarok
 Bannerlord
@@ -13,3 +11,5 @@ Gotham
 ATOM RPG
 Grim Dawn
 Medieval Dynasty
+Broken Roads
+Hogwart
