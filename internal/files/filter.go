@@ -41,15 +41,19 @@ func normalizedTitle(game data.XboxStoreGame) string {
 }
 
 func (f *TxtFileFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
-	return channels.Filter(games, func(game data.XboxStoreGame) bool {
+	return channels.Filter(games, filterGameInFile(f.gamesThatIWantBuy))
+}
+
+func filterGameInFile(gamesThatIWantBuy []string) func(game data.XboxStoreGame) bool {
+	return func(game data.XboxStoreGame) bool {
 		normalizedTitle := normalizedTitle(game)
 		exists := false
-		for _, g := range f.gamesThatIWantBuy {
+		for _, g := range gamesThatIWantBuy {
 			if strings.Contains(normalizedTitle, g) {
 				exists = true
 				break
 			}
 		}
 		return exists
-	})
+	}
 }
