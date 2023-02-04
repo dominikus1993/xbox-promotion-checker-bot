@@ -22,6 +22,24 @@ func TestPErcentageCalculation(t *testing.T) {
 	}
 }
 
+func TestFormatPrice(t *testing.T) {
+	data := []struct {
+		price    float64
+		expected string
+	}{
+		{price: 50.0, expected: "50.00"},
+		{price: 0, expected: "0.00"},
+		{price: 90.0, expected: "90.00"},
+		{price: 50, expected: "50.00"},
+		{price: 21.37, expected: "21.37"},
+	}
+
+	for _, d := range data {
+		result := formatPrice(d.price)
+		assert.Equal(t, d.expected, result)
+	}
+}
+
 func TestFormatPercentage(t *testing.T) {
 	data := []struct {
 		game     XboxStoreGame
