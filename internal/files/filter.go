@@ -10,12 +10,20 @@ import (
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 )
 
-type TxtFileFilter struct {
-	gamesThatIWantBuy []string
+type GameThatIWantProvider interface {
+	Provide() ([]string, error)
 }
 
-func NewTxtFileFilter(filePath string) (*TxtFileFilter, error) {
-	f, err := os.Open(filePath)
+type fileGameThatIWantProvider struct {
+	filePath string
+}
+
+func NewFileGameThatIWantProvider(filePath string) *fileGameThatIWantProvider {
+	return &fileGameThatIWantProvider{filePath: filePath}
+}
+
+func (p *fileGameThatIWantProvider) Provide() ([]string, error) {
+	f, err := os.Open(p.filePath)
 
 	if err != nil {
 		return nil, fmt.Errorf("%w, failed to open file", err)
@@ -33,6 +41,18 @@ func NewTxtFileFilter(filePath string) (*TxtFileFilter, error) {
 		return nil, fmt.Errorf("%w, failed to read file", err)
 	}
 
+	return gamesThatIWantBuy, nil
+}
+
+type TxtFileFilter struct {
+	gamesThatIWantBuy []string
+}
+
+func NewTxtFileFilter(provider GameThatIWantProvider) (*TxtFileFilter, error) {
+	gamesThatIWantBuy, err := provider.Provide()
+	if err != nil {
+		return nil, err
+	}
 	return &TxtFileFilter{gamesThatIWantBuy: gamesThatIWantBuy}, nil
 }
 

@@ -20,7 +20,7 @@ func XboxGamePromotionParser(context *cli.Context) error {
 	webhookId := context.String("webhookid")
 	webhooktoken := context.String("webhooktoken")
 	log.Infoln("starting xbox game promotion parser")
-	fileFilter, err := files.NewTxtFileFilter("./games.txt")
+	fileFilter, err := files.NewTxtFileFilter(files.NewFileGameThatIWantProvider("./games.txt"))
 	if err != nil {
 		return fmt.Errorf("%w, failed to create file filter", err)
 	}
