@@ -50,15 +50,15 @@ func (g *XboxStoreGame) CalculatePromotionPercentage() float64 {
 
 func (g *XboxStoreGame) FormatPromotionPercentage() string {
 	percentage := 100 - (g.price / g.oldPrice * 100)
-	return humanize.FormatFloat("#,###.##", percentage)
+	return formatPrice(percentage)
 }
 
 func (g *XboxStoreGame) GetPrice() string {
-	return humanize.FormatFloat("#,###.##", g.price)
+	return formatPrice(g.price)
 }
 
 func (g *XboxStoreGame) GetOldPrice() string {
-	return humanize.FormatFloat("#,###.##", g.oldPrice)
+	return formatPrice(g.oldPrice)
 }
 
 func NewXboxStoreGame(title Title, link Link, price PromotionPrice, oldPrice RegularPrice) XboxStoreGame {
@@ -79,4 +79,8 @@ func (g *XboxStoreGame) IsValidGame() bool {
 		return false
 	}
 	return true
+}
+
+func formatPrice(price float64) string {
+	return humanize.FormatFloat("#,###.##", price)
 }
