@@ -53,11 +53,11 @@ func (g *XboxStoreGame) FormatPromotionPercentage() string {
 	return formatPrice(percentage)
 }
 
-func (g *XboxStoreGame) GetPrice() string {
+func (g *XboxStoreGame) FormatPrice() string {
 	return formatPrice(g.price)
 }
 
-func (g *XboxStoreGame) GetOldPrice() string {
+func (g *XboxStoreGame) FormatOldPrice() string {
 	return formatPrice(g.oldPrice)
 }
 
