@@ -69,3 +69,14 @@ func NewXboxStoreGame(title Title, link Link, price PromotionPrice, oldPrice Reg
 		oldPrice: oldPrice,
 	}
 }
+
+func (g *XboxStoreGame) IsValidGame() bool {
+	_, err := g.GetLink()
+	if err != nil {
+		return false
+	}
+	if g.Title == "" {
+		return false
+	}
+	return true
+}

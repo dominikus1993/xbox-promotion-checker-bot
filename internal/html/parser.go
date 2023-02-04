@@ -98,8 +98,12 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 				log.WithField("url", e.Request.URL).WithField("link", link).WithField("title", title).WithError(err).Warnln("failed to parse price")
 				return
 			}
-			result <- data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
-
+			newGame := data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
+			if newGame.IsValidGame() {
+				result <- newGame
+			} else {
+				log.WithField("Url", e.Request.URL).Warning("Can't parse game because is invalid")
+			}
 		})
 		parser.collector.OnError(func(r *colly.Response, err error) {
 			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")

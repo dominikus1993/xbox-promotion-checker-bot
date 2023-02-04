@@ -2,6 +2,7 @@ package html
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	gotolkit "github.com/dominikus1993/go-toolkit"
@@ -17,7 +18,7 @@ func TestParsingFirstPage(t *testing.T) {
 	for _, game := range subject {
 		link, err := game.GetLink()
 		assert.NoError(t, err)
-		assert.NotEmpty(t, game.Title)
+		assert.NotEmpty(t, game.Title, fmt.Sprintf("Game of link %s", link))
 		assert.NotEmpty(t, link)
 		oldprice := game.GetOldPrice()
 		assert.NotEmpty(t, oldprice)
