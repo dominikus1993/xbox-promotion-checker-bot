@@ -1,4 +1,6 @@
 output_file = xbox-promotion-checker-bot
+webhookToken = ${DISCORD_WEBHOOK_TOKEN} 
+webhookId = ${DISCORD_WEBHOOK_ID}
 test:
 	go test ./...
 
@@ -9,4 +11,4 @@ run:
 	go run .
 
 runbin: build
-	go run .
+	./$(output_file) --webhooktoken "$(webhookToken)" --webhookid "$(webhookId)"
