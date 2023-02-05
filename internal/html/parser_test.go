@@ -20,10 +20,9 @@ func TestParsingFirstPage(t *testing.T) {
 		assert.NoError(t, err)
 		assert.NotEmpty(t, game.Title, fmt.Sprintf("Game of link %s", link))
 		assert.NotEmpty(t, link)
-		oldprice := game.GetOldPrice()
+		oldprice := game.FormatOldPrice()
 		assert.NotEmpty(t, oldprice)
-		price := game.GetOldPrice()
-
+		price := game.FormatPrice()
 		assert.NotEmpty(t, price)
 	}
 }
@@ -39,9 +38,9 @@ func TestParsingSecondPage(t *testing.T) {
 		assert.NoError(t, err)
 		assert.NotEmpty(t, game.Title)
 		assert.NotEmpty(t, link)
-		oldprice := game.GetOldPrice()
+		oldprice := game.FormatOldPrice()
 		assert.NotEmpty(t, oldprice)
-		price := game.GetOldPrice()
+		price := game.FormatPrice()
 
 		assert.NotEmpty(t, price)
 	}
@@ -66,9 +65,9 @@ func TestParsingAllPages(t *testing.T) {
 		assert.NoError(t, err)
 		assert.NotEmpty(t, game.Title)
 		assert.NotEmpty(t, link)
-		oldprice := game.GetOldPrice()
+		oldprice := game.FormatOldPrice()
 		assert.NotEmpty(t, oldprice)
-		price := game.GetOldPrice()
+		price := game.FormatPrice()
 		assert.NotEmpty(t, price)
 	}
 }

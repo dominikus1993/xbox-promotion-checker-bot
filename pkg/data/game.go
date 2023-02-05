@@ -1,6 +1,7 @@
 package data
 
 import (
+	"errors"
 	"net/url"
 	"strings"
 
@@ -8,6 +9,8 @@ import (
 )
 
 const baseMicrosoftPath = "https://www.microsoft.com/"
+
+var errUrlIsEmptyErr = errors.New("uri is empty")
 
 type PromotionPrice = float64
 
@@ -24,6 +27,9 @@ type XboxStoreGame struct {
 }
 
 func joinPath(uri string) (string, error) {
+	if uri == "" {
+		return "", errUrlIsEmptyErr
+	}
 	if strings.HasPrefix(uri, baseMicrosoftPath) {
 		return uri, nil
 	}
@@ -50,15 +56,15 @@ func (g *XboxStoreGame) CalculatePromotionPercentage() float64 {
 
 func (g *XboxStoreGame) FormatPromotionPercentage() string {
 	percentage := 100 - (g.price / g.oldPrice * 100)
-	return humanize.FormatFloat("#,###.##", percentage)
+	return formatPrice(percentage)
 }
 
-func (g *XboxStoreGame) GetPrice() string {
-	return humanize.FormatFloat("#,###.##", g.price)
+func (g *XboxStoreGame) FormatPrice() string {
+	return formatPrice(g.price)
 }
 
-func (g *XboxStoreGame) GetOldPrice() string {
-	return humanize.FormatFloat("#,###.##", g.oldPrice)
+func (g *XboxStoreGame) FormatOldPrice() string {
+	return formatPrice(g.oldPrice)
 }
 
 func NewXboxStoreGame(title Title, link Link, price PromotionPrice, oldPrice RegularPrice) XboxStoreGame {
@@ -79,4 +85,8 @@ func (g *XboxStoreGame) IsValidGame() bool {
 		return false
 	}
 	return true
+}
+
+func formatPrice(price float64) string {
+	return humanize.FormatFloat("#,###.##", price)
 }
