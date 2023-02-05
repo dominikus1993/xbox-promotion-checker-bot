@@ -1,6 +1,7 @@
 package data
 
 import (
+	"errors"
 	"net/url"
 	"strings"
 
@@ -8,6 +9,8 @@ import (
 )
 
 const baseMicrosoftPath = "https://www.microsoft.com/"
+
+var errUrlIsEmptyErr = errors.New("uri is empty")
 
 type PromotionPrice = float64
 
@@ -24,6 +27,9 @@ type XboxStoreGame struct {
 }
 
 func joinPath(uri string) (string, error) {
+	if uri == "" {
+		return "", errUrlIsEmptyErr
+	}
 	if strings.HasPrefix(uri, baseMicrosoftPath) {
 		return uri, nil
 	}

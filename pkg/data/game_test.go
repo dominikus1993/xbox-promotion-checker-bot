@@ -22,7 +22,7 @@ func TestPErcentageCalculation(t *testing.T) {
 	}
 }
 
-func TestFormatPrice(t *testing.T) {
+func FuzzFormatPrice(f *testing.F) {
 	data := []struct {
 		price    float64
 		expected string
@@ -35,9 +35,13 @@ func TestFormatPrice(t *testing.T) {
 	}
 
 	for _, d := range data {
-		result := formatPrice(d.price)
-		assert.Equal(t, d.expected, result)
+		f.Add(d.price, d.expected)
 	}
+
+	f.Fuzz(func(t *testing.T, price float64, expected string) {
+		result := formatPrice(price)
+		assert.Equal(t, expected, result)
+	})
 }
 
 func TestFormatPercentage(t *testing.T) {
@@ -66,4 +70,20 @@ func TestGetLink(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.Equal(t, "https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", subject.String())
+}
+
+func FuzzJoinPath(f *testing.F) {
+
+	f.Add("", "", true)
+	f.Add("pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", "https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", false)
+	f.Add("https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", "https://www.microsoft.com/pl-pl/p/biomutant-mercenary-class/9pmf2h8q973f%3Fcid=msft_web_chart", false)
+	f.Fuzz(func(t *testing.T, url string, expectedUrl string, isError bool) {
+		result, err := joinPath(url)
+		assert.Equal(t, expectedUrl, result)
+		if !isError {
+			assert.NoError(t, err)
+		} else {
+			assert.NotNil(t, err)
+		}
+	})
 }
