@@ -75,7 +75,7 @@ func isIngGamePassOrEaAccess(element *goquery.Selection) bool {
 }
 
 func getTitleAndLink(element *goquery.Selection) (title data.Title, link data.Link) {
-	el := element.Find("h3.base").Find("a")
+	el := element.Find("a")
 	link = el.AttrOr("href", "")
 	title = el.Text()
 	return
