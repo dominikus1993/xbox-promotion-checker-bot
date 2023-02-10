@@ -9,6 +9,6 @@ build:
 
 run:
 	go run .
-
+	
 runbin: build
-	./$(output_file) --webhooktoken "$(webhookToken)" --webhookid "$(webhookId)"
+	./$(output_file) --webhooktoken "$(strip $(webhookToken))" --webhookid "$(strip $(webhookId))"

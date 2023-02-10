@@ -2,6 +2,7 @@ package discord
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
@@ -22,8 +23,8 @@ func NewDiscordXboxGameWriter(webhookID, webhookToken string) (*DiscordXboxGameW
 		return nil, err
 	}
 	return &DiscordXboxGameWriter{
-		webhookID:    webhookID,
-		webhookToken: webhookToken,
+		webhookID:    strings.TrimSpace(webhookID),
+		webhookToken: strings.TrimSpace(webhookToken),
 		client:       session,
 	}, nil
 }
