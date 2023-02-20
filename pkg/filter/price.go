@@ -6,14 +6,15 @@ import (
 )
 
 type PriceFilter struct {
+	promotionPercentage float64
 }
 
-func NewPriceFilter() *PriceFilter {
-	return &PriceFilter{}
+func NewPriceFilter(promotionPercentage float64) *PriceFilter {
+	return &PriceFilter{promotionPercentage: promotionPercentage}
 }
 
 func (f *PriceFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
 	return channels.Filter(games, func(game data.XboxStoreGame) bool {
-		return game.CalculatePromotionPercentage() >= 50
+		return game.CalculatePromotionPercentage() >= f.promotionPercentage
 	})
 }

@@ -19,12 +19,13 @@ const xboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox"
 func XboxGamePromotionParser(context *cli.Context) error {
 	webhookId := context.String("webhookid")
 	webhooktoken := context.String("webhooktoken")
+	promotionPercentage := context.Float64("pricePromotionPercentage")
 	log.Infoln("starting xbox game promotion parser")
 	fileFilter, err := files.NewTxtFileFilter(files.NewFileGameThatIWantProvider("./games.txt"))
 	if err != nil {
 		return fmt.Errorf("%w, failed to create file filter", err)
 	}
-	priceFilter := filter.NewPriceFilter()
+	priceFilter := filter.NewPriceFilter(promotionPercentage)
 	discord, err := discord.NewDiscordXboxGameWriter(webhookId, webhooktoken)
 	if err != nil {
 		return fmt.Errorf("%w, failed to create discord writer", err)

@@ -23,6 +23,13 @@ func main() {
 				Usage:    "discord webhhook id",
 				Required: true,
 			},
+			&cli.Float64Flag{
+				Name:     "pricePromotionPercentage",
+				Aliases:  []string{"ppp"},
+				Usage:    "minimum promotion percentage",
+				Value:    50,
+				Required: false,
+			},
 		},
 		Action: cmd.XboxGamePromotionParser,
 	}
