@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	gotolkit "github.com/dominikus1993/go-toolkit"
+	gotolkit "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/gocolly/colly/v2"
 	log "github.com/sirupsen/logrus"

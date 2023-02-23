@@ -3,7 +3,7 @@ package files
 import (
 	"testing"
 
-	gotolkit "github.com/dominikus1993/go-toolkit"
+	gotolkit "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/stretchr/testify/assert"
 )

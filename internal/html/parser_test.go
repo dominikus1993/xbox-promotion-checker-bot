@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	gotolkit "github.com/dominikus1993/go-toolkit"
+	gotolkit "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/stretchr/testify/assert"
 )
 
