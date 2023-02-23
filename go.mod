@@ -8,7 +8,6 @@ require (
 	github.com/dominikus1993/go-toolkit v0.0.6
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gocolly/colly/v2 v2.1.0
-	github.com/hashicorp/go-multierror v1.1.1
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/samber/lo v1.37.0
 	github.com/sirupsen/logrus v1.9.0
@@ -28,7 +27,6 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
-	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
