@@ -11,7 +11,7 @@ require (
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/samber/lo v1.37.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	github.com/urfave/cli/v2 v2.24.4
 	golang.org/x/sync v0.1.0
 )
