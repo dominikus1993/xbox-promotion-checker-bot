@@ -1,1 +1,1 @@
-package mongodb
+package mongo

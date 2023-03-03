@@ -17,7 +17,7 @@ func rangeInt(from, to int) []int {
 
 func TestFilter(t *testing.T) {
 	numbers := channels.FromSlice(rangeInt(1, 10))
-	result := Filter(numbers, func(element int) bool { return element%2 == 0 })
+	result := Filter(numbers, func(element int) bool { return element%2 == 0 }, 10)
 	subject := channels.ToSlice(result)
 	assert.Len(t, subject, 4)
 	assert.ElementsMatch(t, []int{2, 4, 6, 8}, subject)
@@ -26,6 +26,6 @@ func TestFilter(t *testing.T) {
 func BenchmarkFilter(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		numbers := channels.FromSlice(rangeInt(1, 10))
-		channels.ToSlice(Filter(numbers, func(element int) bool { return element%2 == 0 }))
+		channels.ToSlice(Filter(numbers, func(element int) bool { return element%2 == 0 }, 1))
 	}
 }

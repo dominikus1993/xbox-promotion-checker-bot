@@ -24,7 +24,7 @@ func normalizedTitle(game data.XboxStoreGame) string {
 }
 
 func (f *TxtFileFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
-	return channels.Filter(games, filterGameInFile(f.gamesThatIWantBuy))
+	return channels.Filter(games, filterGameInFile(f.gamesThatIWantBuy), 10)
 }
 
 func filterGameInFile(gamesThatIWantBuy []string) func(game data.XboxStoreGame) bool {
