@@ -14,6 +14,7 @@ func TestGetCollection(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test")
 	}
+	collectionName := "promotions"
 	// Arrange
 	ctx := context.Background()
 	mongoC, err := mongodb.StartContainer(ctx, mongodb.NewMongoContainerConfigurationBuilder().Build())
@@ -30,7 +31,7 @@ func TestGetCollection(t *testing.T) {
 	if err != nil {
 		t.Fatal(fmt.Errorf("can't download mongo conectionstring, %w", err))
 	}
-	client, err := NewClient(ctx, connectionString, "Articles")
+	client, err := NewClient(ctx, connectionString, "Games", collectionName)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -39,9 +40,15 @@ func TestGetCollection(t *testing.T) {
 		client.Close(ctx)
 	})
 
-	t.Run("Get Collection", func(t *testing.T) {
+	t.Run("Ping", func(t *testing.T) {
 		err := client.Ping(ctx, readpref.PrimaryPreferred())
 
 		assert.NoError(t, err)
+	})
+
+	t.Run("Get Collection", func(t *testing.T) {
+		collection := client.GetCollection()
+		assert.NotNil(t, collection)
+		assert.Equal(t, collectionName, collection.Name())
 	})
 }

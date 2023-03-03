@@ -14,10 +14,10 @@ func NewDatabaseOldPromotionFilter(client *MongoClient) *DatabaseOldPromotionFil
 }
 
 func (f *DatabaseOldPromotionFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
-	return channels.Filter(games, filterGameThatWasInPromtoionSinceWeek(), 10)
+	return channels.Filter(games, filterGameThatWasInPromtoionSinceWeek(f.client), 10)
 }
 
-func filterGameThatWasInPromtoionSinceWeek() func(game data.XboxStoreGame) bool {
+func filterGameThatWasInPromtoionSinceWeek(client *MongoClient) func(game data.XboxStoreGame) bool {
 	return func(game data.XboxStoreGame) bool {
 		return true
 	}
