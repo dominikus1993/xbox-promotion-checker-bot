@@ -1,6 +1,7 @@
 package discord
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -29,7 +30,7 @@ func NewDiscordXboxGameWriter(webhookID, webhookToken string) (*DiscordXboxGameW
 	}, nil
 }
 
-func (w *DiscordXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
+func (w *DiscordXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
 	var result error
 	embeds := make([]*discordgo.MessageEmbed, 0)
 	for game := range games {
