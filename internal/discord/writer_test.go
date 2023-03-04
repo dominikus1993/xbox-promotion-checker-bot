@@ -22,6 +22,7 @@ func TestCreateEmbeds(t *testing.T) {
 	assert.Len(t, embeds, len(data))
 }
 
+// BenchmarkCreateEmbeds-8            79268             13385 ns/op            7955 B/op        147 allocs/op
 func BenchmarkCreateEmbeds(b *testing.B) {
 	data := []data.XboxStoreGame{
 		data.NewXboxStoreGame("", "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 10.0, 10.0),
