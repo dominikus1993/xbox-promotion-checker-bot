@@ -51,6 +51,12 @@ func TestWritere(t *testing.T) {
 		assert.NoError(t, err)
 	})
 
+	t.Run("Write empty array", func(t *testing.T) {
+
+		err := writer.Write(ctx, []data.XboxStoreGame{})
+		assert.Error(t, err)
+	})
+
 	t.Run("Write twice game", func(t *testing.T) {
 		// Act
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
