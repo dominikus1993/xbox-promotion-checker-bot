@@ -39,7 +39,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 		log.Infoln("no games to store")
 		return nil
 	}
-	_, err = collection.BulkWrite(ctx, channels.ToSlice(toMongoWriteModel(games)))
+	_, err = collection.BulkWrite(ctx, gamesToWrite)
 
 	return err
 }
