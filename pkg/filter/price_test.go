@@ -1,6 +1,7 @@
 package filter
 
 import (
+	"context"
 	"testing"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
@@ -13,7 +14,7 @@ func TestPriceFilter(t *testing.T) {
 	games := []data.XboxStoreGame{data.NewXboxStoreGame("test", "test", 10, 20), data.NewXboxStoreGame("test", "test", 10, 10), data.NewXboxStoreGame("test", "test", 10, 30)}
 	stream := lo.SliceToChannel(10, games)
 
-	subject := lo.ChannelToSlice(filter.Filter(stream))
+	subject := lo.ChannelToSlice(filter.Filter(context.TODO(), stream))
 
 	assert.Len(t, subject, 2)
 }

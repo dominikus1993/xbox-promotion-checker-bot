@@ -18,7 +18,7 @@ func TestFormatPercentage(t *testing.T) {
 	}
 	stream := channels.FromSlice(data)
 
-	subject := toMongoWriteModel(stream)
+	subject := channels.ToSlice(toMongoWriteModel(stream))
 
 	assert.Len(t, subject, len(data))
 }

@@ -3,7 +3,7 @@ package mongo
 import (
 	"time"
 
-	"github.com/dominikus1993/go-toolkit/crypto"
+	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -20,10 +20,6 @@ type screapedXboxHame struct {
 }
 
 func fromXboxGame(game data.XboxStoreGame) screapedXboxHame {
-	id, err := crypto.GenerateId(game.Title)
-	if err != nil {
-		panic(err)
-	}
 	link, err := game.GetLink()
 
 	if err != nil {
@@ -31,7 +27,7 @@ func fromXboxGame(game data.XboxStoreGame) screapedXboxHame {
 	}
 
 	return screapedXboxHame{
-		ID:        id,
+		ID:        game.ID,
 		Title:     game.Title,
 		Link:      link.String(),
 		Price:     game.FormatPrice(),
@@ -41,11 +37,8 @@ func fromXboxGame(game data.XboxStoreGame) screapedXboxHame {
 	}
 }
 
-func toMongoWriteModel(games <-chan data.XboxStoreGame) []mongo.WriteModel {
-	result := make([]mongo.WriteModel, 0)
-	for game := range games {
-		mongoGame := mongo.NewInsertOneModel().SetDocument(fromXboxGame(game))
-		result = append(result, mongoGame)
-	}
-	return result
+func toMongoWriteModel(games <-chan data.XboxStoreGame) <-chan mongo.WriteModel {
+	return channels.Map(games, func(game data.XboxStoreGame) mongo.WriteModel {
+		return mongo.NewInsertOneModel().SetDocument(fromXboxGame(game))
+	}, 10)
 }

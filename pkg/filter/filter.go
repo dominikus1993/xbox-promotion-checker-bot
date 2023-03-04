@@ -1,16 +1,20 @@
 package filter
 
-import "github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+import (
+	"context"
+
+	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+)
 
 type GameFilter interface {
-	Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame
+	Filter(ctx context.Context, games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame
 }
 
-func FilterPipeline(stream <-chan data.XboxStoreGame, predicates ...GameFilter) <-chan data.XboxStoreGame {
+func FilterPipeline(ctx context.Context, stream <-chan data.XboxStoreGame, predicates ...GameFilter) <-chan data.XboxStoreGame {
 	out := stream
 	for _, predicate := range predicates {
 		tmp := out
-		out = predicate.Filter(tmp)
+		out = predicate.Filter(ctx, tmp)
 	}
 	return out
 }

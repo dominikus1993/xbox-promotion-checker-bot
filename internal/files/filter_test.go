@@ -1,6 +1,7 @@
 package files
 
 import (
+	"context"
 	"testing"
 
 	gotolkit "github.com/dominikus1993/go-toolkit/channels"
@@ -19,7 +20,7 @@ func mapTitles(games []data.XboxStoreGame) []string {
 func TestParsingFirstPage(t *testing.T) {
 	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
 	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}})
-	result := filter.Filter(games)
+	result := filter.Filter(context.TODO(), games)
 	got := gotolkit.ToSlice(result)
 
 	assert.NotNil(t, got)

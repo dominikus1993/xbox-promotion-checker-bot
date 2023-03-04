@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -32,7 +33,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 		return err
 	}
 
-	_, err = collection.BulkWrite(ctx, toMongoWriteModel(games))
+	_, err = collection.BulkWrite(ctx, channels.ToSlice(toMongoWriteModel(games)))
 
 	return err
 }

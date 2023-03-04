@@ -1,6 +1,7 @@
 package files
 
 import (
+	"context"
 	"strings"
 
 	"github.com/dominikus1993/go-toolkit/channels"
@@ -23,7 +24,7 @@ func normalizedTitle(game data.XboxStoreGame) string {
 	return strings.ToLower(game.Title)
 }
 
-func (f *TxtFileFilter) Filter(games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
+func (f *TxtFileFilter) Filter(ctx context.Context, games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
 	return channels.Filter(games, filterGameInFile(f.gamesThatIWantBuy), 10)
 }
 

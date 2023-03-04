@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/dominikus1993/go-toolkit/crypto"
 	"github.com/dustin/go-humanize"
 )
 
@@ -20,6 +21,7 @@ type Title = string
 type Link = string
 
 type XboxStoreGame struct {
+	ID       string
 	Title    Title
 	link     Link
 	price    PromotionPrice
@@ -68,7 +70,9 @@ func (g *XboxStoreGame) FormatOldPrice() string {
 }
 
 func NewXboxStoreGame(title Title, link Link, price PromotionPrice, oldPrice RegularPrice) XboxStoreGame {
+	id, _ := crypto.GenerateId(title)
 	return XboxStoreGame{
+		ID:       id,
 		Title:    title,
 		link:     link,
 		price:    price,

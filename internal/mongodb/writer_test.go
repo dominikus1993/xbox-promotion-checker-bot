@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetIdsThatExistsInDatabase(t *testing.T) {
+func TestWritere(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test")
 	}
