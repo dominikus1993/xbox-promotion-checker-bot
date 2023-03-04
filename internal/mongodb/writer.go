@@ -10,11 +10,15 @@ import (
 	"go.mongodb.org/mongo-driver/x/bsonx"
 )
 
-type MongoGameWriter struct {
+type mongoGameWriter struct {
 	client *MongoClient
 }
 
-func (writer *MongoGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func NewMongoGameWriter(client *MongoClient) *mongoGameWriter {
+	return &mongoGameWriter{client: client}
+}
+
+func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
 	collection := writer.client.GetCollection()
 	// TTL index
 	index := mongo.IndexModel{
@@ -28,11 +32,7 @@ func (writer *MongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 		return err
 	}
 
-	dbGames := fromStream(games)
+	_, err = collection.BulkWrite(ctx, toMongoWriteModel(games))
 
-	_, err = collection.BulkWrite(ctx, dbGames)
-
-	if err != nil {
-		return err
-	}
+	return err
 }

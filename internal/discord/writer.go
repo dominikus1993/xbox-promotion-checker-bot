@@ -38,6 +38,7 @@ func (w *DiscordXboxGameWriter) Write(ctx context.Context, games <-chan data.Xbo
 		if err != nil {
 			return err
 		}
+
 		embeds = append(embeds, &discordgo.MessageEmbed{
 			Title:       game.Title,
 			Description: fmt.Sprintf("Witam gra potaniala z %s do %s co daje promke %s procent", game.FormatOldPrice(), game.FormatPrice(), game.FormatPromotionPercentage()),

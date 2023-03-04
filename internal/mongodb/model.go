@@ -6,6 +6,7 @@ import (
 	"github.com/dominikus1993/go-toolkit/crypto"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type screapedXboxHame struct {
@@ -44,6 +45,15 @@ func fromStream(games <-chan data.XboxStoreGame) []screapedXboxHame {
 	result := make([]screapedXboxHame, 0)
 	for game := range games {
 		mongoGame := fromXboxGame(game)
+		result = append(result, mongoGame)
+	}
+	return result
+}
+
+func toMongoWriteModel(games <-chan data.XboxStoreGame) []mongo.WriteModel {
+	result := make([]mongo.WriteModel, 0)
+	for game := range games {
+		mongoGame := mongo.NewInsertOneModel().SetDocument(fromXboxGame(game))
 		result = append(result, mongoGame)
 	}
 	return result

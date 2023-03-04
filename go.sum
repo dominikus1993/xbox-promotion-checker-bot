@@ -54,6 +54,8 @@ github.com/dominikus1993/go-toolkit v0.0.6 h1:CFmsrpm7QPVXXnkDjdiMNBuUQ0wv1D3Rfi
 github.com/dominikus1993/go-toolkit v0.0.6/go.mod h1:Fxhy0rnuZhE/GP+ko7Og/1SbbJ85PkOStyLBwQkUu04=
 github.com/dominikus1993/go-toolkit v0.0.7 h1:YvJXWIf0S3MtfZOUBoEWQtHAYjPYcwwduzDEDL3JXtA=
 github.com/dominikus1993/go-toolkit v0.0.7/go.mod h1:Qw+kC/ZiXYiKUEADMwquWIMKAW6T8xiTlwOuQW8mdaQ=
+github.com/dominikus1993/go-toolkit v0.0.8 h1:hosZLr3w8r7T1uJTsfwgy2e85VVrrX2YAOirsAXzGy8=
+github.com/dominikus1993/go-toolkit v0.0.8/go.mod h1:Qw+kC/ZiXYiKUEADMwquWIMKAW6T8xiTlwOuQW8mdaQ=
 github.com/dominikus1993/integrationtestcontainers-go v0.0.5 h1:udYWIDTSKbz7LrnLfEPwodgCOznIFfecW+YpZIY9Gss=
 github.com/dominikus1993/integrationtestcontainers-go v0.0.5/go.mod h1:sf/tgpQUlaL2MNEs+24nFp+pWl7CtawNOu6xVZF9qiY=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=

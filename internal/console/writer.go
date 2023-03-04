@@ -1,6 +1,8 @@
 package console
 
 import (
+	"context"
+
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/k0kubun/pp/v3"
 )
@@ -16,7 +18,7 @@ func printGame(game data.XboxStoreGame) {
 	pp.Println(game)
 }
 
-func (w *ConsoleXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
+func (w *ConsoleXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
 	scheme := pp.ColorScheme{
 		Integer: pp.Green | pp.Bold,
 		Float:   pp.Black | pp.BackgroundWhite | pp.Bold,
