@@ -26,7 +26,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 	// TTL index
 	index := mongo.IndexModel{
 		Keys:    bsonx.Doc{{Key: "CrawledAt", Value: bsonx.Int32(1)}},
-		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 24 Hours.
+		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 7 days
 	}
 
 	_, err := collection.Indexes().CreateOne(context.Background(), index)
