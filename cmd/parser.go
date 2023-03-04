@@ -40,8 +40,9 @@ func XboxGamePromotionParser(context *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("%w, failed to create discord writer", err)
 	}
+	uniqueFilter := filter.NewUniqeFilter()
 	consoleW := console.NewConsoleXboxGameWriter()
 	broadcaster := broadcast.NewBroadcastXboxGameWriter(discord, consoleW, mongoPromotionsWriter)
 	provider := html.NewXboxStoreHtmlParser(xboxStoreUrl, html.NewCollyCollector())
-	return service.NewXboxGamePromotionParser(provider, broadcaster, priceFilter, fileFilter, newPromotionsFilter).Parse(context.Context)
+	return service.NewXboxGamePromotionParser(provider, broadcaster, uniqueFilter, priceFilter, fileFilter, newPromotionsFilter).Parse(context.Context)
 }

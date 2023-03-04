@@ -2,14 +2,16 @@ package mongo
 
 import (
 	"context"
-	"time"
 
 	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/x/bsonx"
 )
+
+const ttlSeconds = 60 * 60 * 24 * 7 // 7 days
 
 type mongoGameWriter struct {
 	client *MongoClient
@@ -24,7 +26,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 	// TTL index
 	index := mongo.IndexModel{
 		Keys:    bsonx.Doc{{Key: "CrawledAt", Value: bsonx.Int32(1)}},
-		Options: options.Index().SetExpireAfterSeconds(int32(time.Now().Add(time.Hour * 24).Unix())), // Will be removed after 24 Hours.
+		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 24 Hours.
 	}
 
 	_, err := collection.Indexes().CreateOne(context.Background(), index)
@@ -32,7 +34,11 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 	if err != nil {
 		return err
 	}
-
+	gamesToWrite := channels.ToSlice(toMongoWriteModel(games))
+	if len(gamesToWrite) == 0 {
+		log.Infoln("no games to store")
+		return nil
+	}
 	_, err = collection.BulkWrite(ctx, channels.ToSlice(toMongoWriteModel(games)))
 
 	return err
