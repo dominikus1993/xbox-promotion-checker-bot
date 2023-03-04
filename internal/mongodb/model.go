@@ -41,15 +41,6 @@ func fromXboxGame(game data.XboxStoreGame) screapedXboxHame {
 	}
 }
 
-func fromStream(games <-chan data.XboxStoreGame) []screapedXboxHame {
-	result := make([]screapedXboxHame, 0)
-	for game := range games {
-		mongoGame := fromXboxGame(game)
-		result = append(result, mongoGame)
-	}
-	return result
-}
-
 func toMongoWriteModel(games <-chan data.XboxStoreGame) []mongo.WriteModel {
 	result := make([]mongo.WriteModel, 0)
 	for game := range games {

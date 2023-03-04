@@ -3,7 +3,7 @@ package files
 import (
 	"strings"
 
-	"github.com/dominikus1993/xbox-promotion-checker-bot/internal/channels"
+	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 )
 
