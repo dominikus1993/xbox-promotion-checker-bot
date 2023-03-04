@@ -1,6 +1,7 @@
 package writer
 
 import (
+	"context"
 	"fmt"
 	"testing"
 
@@ -16,7 +17,7 @@ type fakeOkXboxGameWriter struct {
 	records  int
 }
 
-func (writer *fakeOkXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
+func (writer *fakeOkXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
 	for range games {
 		writer.records += 1
 		writer.executed = true
@@ -28,7 +29,7 @@ type fakeErrorXboxGameWriter struct {
 	executed bool
 }
 
-func (writer *fakeErrorXboxGameWriter) Write(games <-chan data.XboxStoreGame) error {
+func (writer *fakeErrorXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
 	for range games {
 		writer.executed = true
 	}
@@ -39,7 +40,7 @@ func TestBroadcastingGames(t *testing.T) {
 	fake := &fakeOkXboxGameWriter{}
 	writer := NewBroadcastXboxGameWriter(fake)
 	games := []data.XboxStoreGame{{Title: "test"}, {Title: "test2"}}
-	err := writer.Write(gotolkit.FromSlice(games))
+	err := writer.Write(context.TODO(), gotolkit.FromSlice(games))
 	assert.NoError(t, err)
 	assert.True(t, fake.executed)
 	assert.Equal(t, 2, fake.records)
@@ -50,7 +51,7 @@ func TestBroadcastingGamesWhenOneReturnError(t *testing.T) {
 	errorFake := &fakeErrorXboxGameWriter{}
 	writer := NewBroadcastXboxGameWriter(fake, errorFake)
 	games := []data.XboxStoreGame{{Title: "test"}, {Title: "test2"}}
-	err := writer.Write(gotolkit.FromSlice(games))
+	err := writer.Write(context.TODO(), gotolkit.FromSlice(games))
 	assert.Error(t, err)
 	assert.True(t, fake.executed)
 	assert.Equal(t, 2, fake.records)
