@@ -24,6 +24,6 @@ func NewXboxGamePromotionParser(provider parser.XboxGameProvider, writer writer.
 
 func (svc *XboxGamePromotionParser) Parse(ctx context.Context) error {
 	games := svc.provider.Provide(ctx)
-	result := filter.FilterPipeline(games, svc.filters...)
-	return svc.writer.Write(result)
+	result := filter.FilterPipeline(ctx, games, svc.filters...)
+	return svc.writer.Write(ctx, result)
 }

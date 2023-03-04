@@ -30,6 +30,11 @@ func main() {
 				Value:    50,
 				Required: false,
 			},
+			&cli.StringFlag{
+				Name:     "mongo-connection",
+				Usage:    "mongodb connection string",
+				Required: true,
+			},
 		},
 		Action: cmd.XboxGamePromotionParser,
 	}
