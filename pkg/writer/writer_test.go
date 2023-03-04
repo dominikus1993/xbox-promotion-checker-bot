@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"testing"
 
-	gotolkit "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,7 +16,7 @@ type fakeOkXboxGameWriter struct {
 	records  int
 }
 
-func (writer *fakeOkXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func (writer *fakeOkXboxGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
 	for range games {
 		writer.records += 1
 		writer.executed = true
@@ -29,7 +28,7 @@ type fakeErrorXboxGameWriter struct {
 	executed bool
 }
 
-func (writer *fakeErrorXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func (writer *fakeErrorXboxGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
 	for range games {
 		writer.executed = true
 	}
@@ -40,7 +39,7 @@ func TestBroadcastingGames(t *testing.T) {
 	fake := &fakeOkXboxGameWriter{}
 	writer := NewBroadcastXboxGameWriter(fake)
 	games := []data.XboxStoreGame{{Title: "test"}, {Title: "test2"}}
-	err := writer.Write(context.TODO(), gotolkit.FromSlice(games))
+	err := writer.Write(context.TODO(), games)
 	assert.NoError(t, err)
 	assert.True(t, fake.executed)
 	assert.Equal(t, 2, fake.records)
@@ -51,7 +50,7 @@ func TestBroadcastingGamesWhenOneReturnError(t *testing.T) {
 	errorFake := &fakeErrorXboxGameWriter{}
 	writer := NewBroadcastXboxGameWriter(fake, errorFake)
 	games := []data.XboxStoreGame{{Title: "test"}, {Title: "test2"}}
-	err := writer.Write(context.TODO(), gotolkit.FromSlice(games))
+	err := writer.Write(context.TODO(), games)
 	assert.Error(t, err)
 	assert.True(t, fake.executed)
 	assert.Equal(t, 2, fake.records)

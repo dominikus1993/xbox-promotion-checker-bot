@@ -4,12 +4,11 @@ import (
 	"context"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
-	"github.com/samber/lo"
 	"golang.org/x/sync/errgroup"
 )
 
 type XboxGameWriter interface {
-	Write(ctx context.Context, games <-chan data.XboxStoreGame) error
+	Write(ctx context.Context, games []data.XboxStoreGame) error
 }
 
 type BroadcastXboxGameWriter struct {
@@ -20,14 +19,12 @@ func NewBroadcastXboxGameWriter(writers ...XboxGameWriter) *BroadcastXboxGameWri
 	return &BroadcastXboxGameWriter{writers: writers}
 }
 
-func (writer *BroadcastXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func (writer *BroadcastXboxGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
 	var wg errgroup.Group
-	streams := lo.FanOut(len(writer.writers), 10, games)
-	for i, notifier := range writer.writers {
+	for _, notifier := range writer.writers {
 		not := notifier
-		stream := streams[i]
 		wg.Go(func() error {
-			return not.Write(ctx, stream)
+			return not.Write(ctx, games)
 		})
 	}
 	return wg.Wait()

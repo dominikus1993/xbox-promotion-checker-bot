@@ -18,7 +18,7 @@ func printGame(game data.XboxStoreGame) {
 	pp.Println(game)
 }
 
-func (w *ConsoleXboxGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func (w *ConsoleXboxGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
 	scheme := pp.ColorScheme{
 		Integer: pp.Green | pp.Bold,
 		Float:   pp.Black | pp.BackgroundWhite | pp.Bold,
@@ -27,7 +27,7 @@ func (w *ConsoleXboxGameWriter) Write(ctx context.Context, games <-chan data.Xbo
 
 	// Register it for usage
 	pp.SetColorScheme(scheme)
-	for game := range games {
+	for _, game := range games {
 		printGame(game)
 	}
 	return nil
