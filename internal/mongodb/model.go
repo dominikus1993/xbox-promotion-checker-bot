@@ -3,8 +3,8 @@ package mongo
 import (
 	"time"
 
-	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+	"github.com/samber/lo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -37,8 +37,8 @@ func fromXboxGame(game data.XboxStoreGame) screapedXboxHame {
 	}
 }
 
-func toMongoWriteModel(games <-chan data.XboxStoreGame) <-chan mongo.WriteModel {
-	return channels.Map(games, func(game data.XboxStoreGame) mongo.WriteModel {
+func toMongoWriteModel(games []data.XboxStoreGame) []mongo.WriteModel {
+	return lo.Map(games, func(game data.XboxStoreGame, _ int) mongo.WriteModel {
 		return mongo.NewInsertOneModel().SetDocument(fromXboxGame(game))
-	}, 10)
+	})
 }

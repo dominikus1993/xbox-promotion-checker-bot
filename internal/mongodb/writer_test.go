@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"testing"
 
-	channels "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/go-toolkit/random"
 	"github.com/dominikus1993/integrationtestcontainers-go/mongodb"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
@@ -48,7 +47,7 @@ func TestWritere(t *testing.T) {
 		// Act
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 
-		err := writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
+		err := writer.Write(ctx, []data.XboxStoreGame{game})
 		assert.NoError(t, err)
 	})
 
@@ -56,10 +55,10 @@ func TestWritere(t *testing.T) {
 		// Act
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 		game2 := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
-		err := writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
+		err := writer.Write(ctx, []data.XboxStoreGame{game})
 		assert.NoError(t, err)
 
-		err = writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game2}))
+		err = writer.Write(ctx, []data.XboxStoreGame{game2})
 		assert.NoError(t, err)
 	})
 }

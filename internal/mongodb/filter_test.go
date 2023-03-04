@@ -50,7 +50,7 @@ func TestFilter(t *testing.T) {
 		// Act
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 
-		err := writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
+		err := writer.Write(ctx, []data.XboxStoreGame{game})
 		assert.NoError(t, err)
 
 		resultStream := filter.Filter(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
@@ -64,7 +64,7 @@ func TestFilter(t *testing.T) {
 		// Act
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 
-		err := writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
+		err := writer.Write(ctx, []data.XboxStoreGame{game})
 		assert.NoError(t, err)
 
 		resultStream := filter.Filter(ctx, channels.FromSlice([]data.XboxStoreGame{data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)}))
@@ -79,7 +79,7 @@ func TestFilter(t *testing.T) {
 		game := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 		game2 := data.NewXboxStoreGame(random.String(10), "https://www.xbox.com/pl-pl/games/store/lego-batman-3-beyond-gotham-deluxe-edition/c4hfhz44z3r3", 21.37, 69.0)
 		games := []data.XboxStoreGame{game, game2}
-		err := writer.Write(ctx, channels.FromSlice([]data.XboxStoreGame{game}))
+		err := writer.Write(ctx, []data.XboxStoreGame{game})
 		assert.NoError(t, err)
 
 		resultStream := filter.Filter(ctx, channels.FromSlice(games))

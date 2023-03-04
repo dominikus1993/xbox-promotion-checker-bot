@@ -3,7 +3,6 @@ package mongo
 import (
 	"context"
 
-	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -21,7 +20,7 @@ func NewMongoGameWriter(client *MongoClient) *mongoGameWriter {
 	return &mongoGameWriter{client: client}
 }
 
-func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.XboxStoreGame) error {
+func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
 	collection := writer.client.GetCollection()
 	// TTL index
 	index := mongo.IndexModel{
@@ -34,7 +33,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games <-chan data.Xbox
 	if err != nil {
 		return err
 	}
-	gamesToWrite := channels.ToSlice(toMongoWriteModel(games))
+	gamesToWrite := toMongoWriteModel(games)
 	if len(gamesToWrite) == 0 {
 		log.Infoln("no games to store")
 		return nil
