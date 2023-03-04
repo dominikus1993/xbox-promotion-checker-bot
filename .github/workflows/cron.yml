@@ -6,6 +6,7 @@ on:
 env:
   DISCORD_WEBHOOK_TOKEN: "${{ secrets.DISCORD_WEBHOOK_TOKEN }}"
   DISCORD_WEBHOOK_ID: "${{ secrets.DISCORD_WEBHOOK_ID }}"
+  MONGO_CONNECTION_STRING: "${{ secrets.MONGO_CONNECTION_STRING }}"
 
 jobs:
   build:
