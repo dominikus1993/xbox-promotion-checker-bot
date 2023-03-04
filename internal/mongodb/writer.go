@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
-	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/x/bsonx"
@@ -34,10 +33,6 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStore
 		return err
 	}
 	gamesToWrite := toMongoWriteModel(games)
-	if len(gamesToWrite) == 0 {
-		log.Infoln("no games to store")
-		return nil
-	}
 	_, err = collection.BulkWrite(ctx, gamesToWrite)
 
 	return err
