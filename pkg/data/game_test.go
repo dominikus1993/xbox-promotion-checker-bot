@@ -84,6 +84,7 @@ func FuzzJoinPath(f *testing.F) {
 			assert.NoError(t, err)
 		} else {
 			assert.NotNil(t, err)
+			assert.ErrorIs(t, err, errUrlIsEmptyErr)
 		}
 	})
 }
