@@ -27,7 +27,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStore
 		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 7 days
 	}
 
-	_, err := collection.Indexes().CreateOne(context.Background(), index)
+	_, err := collection.Indexes().CreateOne(ctx, index)
 
 	if err != nil {
 		return err
