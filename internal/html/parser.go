@@ -85,6 +85,7 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 	result := make(chan data.XboxStoreGame)
 	pageUrl := parser.getXboxPageUrl(page)
 	go func() {
+		defer close(result)
 		parser.collector.OnHTML("div.card", func(e *colly.HTMLElement) {
 			card_placement := e.DOM.Find("div.card-body")
 			price_placement := card_placement.Find("p[aria-hidden='true']")
@@ -113,16 +114,15 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")
 		}
 		parser.collector.Wait()
-		close(result)
 	}()
 	return result
 }
 
 func (parser *XboxStoreHtmlParser) Provide(ctx context.Context) <-chan data.XboxStoreGame {
 	const pages = 10
-	streams := make([]<-chan data.XboxStoreGame, 0, pages)
+	streams := make([]<-chan data.XboxStoreGame, pages)
 	for i := 1; i <= pages; i++ {
-		streams = append(streams, parser.parsePage(ctx, i))
+		streams[i-1] = parser.parsePage(ctx, i)
 	}
 	return gotolkit.FanIn(ctx, streams...)
 }
