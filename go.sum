@@ -57,8 +57,8 @@ github.com/docker/go-units v0.5.0 h1:69rxXcBk27SvSaaxTtLh/8llcHD8vYHT7WSdRZ/jvr4
 github.com/docker/go-units v0.5.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/dominikus1993/go-toolkit v0.0.12 h1:glITyP8JHvxiRkTuyNBlu37+H0AEdJ8XqxP7XqDxujc=
 github.com/dominikus1993/go-toolkit v0.0.12/go.mod h1:Qw+kC/ZiXYiKUEADMwquWIMKAW6T8xiTlwOuQW8mdaQ=
-github.com/dominikus1993/integrationtestcontainers-go v0.0.7 h1:vsVYzZmU3HujSxNi3EhSHSfO3KL9FPVpan28qlzXY/o=
-github.com/dominikus1993/integrationtestcontainers-go v0.0.7/go.mod h1:V6yEtjmBBZJnL9HcEgXgNhmLCmuXDwaB6AaZJwQ2vT8=
+github.com/dominikus1993/integrationtestcontainers-go v0.0.8 h1:NKAh9c9QYgbbrTKS/Vyd5EOV0wb4CpXtoRCAPnEALWI=
+github.com/dominikus1993/integrationtestcontainers-go v0.0.8/go.mod h1:NZ5DIxn4dO5gddTNO5Wj9zzETs4Ban4pxIyL43gMuEE=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
