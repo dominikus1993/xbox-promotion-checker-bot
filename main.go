@@ -6,6 +6,7 @@ import (
 	"github.com/dominikus1993/xbox-promotion-checker-bot/cmd"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
+	_ "go.uber.org/automaxprocs"
 )
 
 func main() {
