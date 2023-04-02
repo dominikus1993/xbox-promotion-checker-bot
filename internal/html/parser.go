@@ -121,8 +121,8 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 func (parser *XboxStoreHtmlParser) Provide(ctx context.Context) <-chan data.XboxStoreGame {
 	const pages = 10
 	streams := make([]<-chan data.XboxStoreGame, pages)
-	for i := 1; i <= pages; i++ {
-		streams[i-1] = parser.parsePage(ctx, i)
+	for i := 0; i < pages; i++ {
+		streams[i] = parser.parsePage(ctx, i+1)
 	}
 	return gotolkit.FanIn(ctx, streams...)
 }
