@@ -6,6 +6,7 @@ import (
 
 	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
+	"github.com/lithammer/fuzzysearch/fuzzy"
 )
 
 type TxtFileFilter struct {
@@ -31,13 +32,11 @@ func (f *TxtFileFilter) Filter(ctx context.Context, games <-chan data.XboxStoreG
 func filterGameInFile(gamesThatIWantBuy []string) func(game data.XboxStoreGame) bool {
 	return func(game data.XboxStoreGame) bool {
 		normalizedTitle := normalizedTitle(game)
-		exists := false
 		for _, g := range gamesThatIWantBuy {
-			if strings.Contains(normalizedTitle, g) {
-				exists = true
-				break
+			if fuzzy.MatchNormalizedFold(g, normalizedTitle) {
+				return true
 			}
 		}
-		return exists
+		return false
 	}
 }

@@ -29,3 +29,14 @@ func TestParsingFirstPage(t *testing.T) {
 
 	assert.ElementsMatch(t, titlesThatWant, mapTitles(got))
 }
+
+// BenchmarkParsingFirstPage-8      2056284               588.8 ns/op           816 B/op          4 allocs/op
+func BenchmarkParsingFirstPage(b *testing.B) {
+	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
+	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}})
+
+	for i := 0; i < b.N; i++ {
+		result := filter.Filter(context.TODO(), games)
+		gotolkit.ToSlice(result)
+	}
+}
