@@ -13,6 +13,5 @@ Broken Roads
 Hogwart
 subnatica
 deathloop
-kerbal
 frostpunk
 EVERSPACE
