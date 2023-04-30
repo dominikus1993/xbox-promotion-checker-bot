@@ -19,7 +19,7 @@ func mapTitles(games []data.XboxStoreGame) []string {
 
 func TestParsingFirstPage(t *testing.T) {
 	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
-	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}})
+	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}, {Title: "STORY OF SEASONS: Friends of Mineral Town - Digital Edition"}})
 	result := filter.Filter(context.TODO(), games)
 	got := gotolkit.ToSlice(result)
 
@@ -33,10 +33,10 @@ func TestParsingFirstPage(t *testing.T) {
 // BenchmarkParsingFirstPage-8      2056284               588.8 ns/op           816 B/op          4 allocs/op
 func BenchmarkParsingFirstPage(b *testing.B) {
 	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
-	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}})
+	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}, {Title: "STORY OF SEASONS: Friends of Mineral Town - Digital Edition"}})
 
 	for i := 0; i < b.N; i++ {
 		result := filter.Filter(context.TODO(), games)
-		gotolkit.ToSlice(result)
+		_ = gotolkit.ToSlice(result)
 	}
 }
