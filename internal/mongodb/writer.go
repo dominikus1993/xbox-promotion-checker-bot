@@ -2,12 +2,15 @@ package mongo
 
 import (
 	"context"
+	"errors"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/x/bsonx"
 )
+
+var errEmptyArray = errors.New("games array is empty")
 
 const ttlSeconds = 60 * 60 * 24 * 7 // 7 days
 
@@ -20,6 +23,10 @@ func NewMongoGameWriter(client *MongoClient) *mongoGameWriter {
 }
 
 func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStoreGame) error {
+	if len(games) == 0 {
+		return errEmptyArray
+	}
+
 	collection := writer.client.GetCollection()
 	// TTL index
 	index := mongo.IndexModel{
