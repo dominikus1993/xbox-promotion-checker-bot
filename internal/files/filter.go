@@ -22,7 +22,8 @@ func NewTxtFileFilter(provider GameThatIWantProvider) (*TxtFileFilter, error) {
 }
 
 func normalizedTitle(game data.XboxStoreGame) string {
-	return strings.ToLower(game.Title)
+	trimmedTitle := strings.TrimSpace(game.Title)
+	return strings.ToLower(trimmedTitle)
 }
 
 func (f *TxtFileFilter) Filter(ctx context.Context, games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
