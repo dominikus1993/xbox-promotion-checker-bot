@@ -59,13 +59,13 @@ func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 }
 
 func parsePrices(element *goquery.Selection) (regularPrice data.RegularPrice, promotionPrice data.PromotionPrice, err error) {
-	regularPriceE := element.Find("span.text-line-through")
+	regularPriceE := element.Find(".text-line-through.text-muted")
 	regularPrice, err = parsePrice(regularPriceE, polishCurrency)
 	if err != nil {
 		return
 	}
 
-	promotionPriceE := element.Find("span.font-weight-semibold")
+	promotionPriceE := element.Find(".font-weight-semibold")
 	promotionPrice, err = parsePrice(promotionPriceE, polishCurrency)
 	return
 }
