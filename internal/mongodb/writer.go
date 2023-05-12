@@ -12,7 +12,7 @@ import (
 
 var errEmptyArray = errors.New("games array is empty")
 
-const ttlSeconds = 60 * 60 * 24 * 7 // 7 days
+const sevenDays = 60 * 60 * 24 * 7
 
 type mongoGameWriter struct {
 	client *MongoClient
@@ -31,7 +31,7 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStore
 	// TTL index
 	index := mongo.IndexModel{
 		Keys:    bsonx.Doc{{Key: "CrawledAt", Value: bsonx.Int32(1)}},
-		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 7 days
+		Options: options.Index().SetExpireAfterSeconds(sevenDays),
 	}
 
 	_, err := collection.Indexes().CreateOne(ctx, index)
