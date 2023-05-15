@@ -10,7 +10,7 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/k0kubun/pp/v3 v3.2.0
-	github.com/lithammer/fuzzysearch v1.1.7
+	github.com/lithammer/fuzzysearch v1.1.8
 	github.com/samber/lo v1.38.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.2
