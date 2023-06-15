@@ -17,7 +17,7 @@ require (
 	github.com/urfave/cli/v2 v2.25.5
 	go.mongodb.org/mongo-driver v1.11.6
 	go.uber.org/automaxprocs v1.5.2
-	golang.org/x/sync v0.2.0
+	golang.org/x/sync v0.3.0
 )
 
 require (
