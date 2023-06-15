@@ -15,7 +15,7 @@ require (
 	github.com/sirupsen/logrus v1.9.2
 	github.com/stretchr/testify v1.8.2
 	github.com/urfave/cli/v2 v2.25.5
-	go.mongodb.org/mongo-driver v1.11.6
+	go.mongodb.org/mongo-driver v1.11.7
 	go.uber.org/automaxprocs v1.5.2
 	golang.org/x/sync v0.3.0
 )
