@@ -17,7 +17,7 @@ func mapTitles(games []data.XboxStoreGame) []string {
 	return titles
 }
 
-func TestParsingFirstPage(t *testing.T) {
+func TestParsingWhenGamesAreInGamesThatIWantBuy(t *testing.T) {
 	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
 	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Cyberpunk 2077"}, {Title: "Stellaris Enchanced"}, {Title: "Assasins Creed"}, {Title: "STORY OF SEASONS: Friends of Mineral Town - Digital Edition"}})
 	result := filter.Filter(context.TODO(), games)
@@ -28,6 +28,16 @@ func TestParsingFirstPage(t *testing.T) {
 	titlesThatWant := []string{"Cyberpunk 2077", "Stellaris Enchanced"}
 
 	assert.ElementsMatch(t, titlesThatWant, mapTitles(got))
+}
+
+func TestParsingWhenGamesAreNotInGamesThatIWantBuy(t *testing.T) {
+	filter := TxtFileFilter{gamesThatIWantBuy: []string{"stellaris", "cyberpunk"}}
+	games := gotolkit.FromSlice([]data.XboxStoreGame{{Title: "Starfield"}, {Title: "Elden Ring"}, {Title: "Assasins Creed"}, {Title: "STORY OF SEASONS: Friends of Mineral Town - Digital Edition"}})
+	result := filter.Filter(context.TODO(), games)
+	got := gotolkit.ToSlice(result)
+
+	assert.NotNil(t, got)
+	assert.Empty(t, got)
 }
 
 // BenchmarkParsingFirstPage-8      2056284               588.8 ns/op           816 B/op          4 allocs/op
