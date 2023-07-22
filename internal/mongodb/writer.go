@@ -30,7 +30,6 @@ func (writer *mongoGameWriter) Write(ctx context.Context, games []data.XboxStore
 	collection := writer.client.GetCollection()
 	// TTL index
 	index := mongo.IndexModel{
-
 		Keys:    bson.D{{Key: "CrawledAt", Value: 1}},
 		Options: options.Index().SetExpireAfterSeconds(ttlSeconds), // Will be removed after 7 days
 	}
