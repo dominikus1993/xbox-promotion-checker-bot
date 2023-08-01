@@ -9,6 +9,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func FuzzParsingPrice(f *testing.F) {
+	f.Add("19.47\\u00a0 zz\\", 19.47, false)
+	f.Add("21.37zł", 21.37, false)
+	f.Add("21.37 zł", 21.37, false)
+	f.Add("21,37 zł", 21.37, false)
+	f.Fuzz(func(t *testing.T, priceTxt string, expectedPrice float64, isError bool) {
+		result, err := parsePrice(priceTxt)
+		assert.Equal(t, expectedPrice, result)
+		if !isError {
+			assert.NoError(t, err)
+		} else {
+			assert.NotNil(t, err)
+		}
+	})
+}
+
 func TestParsingFirstPage(t *testing.T) {
 	parser := XboxStoreHtmlParser{xboxStoreUrl: "https://www.microsoft.com/pl-pl/store/deals/games/xbox", collector: NewCollyCollector()}
 	result := parser.parsePage(context.Background(), 1)

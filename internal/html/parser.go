@@ -3,6 +3,7 @@ package html
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -15,6 +16,10 @@ import (
 
 const polishCurrency = "zł"
 
+var decimalRegExp = regexp.MustCompile(`[^0-9.,-]`)
+var emptySpace = []byte("")
+var commaRegExp = regexp.MustCompile(`,`)
+
 type XboxStoreHtmlParser struct {
 	xboxStoreUrl string
 	collector    *colly.Collector
@@ -24,30 +29,24 @@ func NewXboxStoreHtmlParser(xboxStoreUrl string, collector *colly.Collector) *Xb
 	return &XboxStoreHtmlParser{xboxStoreUrl: xboxStoreUrl, collector: collector}
 }
 
-func replaceIncorrectChars(text, replacement string, params ...string) string {
-	if len(params) == 0 {
-		return text
-	}
-	var result string = text
-
-	for _, txt := range params {
-		result = strings.Replace(result, txt, "", 1)
-	}
-	return result
-}
-
-func parsePrice(selection *goquery.Selection, currency string) (float64, error) {
-	price := selection.Text()
-	if len(price) == 0 {
+func parsePrice(txt string) (float64, error) {
+	if len(txt) == 0 {
 		return 0.0, fmt.Errorf("price is empty")
 	}
-	priceWithoutCurrency := replaceIncorrectChars(price, "", currency, "+")
-	priceStr := strings.Replace(priceWithoutCurrency, ",", ".", 1)
+	// Zamiana przecinka na kropkę
+	txt = string(commaRegExp.ReplaceAll([]byte(txt), []byte(".")))
+	// Usunięcie wszystkich znaków, które nie są cyframi, kropką ani minusem
+	priceStr := string(decimalRegExp.ReplaceAll([]byte(txt), emptySpace))
 	priceFloat, err := strconv.ParseFloat(strings.TrimSpace(priceStr), 64)
 	if err != nil {
 		return 0.0, err
 	}
 	return priceFloat, nil
+}
+
+func parsePriceFromSelection(selection *goquery.Selection, currency string) (float64, error) {
+	price := selection.Text()
+	return parsePrice(price)
 }
 
 func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
@@ -60,13 +59,13 @@ func (parser *XboxStoreHtmlParser) getXboxPageUrl(page int) string {
 
 func parsePrices(element *goquery.Selection) (regularPrice data.RegularPrice, promotionPrice data.PromotionPrice, err error) {
 	regularPriceE := element.Find("span.text-line-through")
-	regularPrice, err = parsePrice(regularPriceE, polishCurrency)
+	regularPrice, err = parsePriceFromSelection(regularPriceE, polishCurrency)
 	if err != nil {
 		return
 	}
 
 	promotionPriceE := element.Find("span.font-weight-semibold")
-	promotionPrice, err = parsePrice(promotionPriceE, polishCurrency)
+	promotionPrice, err = parsePriceFromSelection(promotionPriceE, polishCurrency)
 	return
 }
 
