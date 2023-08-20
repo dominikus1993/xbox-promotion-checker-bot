@@ -1,10 +1,10 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/cmd"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 	_ "go.uber.org/automaxprocs"
 )
@@ -41,6 +41,6 @@ func main() {
 	}
 	err := app.Run(os.Args)
 	if err != nil {
-		log.WithError(err).Fatalln("error running app")
+		log.Fatal(err)
 	}
 }

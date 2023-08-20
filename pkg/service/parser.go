@@ -2,12 +2,12 @@ package service
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/filter"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/parser"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/writer"
-	log "github.com/sirupsen/logrus"
 )
 
 type XboxGamePromotionParser struct {
@@ -30,7 +30,7 @@ func (svc *XboxGamePromotionParser) Parse(ctx context.Context) error {
 
 	gamesresult := channels.ToSlice(result)
 	if len(gamesresult) == 0 {
-		log.Infoln("no games in promotion")
+		slog.Info("no games in promotion")
 		return nil
 	}
 

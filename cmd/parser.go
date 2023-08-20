@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/dominikus1993/xbox-promotion-checker-bot/internal/console"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/internal/discord"
@@ -11,7 +12,6 @@ import (
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/filter"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/service"
 	broadcast "github.com/dominikus1993/xbox-promotion-checker-bot/pkg/writer"
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
 
@@ -27,7 +27,7 @@ func XboxGamePromotionParser(context *cli.Context) error {
 		return fmt.Errorf("%w, failed to create mongo connection", err)
 	}
 	defer client.Close(context.Context)
-	log.Infoln("starting xbox game promotion parser")
+	slog.InfoContext(context.Context, "starting xbox game promotion parser")
 	newPromotionsFilter := mongo.NewDatabaseOldPromotionFilter(client)
 	mongoPromotionsWriter := mongo.NewMongoGameWriter(client)
 

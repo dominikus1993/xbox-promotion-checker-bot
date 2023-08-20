@@ -11,7 +11,7 @@ import (
 	gotolkit "github.com/dominikus1993/go-toolkit/channels"
 	"github.com/dominikus1993/xbox-promotion-checker-bot/pkg/data"
 	"github.com/gocolly/colly/v2"
-	log "github.com/sirupsen/logrus"
+	"golang.org/x/exp/slog"
 )
 
 const polishCurrency = "zł"
@@ -90,27 +90,27 @@ func (parser *XboxStoreHtmlParser) parsePage(ctx context.Context, page int) <-ch
 			price_placement := card_placement.Find("p[aria-hidden='true']")
 			title, link := getTitleAndLink(card_placement)
 			if isIngGamePassOrEaAccess(price_placement) {
-				log.WithField("url", e.Request.URL).WithField("link", link).WithField("title", title).Warnln("Is In GamePass or EaAccess")
+				slog.WarnContext(ctx, "is in GamePass or EaAccess", slog.String("link", link), slog.String("title", title), slog.String("url", e.Request.URL.String()))
 				return
 			}
 			oldPrice, promotionPrice, err := parsePrices(price_placement)
 			if err != nil {
-				log.WithField("url", e.Request.URL).WithField("link", link).WithField("title", title).WithError(err).Warnln("failed to parse price")
+				slog.WarnContext(ctx, "failed to parse price", slog.String("link", link), slog.String("title", title), slog.String("url", e.Request.URL.String()))
 				return
 			}
 			newGame := data.NewXboxStoreGame(title, link, promotionPrice, oldPrice)
 			if newGame.IsValidGame() {
 				result <- newGame
 			} else {
-				log.WithField("Url", e.Request.URL).Warning("Can't parse game because is invalid")
+				slog.WarnContext(ctx, "can't parse game because is invalid", slog.String("link", link), slog.String("title", title), slog.String("url", e.Request.URL.String()))
 			}
 		})
 		parser.collector.OnError(func(r *colly.Response, err error) {
-			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")
+			slog.ErrorContext(ctx, "error while parsing page", "error", err, "page", page)
 		})
 		err := parser.collector.Visit(pageUrl)
 		if err != nil {
-			log.WithError(err).WithField("page", page).Errorln("Error while parsing page")
+			slog.ErrorContext(ctx, "error while parsing page", "error", err, "page", page)
 		}
 		parser.collector.Wait()
 	}()

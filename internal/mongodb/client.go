@@ -3,9 +3,9 @@ package mongo
 import (
 	"context"
 
-	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"golang.org/x/exp/slog"
 )
 
 type MongoClient struct {
@@ -43,6 +43,6 @@ func (c *MongoClient) GetCollection() *mongo.Collection {
 
 func (c *MongoClient) Close(ctx context.Context) {
 	if err := c.Disconnect(ctx); err != nil {
-		log.WithError(err).Error("Error when trying disconnect from mongo")
+		slog.Error("Error when trying disconnect from mongo", "error", err)
 	}
 }
