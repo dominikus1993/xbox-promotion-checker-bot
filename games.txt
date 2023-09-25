@@ -4,3 +4,5 @@ Grim Dawn
 subnatica
 deathloop
 EVERSPACE
+doom
+wolfenstein
