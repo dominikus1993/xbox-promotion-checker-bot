@@ -87,6 +87,6 @@ func TestFilter(t *testing.T) {
 		subject := channels.ToSlice(resultStream)
 
 		assert.Len(t, subject, 1)
-		assert.Equal(t, game2, subject[0])
+		assert.Contains(t, subject, game2)
 	})
 }
