@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B700CB21-0351-4044-8420-0C77ABE96703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxPromotionCheckerBot.App", "src\XboxPromotionCheckerBot.App\XboxPromotionCheckerBot.App.csproj", "{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2B7A8BA7-9686-43EE-BE25-4C3233545C3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxPromotionCheckerBot.App.Tests", "tests\XboxPromotionCheckerBot.App.Tests\XboxPromotionCheckerBot.App.Tests.csproj", "{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D33799D-43FA-4BF4-BD5B-AA58E31D8D9A} = {B700CB21-0351-4044-8420-0C77ABE96703}
+		{AABCAE7C-BD3A-4CEE-91CC-28E4CA4EC209} = {2B7A8BA7-9686-43EE-BE25-4C3233545C3C}
+	EndGlobalSection
+EndGlobal
