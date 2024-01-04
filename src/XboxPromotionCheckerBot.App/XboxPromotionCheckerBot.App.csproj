@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cocona" />
+    <PackageReference Include="Discord.Net.Webhook" />
+    <PackageReference Include="HtmlAgilityPack" />
+    <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="System.Linq.Async" />
+  </ItemGroup>
+
+</Project>
