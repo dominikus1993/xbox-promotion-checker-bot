@@ -5,7 +5,7 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Filters;
 
 public sealed class GameNameFilter : IGamesFilter
 {
-    public IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<XboxGame> Filter(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
     {
         return games;
     }

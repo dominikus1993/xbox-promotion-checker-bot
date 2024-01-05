@@ -5,17 +5,16 @@ namespace XboxPromotionCheckerBot.App.Tests.Core.Crypto;
 public class IdGeneratorTests
 {
     [Fact]
-    public async Task GenerateIdWhenKeysAreEmpty()
+    public void GenerateIdWhenKeysAreEmpty()
     {
-        var subject = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => IdGenerator.GenerateId());
+        var subject = Assert.Throws<ArgumentOutOfRangeException>(() => IdGenerator.GenerateId());
         Assert.NotNull(subject);
     }
     
     [Fact]
-    public async Task GenerateIdWhenKeysAreNotEmpty()
+    public void GenerateIdWhenKeysAreNotEmpty()
     {
-        var subject = await IdGenerator.GenerateId("jp2gmd", "2137");
-        Assert.NotNull(subject);
-        Assert.Equal("iJLwXnhXT+uX7V9R4zA5jRlWF9Z7Zuqq9RSkNnANrzo=", subject);
+        var subject = IdGenerator.GenerateId("jp2gmd", "2137");
+        Assert.Equal(new Guid("40b674a4-86cb-99e8-2ef7-76ac3e291aca"), subject);
     }
 }

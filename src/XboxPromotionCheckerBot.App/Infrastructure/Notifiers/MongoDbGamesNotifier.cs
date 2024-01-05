@@ -5,7 +5,7 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 
 public sealed class MongoDbGamesNotifier : IGamesNotifier
 {
-    public Task Notify(IReadOnlyList<Game> games, CancellationToken cancellationToken = default)
+    public Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
     {
         return Task.CompletedTask;
     }

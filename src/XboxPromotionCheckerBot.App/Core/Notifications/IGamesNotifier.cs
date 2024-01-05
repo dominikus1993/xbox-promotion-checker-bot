@@ -4,12 +4,12 @@ namespace XboxPromotionCheckerBot.App.Core.Notifications;
 
 public interface IGamesNotifier
 {
-    Task Notify(IReadOnlyList<Game> games, CancellationToken cancellationToken = default);
+    Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default);
 }
 
 public interface IGamesBroadcaster
 {
-    Task Broadcast(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default);
+    Task Broadcast(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default);
 }
 
 public sealed class DefaultGamesBroadcaster : IGamesBroadcaster
@@ -21,7 +21,7 @@ public sealed class DefaultGamesBroadcaster : IGamesBroadcaster
         _gamesNotifiers = gamesNotifiers;
     }
 
-    public async Task Broadcast(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
+    public async Task Broadcast(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         

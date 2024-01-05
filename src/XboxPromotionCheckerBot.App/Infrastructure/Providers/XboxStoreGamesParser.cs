@@ -5,8 +5,8 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
 public sealed class XboxStoreGamesParser : IGamesParser
 {
-    public IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<XboxGame> Parse(CancellationToken cancellationToken = default)
     {
-        return AsyncEnumerable.Empty<Game>();
+        return AsyncEnumerable.Empty<XboxGame>();
     }
 }

@@ -9,7 +9,7 @@ public class AsyncEnumerableExtensionsTests
 {
     [Theory]
     [AutoData]
-    public async Task TestWhenFilterEnumerableIsEmpty(IEnumerable<Game> games)
+    public async Task TestWhenFilterEnumerableIsEmpty(IEnumerable<XboxGame> games)
     {
         var filters = Enumerable.Empty<IGamesFilter>();
 
