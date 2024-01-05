@@ -1,7 +1,6 @@
-using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Types;
 
-namespace XboxPromotionCheckerBot.App.Infrastructure.Filters;
+namespace XboxPromotionCheckerBot.App.Core.Filters;
 
 public sealed class GameNameFilter : IGamesFilter
 {

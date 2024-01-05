@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Providers;
-using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 using XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 using XboxPromotionCheckerBot.App.Infrastructure.Providers;
 

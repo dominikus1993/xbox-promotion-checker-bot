@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Core\Repositories\" />
+    <Folder Include="Infrastructure\Filters\" />
   </ItemGroup>
 
 </Project>
