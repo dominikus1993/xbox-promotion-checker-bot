@@ -6,7 +6,18 @@ using Title = string;
 using GameId = string;
 using Price = decimal;
 
-public readonly struct GamePrice(Price Price, Price? OldPrice);
+public readonly record struct GamePrice(Price Price, Price? OldPrice = default)
+{
+    public double CalculatePromotionPercentage()
+    {
+        if (!OldPrice.HasValue)
+        {
+            return 0d;
+        }
+
+        return 100d - (Price.ToDouble(Price) / Price.ToDouble(OldPrice.Value) * 100d);
+    }
+}
 
 public sealed class Game
 {
@@ -23,6 +34,7 @@ public sealed class Game
     public Uri Link { get; }
     public GamePrice GamePrice { get; }
 
+    public double PromotionPercentage => GamePrice.CalculatePromotionPercentage();
 
     public static async Task<Game> Create(Title title, Uri link, GamePrice gamePrice)
     {
