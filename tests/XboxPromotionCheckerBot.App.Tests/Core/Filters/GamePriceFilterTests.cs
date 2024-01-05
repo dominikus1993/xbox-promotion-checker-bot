@@ -13,6 +13,13 @@ public class GamePriceFilterTests
     }
     
     [Fact]
+    public async Task TestPriceFilterWhenSourceIsNull()
+    {
+        var subject = await Assert.ThrowsAsync<ArgumentNullException>(async () => await _priceFilter.Filter(null).ToArrayAsync());
+        Assert.NotNull(subject);
+    }
+    
+    [Fact]
     public async Task TestPriceFilterWhenSourceIsEmpty()
     {
         var games = AsyncEnumerable.Empty<XboxGame>();

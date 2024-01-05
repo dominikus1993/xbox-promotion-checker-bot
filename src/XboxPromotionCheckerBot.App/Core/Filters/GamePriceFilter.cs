@@ -14,6 +14,7 @@ public sealed class GamePriceFilter : IGamesFilter
     
     public async IAsyncEnumerable<XboxGame> Filter(IAsyncEnumerable<XboxGame> games, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(games);
         await foreach (var game in games.WithCancellation(cancellationToken))
         {
             if (game.PromotionPercentage >= _minimumPercentage)

@@ -17,4 +17,24 @@ public class AsyncEnumerableExtensionsTests
         
         Assert.Equivalent(games, result);
     }
+    
+    [Theory]
+    [AutoData]
+    public async Task TestWhenFilterEnumerableIsNull(IEnumerable<XboxGame> games)
+    {
+        var result = await Assert.ThrowsAsync<ArgumentNullException>(async () => await games.ToAsyncEnumerable().Pipe(null!).ToListAsync());
+        
+        Assert.NotNull(result);
+    }
+    
+    [Theory]
+    [AutoData]
+    public async Task TestWhenGamesAreNull()
+    {
+        IAsyncEnumerable<XboxGame> games = null!;
+        var filters = Enumerable.Empty<IGamesFilter>();
+        var result = await Assert.ThrowsAsync<ArgumentNullException>(async () => await games.Pipe(filters).ToListAsync());
+        
+        Assert.NotNull(result);
+    }
 }

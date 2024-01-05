@@ -10,6 +10,9 @@ public static class AsyncEnumerableExtensions
     public static IAsyncEnumerable<XboxGame> Pipe(this IAsyncEnumerable<XboxGame> games, IEnumerable<IGamesFilter> filters,
         CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(games);
+        ArgumentNullException.ThrowIfNull(filters);
+        
         var stream = games;
         foreach (var filter in filters)
         {
