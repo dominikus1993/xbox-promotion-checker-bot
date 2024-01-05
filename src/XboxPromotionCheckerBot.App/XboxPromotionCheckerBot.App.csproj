@@ -16,9 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Core\Notifications\" />
-    <Folder Include="Core\Providers\" />
     <Folder Include="Core\Repositories\" />
-    <Folder Include="Core\UseCases\" />
   </ItemGroup>
 
 </Project>
