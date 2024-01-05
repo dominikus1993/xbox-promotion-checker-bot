@@ -13,7 +13,7 @@ public static class WebApplicationBuilderExtensions
     {
         services.AddScoped<IGamesFilter, GameLastSendFilter>();
         services.AddScoped<IGamesFilter, GameNameFilter>();
-        services.AddScoped<IGamesFilter, GamePriceNotifier>();
+        services.AddScoped<IGamesFilter, GamePriceFilter>();
         services.AddScoped<IGamesNotifier, DiscordGameNotifier>();
         services.AddScoped<IGamesNotifier, MongoDbGamesNotifier>();
         return services;

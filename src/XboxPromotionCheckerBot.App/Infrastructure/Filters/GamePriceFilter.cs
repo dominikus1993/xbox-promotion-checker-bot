@@ -3,7 +3,7 @@ using XboxPromotionCheckerBot.App.Core.Types;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Filters;
 
-public sealed class GamePriceNotifier : IGamesFilter
+public sealed class GamePriceFilter : IGamesFilter
 {
     public IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
     {
