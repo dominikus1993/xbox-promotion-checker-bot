@@ -65,6 +65,21 @@ public sealed class XboxGame
         GamePrice = gamePrice;
     }
 
+    private bool Equals(XboxGame other)
+    {
+        return Id.Equals(other.Id);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || obj is XboxGame other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
+
     public GameId Id { get; }
     public Title Title { get; }
     public Uri Link { get; }
