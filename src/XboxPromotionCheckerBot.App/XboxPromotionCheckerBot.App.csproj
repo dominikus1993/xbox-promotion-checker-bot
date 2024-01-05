@@ -10,6 +10,7 @@
     <PackageReference Include="Cocona" />
     <PackageReference Include="Discord.Net.Webhook" />
     <PackageReference Include="HtmlAgilityPack" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />
     <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
