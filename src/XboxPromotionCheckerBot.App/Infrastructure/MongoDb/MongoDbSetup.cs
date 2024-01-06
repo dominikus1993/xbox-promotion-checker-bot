@@ -8,6 +8,10 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 public static class MongoDbSetup
 {
     public static IMongoCollection<MongoXboxGame> Games(this IMongoDatabase db) => db.GetCollection<MongoXboxGame>("games");
+
+    public static IMongoDatabase GamesDb(this IMongoClient client) => client.GetDatabase("Games");
+    
+    
     
     public static async Task Setup(this IMongoDatabase db)
     {

@@ -1,10 +1,11 @@
 using MongoDB.Driver;
+using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Core.Types;
 using XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
-public sealed class MongoGamesRepository
+public sealed class MongoGamesRepository : IGamesRepository
 {
     private readonly IMongoCollection<MongoXboxGame> _games;
     

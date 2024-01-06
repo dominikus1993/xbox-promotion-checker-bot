@@ -1,15 +1,14 @@
 using System.Runtime.CompilerServices;
-using XboxPromotionCheckerBot.App.Core.Filters;
+using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Core.Types;
-using XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
-namespace XboxPromotionCheckerBot.App.Infrastructure.Filters;
+namespace XboxPromotionCheckerBot.App.Core.Filters;
 
 public sealed class GameLastSendFilter : IGamesFilter
 {
-    private readonly MongoGamesRepository _mongoGamesRepository;
+    private readonly IGamesRepository _mongoGamesRepository;
 
-    public GameLastSendFilter(MongoGamesRepository mongoGamesRepository)
+    public GameLastSendFilter(IGamesRepository mongoGamesRepository)
     {
         _mongoGamesRepository = mongoGamesRepository;
     }
