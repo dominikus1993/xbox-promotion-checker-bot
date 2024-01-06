@@ -10,9 +10,8 @@ public static class MongoDbSetup
     public static IMongoCollection<MongoXboxGame> Games(this IMongoDatabase db) => db.GetCollection<MongoXboxGame>("games");
 
     public static IMongoDatabase GamesDb(this IMongoClient client) => client.GetDatabase("Games");
-    
-    
-    
+
+    public static IMongoClient MongoClient(string connection) => new MongoClient(connection);
     public static async Task Setup(this IMongoDatabase db)
     {
         BsonClassMap.RegisterClassMap<MongoXboxGame>(classMap =>

@@ -1,4 +1,5 @@
 using Testcontainers.MongoDb;
+using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 using XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
@@ -6,10 +7,11 @@ namespace XboxPromotionCheckerBot.App.Tests.Infrastructure.Fixtures;
 
 public sealed class MongoDbFixture : IAsyncLifetime
 {
-    public MongoDbContainer MongoDbContainer = new MongoDbBuilder().Build();
+    private readonly MongoDbContainer _mongoDbContainer = new MongoDbBuilder().Build();
     
-    public MongoGamesRepository MongoGamesRepository { get; private set; }
+    public IGamesRepository MongoGamesRepository { get; private set; }
 
+    
     public MongoDbFixture()
     {
         
@@ -18,11 +20,15 @@ public sealed class MongoDbFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await MongoDbContainer.StartAsync();
+        await _mongoDbContainer.StartAsync();
+        var client = MongoDbSetup.MongoClient(_mongoDbContainer.GetConnectionString());
+        var db = client.GamesDb();
+        await db.Setup();
+        MongoGamesRepository = new MongoGamesRepository(db);
     }
 
     public Task DisposeAsync()
     {
-        return MongoDbContainer.StopAsync();
+        return _mongoDbContainer.StopAsync();
     }
 }
