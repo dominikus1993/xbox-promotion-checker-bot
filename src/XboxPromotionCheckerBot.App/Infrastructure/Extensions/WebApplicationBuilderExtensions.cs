@@ -13,9 +13,10 @@ public static class WebApplicationBuilderExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IGamesFilter, GameLastSendFilter>();
-        services.AddScoped<IGamesFilter, GameNameFilter>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();
+        services.AddScoped<IGamesFilter, GameNameFilter>();
+        services.AddScoped<IGamesFilter, GameLastSendFilter>();
+        
         services.AddScoped<IGamesNotifier, DiscordGameNotifier>();
         services.AddScoped<IGamesNotifier, MongoDbGamesNotifier>();
         services.AddScoped<IGamesParser, XboxStoreGamesParser>();

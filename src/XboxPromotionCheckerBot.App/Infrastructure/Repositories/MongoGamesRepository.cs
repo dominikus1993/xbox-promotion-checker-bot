@@ -18,4 +18,10 @@ public sealed class MongoGamesRepository
         var filter = Builders<MongoXboxGame>.Filter.Eq(x => x.Id, game.Id);
         return await _games.Find(filter).CountDocumentsAsync(cancellationToken: cancellationToken) > 0;
     }
+    
+    public async Task Insert(XboxGame game, CancellationToken cancellationToken = default)
+    {
+        var mongoGame = new MongoXboxGame(game);
+        await _games.InsertOneAsync(mongoGame, cancellationToken: cancellationToken);
+    }
 }
