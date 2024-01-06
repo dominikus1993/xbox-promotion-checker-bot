@@ -130,6 +130,11 @@
           "NETStandard.Library": "1.6.1"
         }
       },
+      "J2N": {
+        "type": "Transitive",
+        "resolved": "2.0.0",
+        "contentHash": "M5bwDajAARZiyqupU+rHQJnsVLxNBOHJ8vKYHd8LcLIb1FgLfzzcJvc31Qo5Xz/GEHFjDF9ScjKL/ks/zRTXuA=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -1507,6 +1512,7 @@
           "Cocona": "[2.2.0, )",
           "Discord.Net.Webhook": "[3.13.0, )",
           "HtmlAgilityPack": "[1.11.57, )",
+          "Lucene.Net": "[4.8.0-beta00016, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.23.1, )",
           "System.Linq.Async": "[6.0.1, )"
@@ -1540,6 +1546,16 @@
         "resolved": "1.11.57",
         "contentHash": "zDxnHcAvi+qhZG602eKaPJKmzm0T8npKVML0RMwjrRBabpmTRtu2OVpfNkMUfYMgQ+5EllOkSeGxu0uFVV2zFw=="
       },
+      "Lucene.Net": {
+        "type": "CentralTransitive",
+        "requested": "[4.8.0-beta00016, )",
+        "resolved": "4.8.0-beta00016",
+        "contentHash": "DCtUbE/NIrisNI7hRwU+UKS3Cr6S2vH1XB9wvEHHI3anu5OUpX1Fkr/PDC7oFCaol/QCvzVLbLZVizAT1aTLpA==",
+        "dependencies": {
+          "J2N": "2.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0"
+        }
+      },
       "Microsoft.IO.RecyclableMemoryStream": {
         "type": "CentralTransitive",
         "requested": "[3.0.0, )",
@@ -1561,10 +1577,10 @@
       "System.Interactive.Async": {
         "type": "CentralTransitive",
         "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "f8H1O4ZWDQo344y5NQU76G4SIjWMuKDVXL9OM1dg6K5YZnLkc8iCdQDybBvMcC6ufk61jzXGVAX6UCDu0qDSjA==",
+        "resolved": "5.0.0",
+        "contentHash": "QaqhQVDiULcu4vm6o89+iP329HcK44cETHOYgy/jfEjtzeFy0ZxmuM7nel9ocjnKxEM4yh1mli7hgh8Q9o+/Iw==",
         "dependencies": {
-          "System.Linq.Async": "6.0.1"
+          "System.Linq.Async": "5.0.0"
         }
       },
       "System.Linq.Async": {

@@ -10,6 +10,7 @@
     <PackageReference Include="Cocona" />
     <PackageReference Include="Discord.Net.Webhook" />
     <PackageReference Include="HtmlAgilityPack" />
+    <PackageReference Include="Lucene.Net" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />
     <PackageReference Include="System.Linq.Async" />
@@ -17,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Core\Repositories\" />
-    <Folder Include="Infrastructure\Filters\" />
   </ItemGroup>
 
 </Project>
