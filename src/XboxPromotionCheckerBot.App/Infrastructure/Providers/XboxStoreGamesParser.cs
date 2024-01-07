@@ -4,6 +4,7 @@ using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Providers;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Logger;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
@@ -36,7 +37,7 @@ public sealed class XboxStoreGamesParser : IGamesParser
         var doc = await web.LoadFromWebAsync(url.ToString(), cancellationToken);
         if (doc is null)
         {
-            _logger.LogWarning("No games in page {Page}", page);
+            _logger.LogNoGames(page);
             yield break;
         }
         
