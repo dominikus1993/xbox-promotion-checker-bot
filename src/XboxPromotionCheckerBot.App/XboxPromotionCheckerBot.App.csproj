@@ -11,6 +11,7 @@
     <PackageReference Include="Discord.Net.Webhook" />
     <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Lucene.Net" />
+    <PackageReference Include="Microsoft.Extensions.Telemetry.Abstractions" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />
     <PackageReference Include="System.Linq.Async" />

@@ -25,4 +25,10 @@ public sealed class MongoGamesRepository : IGamesRepository
         var mongoGame = new MongoXboxGame(game);
         await _games.InsertOneAsync(mongoGame, cancellationToken: cancellationToken);
     }
+
+    public async Task Insert(IEnumerable<XboxGame> game, CancellationToken cancellationToken = default)
+    {
+        var xboxGames = game.Select(g => new MongoXboxGame(g));
+        await _games.InsertManyAsync(xboxGames, cancellationToken: cancellationToken);
+    }
 }
