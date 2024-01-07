@@ -97,4 +97,9 @@ public sealed class XboxGame
     {
         return new XboxGame(id, title, link, gamePrice);
     }
+
+    public bool IsValidGame()
+    {
+        return true;
+    }
 }
