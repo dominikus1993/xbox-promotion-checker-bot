@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Providers;
 using XboxPromotionCheckerBot.App.Core.Types;
 
@@ -11,6 +12,14 @@ public sealed class XboxStoreGamesParser : IGamesParser
     public const string XboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox";
     
     public const int Pages = 10;
+
+    private readonly ILogger<XboxStoreGamesParser> _logger;
+
+    public XboxStoreGamesParser(ILogger<XboxStoreGamesParser> logger)
+    {
+        _logger = logger;
+    }
+
     public async IAsyncEnumerable<XboxGame> Parse([EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         var pages = Enumerable.Range(0, Pages).Select(page => ParsePage(page + 1, cancellationToken)).ToArray();
@@ -25,6 +34,13 @@ public sealed class XboxStoreGamesParser : IGamesParser
         var url = GetPageUrl(page);
         var web = new HtmlWeb();
         var doc = await web.LoadFromWebAsync(url.ToString(), cancellationToken);
+        if (doc is null)
+        {
+            _logger.LogWarning("No games in page {Page}", page);
+            yield break;
+        }
+        
+        
         Console.WriteLine("XD");
         yield break;
     }
