@@ -27,7 +27,7 @@ public sealed class XboxStoreGamesParser : IGamesParser
         await foreach (var game in AsyncEnumerableEx.Merge(pages).WithCancellation(cancellationToken))
         {
             yield return game;
-        }
+        }//*[@id="card-1-0"]
     }
 
     private async IAsyncEnumerable<XboxGame> ParsePage(int page, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -40,10 +40,32 @@ public sealed class XboxStoreGamesParser : IGamesParser
             _logger.LogNoGames(page);
             yield break;
         }
-        
-        
-        Console.WriteLine("XD");
-        yield break;
+        var cards = doc.DocumentNode.SelectNodes("""//div[contains(@class, 'card-body')]""");
+        if (cards is null)
+        {
+            yield break;
+        }
+
+        foreach (var node in cards)
+        {
+            var game = ParseHtmlNode(node);
+            if (game is not null)
+            {
+                yield return game;
+            }
+        }
+    }
+
+
+    private static XboxGame? ParseHtmlNode(HtmlNode node)
+    {
+        var priceNode = node.SelectSingleNode("./p[@aria-hidden='true']");
+        if (priceNode is null)
+        {
+            return null;
+        }
+
+        return null;
     }
 
     private static Uri GetPageUrl(int page)
