@@ -59,13 +59,46 @@ public sealed class XboxStoreGamesParser : IGamesParser
 
     private static XboxGame? ParseHtmlNode(HtmlNode node)
     {
-        var priceNode = node.SelectSingleNode("./p[@aria-hidden='true']");
-        if (priceNode is null)
+        
+        var titleAndUrl = ParseTitleAndLink(node);
+        if (titleAndUrl is null)
+        {
+            return null;
+        }
+        
+        var price = ParsePrice(node);
+        if (price is null)
         {
             return null;
         }
 
         return null;
+    }
+
+    private static GamePrice? ParsePrice(HtmlNode node)
+    {
+        var priceNode = node.SelectSingleNode("./p[@aria-hidden='true']");
+        if (priceNode is null)
+        {
+            return null;
+        }
+        return null;
+    }
+
+    private static (string Title, Uri? Link)? ParseTitleAndLink(HtmlNode node)
+    {
+        var titleNode = node.SelectSingleNode("./h3/a");
+        if (titleNode is null)
+        {
+            return null;
+        }
+
+        var link = titleNode.Attributes["href"];
+        var url = link?.Value is not null  ? new Uri(link.Value) : null;
+
+        var title = titleNode.InnerText!;
+        
+        return (title, url);
     }
 
     private static Uri GetPageUrl(int page)
