@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Providers;
@@ -8,8 +10,10 @@ using XboxPromotionCheckerBot.App.Infrastructure.Logger;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
-public sealed class XboxStoreGamesParser : IGamesParser
+public sealed partial class XboxStoreGamesParser : IGamesParser
 {
+    [GeneratedRegex(@"(\d+,\d{2})", RegexOptions.Compiled | RegexOptions.IgnoreCase)]
+    private static partial Regex PriceRegex();
     public const string XboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox";
     
     public const int Pages = 10;
@@ -27,7 +31,7 @@ public sealed class XboxStoreGamesParser : IGamesParser
         await foreach (var game in AsyncEnumerableEx.Merge(pages).WithCancellation(cancellationToken))
         {
             yield return game;
-        }//*[@id="card-1-0"]
+        }
     }
 
     private async IAsyncEnumerable<XboxGame> ParsePage(int page, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -57,11 +61,11 @@ public sealed class XboxStoreGamesParser : IGamesParser
     }
 
 
-    private static XboxGame? ParseHtmlNode(HtmlNode node)
+    private XboxGame? ParseHtmlNode(HtmlNode node)
     {
         
         var titleAndUrl = ParseTitleAndLink(node);
-        if (titleAndUrl is null)
+        if (!titleAndUrl.HasValue)
         {
             return null;
         }
@@ -72,20 +76,42 @@ public sealed class XboxStoreGamesParser : IGamesParser
             return null;
         }
 
+        var (title, link) = titleAndUrl.Value;
+        var result = XboxGame.Create(title, link, price.Value);
+        
+        if (result.IsValidGame())
+        {
+            return result;
+        }
+        
         return null;
     }
 
-    private static GamePrice? ParsePrice(HtmlNode node)
+    private GamePrice? ParsePrice(HtmlNode node)
     {
         var priceNode = node.SelectSingleNode("./p[@aria-hidden='true']");
         if (priceNode is null)
         {
             return null;
         }
+
+        var pricesText = priceNode.InnerText;
+
+        var elements = PriceRegex().Matches(pricesText);
+
+        if (elements is [var oldPrice, var promotionalPrice])
+        {
+            var price = promotionalPrice.Value.Replace(",", ".", StringComparison.InvariantCultureIgnoreCase);
+            var oldP = oldPrice.Value.Replace(",", ".", StringComparison.InvariantCultureIgnoreCase);
+            return new GamePrice(decimal.Parse(price, CultureInfo.InvariantCulture),
+                decimal.Parse(oldP, CultureInfo.InvariantCulture));
+        }
+        
+        _logger.LogWarning("Can't find prices, {InnerText}", priceNode.InnerText);
         return null;
     }
 
-    private static (string Title, Uri? Link)? ParseTitleAndLink(HtmlNode node)
+    private (string Title, Uri Link)? ParseTitleAndLink(HtmlNode node)
     {
         var titleNode = node.SelectSingleNode("./h3/a");
         if (titleNode is null)
@@ -94,11 +120,15 @@ public sealed class XboxStoreGamesParser : IGamesParser
         }
 
         var link = titleNode.Attributes["href"];
-        var url = link?.Value is not null  ? new Uri(link.Value) : null;
-
-        var title = titleNode.InnerText!;
+        if (!string.IsNullOrEmpty(link.Value) && Uri.TryCreate(link.Value, UriKind.Absolute, out var uri))
+        {
+            var title = titleNode.InnerText!;
         
-        return (title, url);
+            return (title, uri);
+        }
+        
+        _logger.LogWarning("Can't parse url {Uri}", link.Value);
+        return null;
     }
 
     private static Uri GetPageUrl(int page)
