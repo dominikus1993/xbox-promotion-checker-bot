@@ -176,6 +176,32 @@
         "resolved": "2.0.0",
         "contentHash": "M5bwDajAARZiyqupU+rHQJnsVLxNBOHJ8vKYHd8LcLIb1FgLfzzcJvc31Qo5Xz/GEHFjDF9ScjKL/ks/zRTXuA=="
       },
+      "Lucene.Net.Queries": {
+        "type": "Transitive",
+        "resolved": "4.8.0-beta00016",
+        "contentHash": "XBzdMDlan68V2ZlhAlP8Fd+Xx2Le8ec7cEN1kFF45Sipa3Q8L/tilJfwS9VHvMTvGkwPM/yj62eGbfGBgIMR8Q==",
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00016"
+        }
+      },
+      "Lucene.Net.QueryParser": {
+        "type": "Transitive",
+        "resolved": "4.8.0-beta00016",
+        "contentHash": "5dVvjXmzPaK8GD/eblJopTJMQmO6c6fvVPfBIOw46+jyZR+yESkUnWF1LtLoLXZQNrl4Dx8LKdes5G1QAM7eGA==",
+        "dependencies": {
+          "Lucene.Net.Analysis.Common": "4.8.0-beta00016",
+          "Lucene.Net.Queries": "4.8.0-beta00016",
+          "Lucene.Net.Sandbox": "4.8.0-beta00016"
+        }
+      },
+      "Lucene.Net.Sandbox": {
+        "type": "Transitive",
+        "resolved": "4.8.0-beta00016",
+        "contentHash": "wMsRZtbNx0wvX3mtNjpOwQmKx3Ij4UGHWIYHbvnzMWlPUTgtOpYSj02REL4hOxI71WBZylpGB5EWfQ2eEld63g==",
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00016"
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -1594,16 +1620,25 @@
       "xboxpromotioncheckerbot.app": {
         "type": "Project",
         "dependencies": {
+          "Akade.IndexedSet": "[1.1.0, )",
           "Cocona": "[2.2.0, )",
           "Discord.Net.Webhook": "[3.13.0, )",
           "HtmlAgilityPack": "[1.11.57, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
+          "Lucene.Net.Analysis.Common": "[4.8.0-beta00016, )",
+          "Lucene.Net.QueryParser": "[4.8.0-beta00016, )",
           "Microsoft.Extensions.Telemetry.Abstractions": "[8.0.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.23.1, )",
           "System.Interactive.Async": "[6.0.1, )",
           "System.Linq.Async": "[6.0.1, )"
         }
+      },
+      "Akade.IndexedSet": {
+        "type": "CentralTransitive",
+        "requested": "[1.1.0, )",
+        "resolved": "1.1.0",
+        "contentHash": "w2h7zzKCM+TLVw93VllXG80MIK1uoNkM/drZ3MJheHPPUZFDF6X36Vg4OHqi65ra6lhjo+5pzitE7BuJTKcm7g=="
       },
       "Cocona": {
         "type": "CentralTransitive",
@@ -1641,6 +1676,15 @@
         "dependencies": {
           "J2N": "2.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "2.0.0"
+        }
+      },
+      "Lucene.Net.Analysis.Common": {
+        "type": "CentralTransitive",
+        "requested": "[4.8.0-beta00016, )",
+        "resolved": "4.8.0-beta00016",
+        "contentHash": "7pjEAIliWdih6E3I0hCE8hKcKKRx1LLzeQBslF1fhvzE1Sal4NyHd8RFJHV1Z+yHlBw4gCyyVIDZADiIoyqwxg==",
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00016"
         }
       },
       "Microsoft.Extensions.Telemetry.Abstractions": {
