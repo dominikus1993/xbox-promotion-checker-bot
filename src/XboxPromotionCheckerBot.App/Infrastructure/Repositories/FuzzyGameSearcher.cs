@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Akade.IndexedSet;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
@@ -35,7 +36,7 @@ public sealed class FuzzyGameSearcher : IGameSearcher, IDisposable
     }
 
 
-    public async IAsyncEnumerable<XboxGame> FilterExistingGames(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<XboxGame> FilterExistingGames(IAsyncEnumerable<XboxGame> games, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         IndexWriterConfig indexConfig = new IndexWriterConfig(LuceneVersion, _analyzer)
         {
