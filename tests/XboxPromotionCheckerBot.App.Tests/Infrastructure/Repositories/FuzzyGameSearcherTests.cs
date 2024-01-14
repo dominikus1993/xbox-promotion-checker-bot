@@ -37,4 +37,18 @@ public sealed class FuzzyGameSearcherTests
         
         Assert.Empty(subject);
     }
+
+    [Fact]
+    public async Task TestParsingWhenGamesAreInGamesThatIWantBuy()
+    {
+        FuzzGame[] games = [new FuzzGame("stellaris"), new FuzzGame("cyberpunk")];
+        using var searcher = FuzzyGameSearcher.Create(games);
+        XboxGame[] gamesFromSomething = [XboxGame.Create("Cyberpunk 2077", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("Assasins Creed", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("STORY OF SEASONS: Friends of Mineral Town - Digital Edition", new Uri("http://localhost"), new GamePrice(10, 20))];
+        var subject = await searcher.FilterExistingGames(gamesFromSomething.ToAsyncEnumerable()).ToListAsync();
+        
+        Assert.NotEmpty(subject);
+        Assert.Equal(2, subject.Count);
+        Assert.Contains(subject, game => game.Title == "Cyberpunk 2077");
+        Assert.Contains(subject, game => game.Title == "Stellaris Enchanced");
+    }
 }
