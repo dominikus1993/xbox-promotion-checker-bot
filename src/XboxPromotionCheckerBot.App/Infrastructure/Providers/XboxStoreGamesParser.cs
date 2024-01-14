@@ -107,7 +107,7 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
                 decimal.Parse(oldP, CultureInfo.InvariantCulture));
         }
         
-        _logger.LogWarning("Can't find prices, {InnerText}", priceNode.InnerText);
+        _logger.LogCantFindPrices(priceNode.InnerText);
         return null;
     }
 
@@ -127,7 +127,7 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
             return (title, uri);
         }
         
-        _logger.LogWarning("Can't parse url {Uri}", link.Value);
+        _logger.LogCantParseUrl(link.Value);
         return null;
     }
 
