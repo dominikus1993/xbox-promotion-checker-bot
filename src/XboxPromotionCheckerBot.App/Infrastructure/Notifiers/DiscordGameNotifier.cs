@@ -14,20 +14,25 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         _discordWebhookClient = discordWebhookClient;
     }
 
-    public async Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
+    public Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
     {
         var embeds = MapEmbeds(games).Chunk(10);
-        var tasks = new List<Task>();
-        
-        foreach (var messages in embeds)
-        {
-            tasks.Add(_discordWebhookClient.SendMessageAsync("Witam serdecznie, oto nowe gry w promocji", false, messages));   
-        }
-
-        await Task.WhenAll(tasks);
+        return SendAll(embeds, _discordWebhookClient, (client, em) => client.SendMessageAsync("Witam serdecznie, oto nowe gry w promocji", false, em));
     }
 
-    private IEnumerable<Embed> MapEmbeds(IEnumerable<XboxGame> games)
+    private Task SendAll<T, TDepen>(IEnumerable<T[]> elements, TDepen dep, Func<TDepen, T[], Task> f)
+    {
+        var tasks = new List<Task>();
+        
+        foreach (var message in elements)
+        {
+            tasks.Add(f(dep, message));   
+        }
+
+        return Task.WhenAll(tasks);
+    }
+
+    private static IEnumerable<Embed> MapEmbeds(IEnumerable<XboxGame> games)
     {
         foreach (var game in games)
         {
