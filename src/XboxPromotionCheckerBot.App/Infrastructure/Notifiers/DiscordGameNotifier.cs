@@ -16,6 +16,11 @@ public sealed class DiscordGameNotifier : IGamesNotifier
 
     public Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
     {
+        if (games is {Count: 0})
+        {
+            return Task.CompletedTask;
+        }
+        
         var embeds = MapEmbeds(games).Chunk(10);
         return SendAll(embeds, _discordWebhookClient, (client, em) => client.SendMessageAsync("Witam serdecznie, oto nowe gry w promocji", false, em));
     }
