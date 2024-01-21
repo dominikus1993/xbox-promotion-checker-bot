@@ -9,7 +9,7 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 public sealed class MongoDbGamesNotifier : IGamesNotifier
 {
     private readonly IGamesRepository _gamesRepository;
-    private ILogger<MongoDbGamesNotifier> _logger;
+    private readonly ILogger<MongoDbGamesNotifier> _logger;
     public MongoDbGamesNotifier(IGamesRepository gamesRepository, ILogger<MongoDbGamesNotifier> logger)
     {
         _gamesRepository = gamesRepository;
