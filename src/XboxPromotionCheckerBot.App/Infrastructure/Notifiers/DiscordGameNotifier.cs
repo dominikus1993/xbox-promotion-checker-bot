@@ -1,23 +1,28 @@
 using Discord;
 using Discord.Webhook;
+using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Logger;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 
 public sealed class DiscordGameNotifier : IGamesNotifier
 {
     private readonly DiscordWebhookClient _discordWebhookClient;
+    private readonly ILogger<DiscordGameNotifier> _logger;
 
-    public DiscordGameNotifier(DiscordWebhookClient discordWebhookClient)
+    public DiscordGameNotifier(DiscordWebhookClient discordWebhookClient, ILogger<DiscordGameNotifier> logger)
     {
         _discordWebhookClient = discordWebhookClient;
+        _logger = logger;
     }
 
     public Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
     {
         if (games is {Count: 0})
         {
+            _logger.LogNoGamesToSend();
             return Task.CompletedTask;
         }
         

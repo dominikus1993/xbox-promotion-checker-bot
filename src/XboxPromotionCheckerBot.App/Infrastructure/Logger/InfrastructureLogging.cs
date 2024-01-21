@@ -13,6 +13,9 @@ public static partial class InfrastructureLogging
     [LoggerMessage(LogLevel.Warning, "No games in page {Page}")]
     public static partial void LogNoGames(this ILogger logger, int page);
     
+    [LoggerMessage(LogLevel.Warning, "No games to send")]
+    public static partial void LogNoGamesToSend(this ILogger logger);
+    
     [LoggerMessage(LogLevel.Warning, "Can't find prices, {InnerText}")]
     public static partial void LogCantFindPrices(this ILogger logger, string innerText);
     
