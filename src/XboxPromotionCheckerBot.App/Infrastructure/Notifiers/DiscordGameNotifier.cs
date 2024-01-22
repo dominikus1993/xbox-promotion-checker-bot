@@ -30,7 +30,7 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         return SendAll(embeds, _discordWebhookClient, (client, em) => client.SendMessageAsync("Witam serdecznie, oto nowe gry w promocji", false, em));
     }
 
-    private Task SendAll<T, TDepen>(IEnumerable<T[]> elements, TDepen dep, Func<TDepen, T[], Task> f)
+    private static Task SendAll<T, TDepen>(IEnumerable<T[]> elements, TDepen dep, Func<TDepen, T[], Task> f)
     {
         var tasks = new List<Task>();
         
