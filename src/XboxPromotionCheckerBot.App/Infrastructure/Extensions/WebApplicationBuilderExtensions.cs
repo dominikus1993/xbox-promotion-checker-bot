@@ -1,3 +1,4 @@
+using Discord.Webhook;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -19,6 +20,12 @@ public static class WebApplicationBuilderExtensions
         await db.Setup();
         services.AddSingleton<IMongoClient>(client);
         services.AddSingleton<IMongoDatabase>(db);
+
+        services.AddSingleton<DiscordWebhookClient>(sp =>
+        {
+            var cfg = sp.GetRequiredService<IConfiguration>();
+            return new DiscordWebhookClient(cfg.GetConnectionString("DiscordWebhookUrl"));
+        });
         
         services.AddScoped<IGamesFilter, GamePriceFilter>();
         services.AddScoped<IGamesFilter, GameNameFilter>();
