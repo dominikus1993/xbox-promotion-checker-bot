@@ -5,9 +5,11 @@ using MongoDB.Driver;
 using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Providers;
+using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 using XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 using XboxPromotionCheckerBot.App.Infrastructure.Providers;
+using XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
@@ -18,6 +20,7 @@ public static class WebApplicationBuilderExtensions
         var client = MongoDbSetup.MongoClient(configuration.GetConnectionString("Games"));
         var db = client.GamesDb();
         await db.Setup();
+        
         services.AddSingleton<IMongoClient>(client);
         services.AddSingleton<IMongoDatabase>(db);
 
@@ -26,7 +29,8 @@ public static class WebApplicationBuilderExtensions
             var cfg = sp.GetRequiredService<IConfiguration>();
             return new DiscordWebhookClient(cfg.GetConnectionString("DiscordWebhookUrl"));
         });
-        
+
+        services.AddScoped<IGamesRepository, MongoGamesRepository>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();
         services.AddScoped<IGamesFilter, GameNameFilter>();
         services.AddScoped<IGamesFilter, GameLastSendFilter>();

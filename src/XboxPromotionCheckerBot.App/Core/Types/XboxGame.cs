@@ -6,7 +6,7 @@ using Title = string;
 using GameId = Guid;
 using Price = decimal;
 
-public readonly record struct PromotionPercentage(double Value) : IComparable<PromotionPercentage>
+public sealed record PromotionPercentage(double Value) : IComparable<PromotionPercentage>
 {
     public override string ToString()
     {
