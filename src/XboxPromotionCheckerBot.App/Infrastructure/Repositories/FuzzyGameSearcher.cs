@@ -21,7 +21,7 @@ public sealed record FuzzGame(Guid Id, string Title)
     }
 }
 
-public sealed class FuzzyGameSearcher : IGameSearcher, IDisposable
+public sealed class FuzzyGameSearcher : IGameSearcher
 {
     const LuceneVersion LuceneVersion = Lucene.Net.Util.LuceneVersion.LUCENE_48;
     private readonly Analyzer _analyzer;
