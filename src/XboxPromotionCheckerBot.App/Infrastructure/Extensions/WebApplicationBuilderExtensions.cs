@@ -6,6 +6,7 @@ using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Providers;
 using XboxPromotionCheckerBot.App.Core.Repositories;
+using XboxPromotionCheckerBot.App.Infrastructure.Factories;
 using XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 using XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 using XboxPromotionCheckerBot.App.Infrastructure.Providers;
@@ -30,6 +31,11 @@ public static class WebApplicationBuilderExtensions
             return new DiscordWebhookClient(cfg.GetConnectionString("DiscordWebhookUrl"));
         });
 
+        services.AddScoped<IGameSearcher, FuzzyGameSearcher>(sp =>
+        {
+            var cfg = sp.GetRequiredService<IConfiguration>();
+            return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath"));
+        });
         services.AddScoped<IGamesRepository, MongoGamesRepository>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();
         services.AddScoped<IGamesFilter, GameNameFilter>();

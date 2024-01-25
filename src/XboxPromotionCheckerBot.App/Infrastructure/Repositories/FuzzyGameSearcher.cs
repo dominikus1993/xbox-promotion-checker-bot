@@ -10,6 +10,7 @@ using Lucene.Net.Store;
 using Lucene.Net.Util;
 using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
@@ -69,7 +70,7 @@ public sealed class FuzzyGameSearcher : IGameSearcher
         }
     }
 
-    public static IGameSearcher Create(IEnumerable<FuzzGame> games)
+    public static FuzzyGameSearcher Create(IEnumerable<FuzzGame> games)
     {
         const LuceneVersion luceneVersion = LuceneVersion.LUCENE_48;
         Analyzer standardAnalyzer = new StandardAnalyzer(luceneVersion);

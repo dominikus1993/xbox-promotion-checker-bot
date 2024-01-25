@@ -10,11 +10,13 @@
   <ItemGroup>
     <PackageReference Include="Akade.IndexedSet" />
     <PackageReference Include="Cocona" />
+    <PackageReference Include="CsvHelper" />
     <PackageReference Include="Discord.Net.Webhook" />
     <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Lucene.Net" />
     <PackageReference Include="Lucene.Net.Analysis.Common" />
     <PackageReference Include="Lucene.Net.QueryParser" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
     <PackageReference Include="Microsoft.Extensions.Telemetry.Abstractions" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />
