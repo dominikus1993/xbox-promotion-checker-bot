@@ -1,6 +1,7 @@
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
@@ -14,7 +15,7 @@ public static class FuzzyGameSearcherFactory
         public string Title { get; set; }
     }
     
-    public static FuzzyGameSearcher Produce(string filePath)
+    public static GameNameFilter Produce(string filePath)
     {
         using var file = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
         using var stream = new StreamReader(file);
@@ -26,6 +27,6 @@ public static class FuzzyGameSearcherFactory
         
         var records = csv.GetRecords<Game>();
         
-        return FuzzyGameSearcher.Create(records.Select(g => new FuzzGame(g.Title)));
+        return new GameNameFilter(records.Select(g => new FuzzGame(g.Title)));
     }
 }

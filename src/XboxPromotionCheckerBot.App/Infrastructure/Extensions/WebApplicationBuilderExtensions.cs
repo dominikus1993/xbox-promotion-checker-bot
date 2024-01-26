@@ -31,14 +31,13 @@ public static class WebApplicationBuilderExtensions
             return new DiscordWebhookClient(cfg.GetConnectionString("DiscordWebhookUrl"));
         });
 
-        services.AddScoped<IGameSearcher, FuzzyGameSearcher>(sp =>
+        services.AddScoped<IGamesFilter, GameNameFilter>(sp =>
         {
             var cfg = sp.GetRequiredService<IConfiguration>();
             return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath"));
         });
         services.AddScoped<IGamesRepository, MongoGamesRepository>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();
-        services.AddScoped<IGamesFilter, GameNameFilter>();
         services.AddScoped<IGamesFilter, GameLastSendFilter>();
         
         services.AddScoped<IGamesNotifier, DiscordGameNotifier>();
