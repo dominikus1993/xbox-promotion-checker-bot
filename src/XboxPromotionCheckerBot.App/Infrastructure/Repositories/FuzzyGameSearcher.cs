@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Akade.IndexedSet;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
