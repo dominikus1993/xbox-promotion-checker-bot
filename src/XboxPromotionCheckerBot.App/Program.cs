@@ -7,11 +7,12 @@ using XboxPromotionCheckerBot.App.Core.UseCases;
 using XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
 var builder = CoconaApp.CreateBuilder();
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false);
+builder.Configuration.AddUserSecrets<Program>();
+
 builder.Services.AddCore(builder.Configuration);
 await builder.Services.AddInfrastructure(builder.Configuration);
-
-builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
-builder.Configuration.AddJsonFile("appsettings.json", optional: true);
 
 var app = builder.Build();
 
