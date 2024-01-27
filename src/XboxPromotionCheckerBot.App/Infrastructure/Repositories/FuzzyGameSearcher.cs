@@ -8,27 +8,12 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
+using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Core.Types;
 using XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Repositories;
-
-public sealed record FuzzGame(Guid Id, string Title)
-{
-    private readonly string _normalizedTitle;
-    public FuzzGame(string Title): this(Guid.NewGuid(), Title)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(Title);
-        _normalizedTitle = Title.Normalize().ToUpperInvariant();
-    }
-
-    public bool Contains(XboxGame game)
-    {
-        var title = game.Title.Normalize().ToUpperInvariant();
-        return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
-    }
-}
 
 public sealed class FuzzyGameSearcher : IGameSearcher
 {
