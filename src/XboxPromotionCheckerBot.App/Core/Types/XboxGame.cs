@@ -85,7 +85,7 @@ public sealed class XboxGame
     public Uri Link { get; }
     public GamePrice GamePrice { get; }
 
-    public PromotionPercentage PromotionPercentage => GamePrice.CalculatePromotionPercentage();
+    public PromotionPercentage PromotionPercentage() => GamePrice.CalculatePromotionPercentage();
 
     public static XboxGame Create(Title title, Uri link, GamePrice gamePrice)
     {

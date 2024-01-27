@@ -53,11 +53,11 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         }
     }
 
-    private static Color GetColorByPromotionLevel(XboxGame game) => game.PromotionPercentage.Value switch
+    private static Color GetColorByPromotionLevel(XboxGame game) => game.PromotionPercentage() switch
     {
-        > 90 => Color.Gold,
-        > 70 => Color.Red,
-        > 50 => Color.Green,
+        { Value:> 90 } => Color.Gold,
+        { Value:> 70 } => Color.Red,
+        { Value:> 50 } => Color.Green,
         _ => Color.Default,
     };
 }

@@ -17,7 +17,7 @@ public sealed class GamePriceFilter : IGamesFilter
         ArgumentNullException.ThrowIfNull(games);
         await foreach (var game in games.WithCancellation(cancellationToken))
         {
-            if (game.PromotionPercentage >= _minimumPercentage)
+            if (game.PromotionPercentage() >= _minimumPercentage)
             {
                 yield return game;
             }
