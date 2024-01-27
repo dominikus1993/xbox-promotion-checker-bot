@@ -16,6 +16,12 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
 public static class WebApplicationBuilderExtensions
 {
+    private static DiscordWebhookClient CreateDiscordWebhookClient(string webhookurl)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(webhookurl);
+        return new DiscordWebhookClient(webhookurl);
+    }
+    
     public static async Task<IServiceCollection> AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         var client = MongoDbSetup.MongoClient(configuration.GetConnectionString("Games"));
@@ -28,7 +34,8 @@ public static class WebApplicationBuilderExtensions
         services.AddSingleton<DiscordWebhookClient>(sp =>
         {
             var cfg = sp.GetRequiredService<IConfiguration>();
-            return new DiscordWebhookClient(cfg.GetConnectionString("DiscordWebhookUrl"));
+            var url = cfg.GetConnectionString("DiscordWebhookUrl");
+            return CreateDiscordWebhookClient(url);
         });
 
         services.AddScoped<IGamesFilter, GameNameFilter>(sp =>
