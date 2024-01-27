@@ -23,7 +23,7 @@ public sealed record FuzzGame(Guid Id, string Title)
 public sealed class GameNameFilter : IGamesFilter
 {
     private readonly FuzzGame[] _games;
-
+    
     public GameNameFilter(IEnumerable<FuzzGame> games)
     {
         _games = games.ToArray();
@@ -33,7 +33,13 @@ public sealed class GameNameFilter : IGamesFilter
     {
         return games.Where(x =>
         {
-            return _games.Any(game => game.Contains(x));
+            foreach (var game in _games.AsSpan())
+            {
+                if (game.Contains(x)) 
+                    return true;
+            }
+
+            return false;
         });
     }
 }
