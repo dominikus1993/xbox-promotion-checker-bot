@@ -8,6 +8,7 @@ using XboxPromotionCheckerBot.App.Infrastructure.Extensions;
 
 var builder = CoconaApp.CreateBuilder();
 
+builder.Configuration.AddEnvironmentVariables();
 builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 builder.Configuration.AddUserSecrets<Program>();
 
