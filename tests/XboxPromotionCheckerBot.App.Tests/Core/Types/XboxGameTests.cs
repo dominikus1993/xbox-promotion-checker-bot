@@ -18,7 +18,9 @@ public sealed class PromotionPercentageData : TheoryData<XboxGame, PromotionPerc
 {
     public PromotionPercentageData()
     {
+        Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(300, 200)), new PromotionPercentage(0d));
         Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20)), new PromotionPercentage(50d));
+        Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(99, 100)), new PromotionPercentage(1d));
         Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10)), PromotionPercentage.Zero);
         Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 100)), new PromotionPercentage(90d));
         Add(XboxGame.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(134.99m, 269.99m)), new PromotionPercentage(50d));

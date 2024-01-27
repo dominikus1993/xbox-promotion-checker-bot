@@ -45,7 +45,13 @@ public readonly record struct GamePrice(Price Price, Price? OldPrice = default)
 {
     public PromotionPercentage CalculatePromotionPercentage()
     {
+        
         if (!OldPrice.HasValue)
+        {
+            return PromotionPercentage.Zero;
+        }
+
+        if (Price >= OldPrice.Value)
         {
             return PromotionPercentage.Zero;
         }
