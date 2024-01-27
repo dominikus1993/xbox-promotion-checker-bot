@@ -32,4 +32,8 @@
     <ProjectReference Include="..\..\src\XboxPromotionCheckerBot.App\XboxPromotionCheckerBot.App.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Extensions\" />
+  </ItemGroup>
+
 </Project>
