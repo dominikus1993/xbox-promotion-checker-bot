@@ -8,9 +8,11 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 public sealed class MongoGamesRepository : IGamesRepository
 {
     private readonly IMongoCollection<MongoXboxGame> _games;
+    private readonly TimeProvider _timeProvider;
     
-    public MongoGamesRepository(IMongoDatabase mongoDatabase)
+    public MongoGamesRepository(IMongoDatabase mongoDatabase, TimeProvider timeProvider)
     {
+        _timeProvider = timeProvider;
         _games = mongoDatabase.Games();
     }
 
@@ -22,13 +24,26 @@ public sealed class MongoGamesRepository : IGamesRepository
     
     public async Task Insert(XboxGame game, CancellationToken cancellationToken = default)
     {
-        var mongoGame = new MongoXboxGame(game);
+        var mongoGame = MapGame(game);
         await _games.InsertOneAsync(mongoGame, cancellationToken: cancellationToken);
     }
 
     public async Task Insert(IEnumerable<XboxGame> game, CancellationToken cancellationToken = default)
     {
-        var xboxGames = game.Select(g => new MongoXboxGame(g));
+        var xboxGames = MapGames(game);
         await _games.InsertManyAsync(xboxGames, cancellationToken: cancellationToken);
+    }
+    
+    private IEnumerable<MongoXboxGame> MapGames(IEnumerable<XboxGame> games)
+    {
+        foreach (var game in games)
+        {
+            yield return MapGame(game);
+        }
+    }
+    
+    private MongoXboxGame MapGame(XboxGame game)
+    {
+        return new MongoXboxGame(game, _timeProvider);
     }
 }

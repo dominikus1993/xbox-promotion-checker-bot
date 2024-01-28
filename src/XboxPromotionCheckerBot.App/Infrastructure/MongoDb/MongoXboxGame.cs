@@ -18,11 +18,12 @@ public sealed class MongoXboxGame
         
     }
 
-    public MongoXboxGame(XboxGame game)
+    public MongoXboxGame(XboxGame game, TimeProvider provider)
     {
         Id = game.Id;
         Title = game.Title;
         Link = game.Link;
         GamePrice = game.GamePrice;
+        CrawledAtEpoch = provider.GetUtcNow().ToUnixTimeMilliseconds();
     }
 }
