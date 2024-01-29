@@ -15,8 +15,12 @@ public sealed record PromotionPercentage(double Value) : IComparable<PromotionPe
     
     public static readonly PromotionPercentage Zero = new PromotionPercentage(0d);
 
-    public int CompareTo(PromotionPercentage other)
+    public int CompareTo(PromotionPercentage? other)
     {
+        if (other is null)
+        {
+            return -1;
+        }
         return Value.CompareTo(other.Value);
     }
 
@@ -106,6 +110,11 @@ public sealed class XboxGame
 
     public bool IsValidGame()
     {
-        return true;
+        if (GamePrice is {Price: > 0})
+        {
+            return true;
+        }
+
+        return false;
     }
 }
