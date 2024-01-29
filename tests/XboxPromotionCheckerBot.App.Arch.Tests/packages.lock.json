@@ -1596,7 +1596,7 @@
           "Cocona": "[2.2.0, )",
           "CsvHelper": "[30.1.0, )",
           "Discord.Net.Webhook": "[3.13.0, )",
-          "HtmlAgilityPack": "[1.11.57, )",
+          "HtmlAgilityPack": "[1.11.58, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
           "Lucene.Net.Analysis.Common": "[4.8.0-beta00016, )",
           "Lucene.Net.QueryParser": "[4.8.0-beta00016, )",
@@ -1641,9 +1641,9 @@
       },
       "HtmlAgilityPack": {
         "type": "CentralTransitive",
-        "requested": "[1.11.57, )",
-        "resolved": "1.11.57",
-        "contentHash": "zDxnHcAvi+qhZG602eKaPJKmzm0T8npKVML0RMwjrRBabpmTRtu2OVpfNkMUfYMgQ+5EllOkSeGxu0uFVV2zFw=="
+        "requested": "[1.11.58, )",
+        "resolved": "1.11.58",
+        "contentHash": "/LzjIKoAWdyXOn6o+zJTN2qpNIwfaDWbSQ974pVRwnzHsUFohIOSILdtkPrSO6YC38MNj4nDbpr1RkVBDE1RWQ=="
       },
       "Lucene.Net": {
         "type": "CentralTransitive",

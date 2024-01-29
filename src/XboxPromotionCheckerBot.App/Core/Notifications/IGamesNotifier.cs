@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Logger;
 
 namespace XboxPromotionCheckerBot.App.Core.Notifications;
 
@@ -15,10 +17,11 @@ public interface IGamesBroadcaster
 public sealed class DefaultGamesBroadcaster : IGamesBroadcaster
 {
     private readonly IEnumerable<IGamesNotifier> _gamesNotifiers;
-
-    public DefaultGamesBroadcaster(IEnumerable<IGamesNotifier> gamesNotifiers)
+    private readonly ILogger<DefaultGamesBroadcaster> _logger;
+    public DefaultGamesBroadcaster(IEnumerable<IGamesNotifier> gamesNotifiers, ILogger<DefaultGamesBroadcaster> logger)
     {
         _gamesNotifiers = gamesNotifiers;
+        _logger = logger;
     }
 
     public async Task Broadcast(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
@@ -28,6 +31,7 @@ public sealed class DefaultGamesBroadcaster : IGamesBroadcaster
         var result = await games.ToArrayAsync(cancellationToken: cancellationToken);
         if (result is null or {Length: 0})
         {
+            _logger.LogNoGamesToSend();
             return;
         }
 
