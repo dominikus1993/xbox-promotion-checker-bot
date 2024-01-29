@@ -14,14 +14,12 @@ public sealed class ParseGamesFilterAndSendItUseCase
     private readonly IGamesParser _gamesParser;
     private readonly IEnumerable<IGamesFilter> _gamesFilters;
     private readonly IGamesBroadcaster _gamesBroadcaster;
-    private ILogger<ParseGamesFilterAndSendItUseCase> _logger;
 
-    public ParseGamesFilterAndSendItUseCase(IGamesParser gamesParser, IEnumerable<IGamesFilter> gamesFilters, IGamesBroadcaster gamesBroadcaster, ILogger<ParseGamesFilterAndSendItUseCase> logger)
+    public ParseGamesFilterAndSendItUseCase(IGamesParser gamesParser, IEnumerable<IGamesFilter> gamesFilters, IGamesBroadcaster gamesBroadcaster)
     {
         _gamesParser = gamesParser;
         _gamesFilters = gamesFilters;
         _gamesBroadcaster = gamesBroadcaster;
-        _logger = logger;
     }
 
     public async Task Execute(CancellationToken cancellationToken = default)
