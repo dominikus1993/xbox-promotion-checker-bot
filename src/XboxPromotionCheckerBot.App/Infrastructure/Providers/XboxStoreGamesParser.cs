@@ -12,11 +12,11 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
 public sealed partial class XboxStoreGamesParser : IGamesParser
 {
-    [GeneratedRegex(@"(\d+,\d{2})", RegexOptions.Compiled | RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"(\d+,\d{2})", RegexOptions.Compiled | RegexOptions.IgnoreCase, 1000)]
     private static partial Regex PriceRegex();
-    public const string XboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox";
+    private const string XboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox";
     
-    public const int Pages = 10;
+    private const int Pages = 10;
 
     private readonly ILogger<XboxStoreGamesParser> _logger;
 

@@ -20,5 +20,5 @@ public static class AsyncEnumerableExtensions
         }
 
         return stream;
-    } 
+    }
 }
