@@ -25,12 +25,17 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
         _logger = logger;
     }
 
-    public async IAsyncEnumerable<XboxGame> Parse([EnumeratorCancellation] CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<XboxGame> Parse(CancellationToken cancellationToken = default)
     {
-        var pages = Enumerable.Range(0, Pages).Select(page => ParsePage(page + 1, cancellationToken)).ToArray();
-        await foreach (var game in AsyncEnumerableEx.Merge(pages).WithCancellation(cancellationToken))
+        var pages = ParsePages(Pages, cancellationToken).ToArray();
+        return AsyncEnumerableEx.Merge(pages);
+    }
+    
+    private IEnumerable<IAsyncEnumerable<XboxGame>> ParsePages(int pages, CancellationToken cancellationToken = default)
+    {
+        for (int page = 1; page <= pages; page++)
         {
-            yield return game;
+            yield return ParsePage(page, cancellationToken);
         }
     }
 
