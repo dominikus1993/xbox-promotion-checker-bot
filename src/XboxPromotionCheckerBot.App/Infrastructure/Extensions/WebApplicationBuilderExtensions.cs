@@ -27,7 +27,8 @@ public static class WebApplicationBuilderExtensions
         var client = MongoDbSetup.MongoClient(configuration.GetConnectionString("Games"));
         var db = client.GamesDb();
         await db.Setup();
-        
+
+        services.AddSingleton<TimeProvider>(TimeProvider.System);
         services.AddSingleton<IMongoClient>(client);
         services.AddSingleton<IMongoDatabase>(db);
 
