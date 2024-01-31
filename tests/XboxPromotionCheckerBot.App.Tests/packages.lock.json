@@ -118,6 +118,11 @@
         "resolved": "2.2.0",
         "contentHash": "WvkfA2XCHrlgggiIG7PCxX4RSbNAHSmIHl4BcxcphOTwX5ZuQmiGm13ooeD6ZwGet4Bq+xzk+jfz0bmgjaXfUQ=="
       },
+      "csFastFloat": {
+        "type": "Transitive",
+        "resolved": "4.1.0",
+        "contentHash": "i1gik3wrQPAEX7wE1AOk1RXJ/a65Tyr1YLFdDRqw0redBGWEbnsxe70zhRjdKrI/DwdxrVmCLn7mzplPglvbWg=="
+      },
       "Discord.Net.Core": {
         "type": "Transitive",
         "resolved": "3.13.0",
@@ -1604,6 +1609,7 @@
           "Microsoft.Extensions.Telemetry.Abstractions": "[8.1.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.23.1, )",
+          "Sep": "[0.4.0, )",
           "System.Interactive.Async": "[6.0.1, )",
           "System.Linq.Async": "[6.0.1, )"
         }
@@ -1716,6 +1722,15 @@
           "MongoDB.Bson": "2.23.1",
           "MongoDB.Driver.Core": "2.23.1",
           "MongoDB.Libmongocrypt": "1.8.0"
+        }
+      },
+      "Sep": {
+        "type": "CentralTransitive",
+        "requested": "[0.4.0, )",
+        "resolved": "0.4.0",
+        "contentHash": "10Su9h/Op4HSwvxUvBpfCrljJ5LtGZpm/f3fo8JWWmstZChIXDvmqEDNRqi03gJUWsDVjDZDUznaHwt0VSC7Vg==",
+        "dependencies": {
+          "csFastFloat": "4.1.0"
         }
       },
       "System.Interactive.Async": {

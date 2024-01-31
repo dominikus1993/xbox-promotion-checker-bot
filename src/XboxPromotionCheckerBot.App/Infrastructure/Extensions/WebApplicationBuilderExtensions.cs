@@ -24,7 +24,7 @@ public static class WebApplicationBuilderExtensions
     
     public static async Task<IServiceCollection> AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var client = MongoDbSetup.MongoClient(configuration.GetConnectionString("Games"));
+        var client = MongoDbSetup.MongoClient(configuration.GetConnectionString("Games")!);
         var db = client.GamesDb();
         await db.Setup();
 
@@ -39,10 +39,10 @@ public static class WebApplicationBuilderExtensions
             return CreateDiscordWebhookClient(url);
         });
 
-        services.AddScoped<IGamesFilter, GameNameFilter>(sp =>
+        services.AddSingleton<IGamesFilter, GameNameFilter>(sp =>
         {
             var cfg = sp.GetRequiredService<IConfiguration>();
-            return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath"));
+            return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath")!);
         });
         services.AddScoped<IGamesRepository, MongoGamesRepository>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();

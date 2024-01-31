@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.Extensions.Telemetry.Abstractions" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="Sep" />
     <PackageReference Include="System.Interactive.Async" />
     <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
