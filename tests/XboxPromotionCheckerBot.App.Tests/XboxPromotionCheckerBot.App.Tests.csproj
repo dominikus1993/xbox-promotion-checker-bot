@@ -37,4 +37,10 @@
     <Folder Include="Infrastructure\Extensions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="games.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

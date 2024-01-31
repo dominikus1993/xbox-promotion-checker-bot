@@ -11,17 +11,8 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Factories;
 
 public static class FuzzyGameSearcherFactory
 {
-    private sealed class Game
-    {
-        public string Title { get; set; }
-    }
-    
     public static GameNameFilter Produce(string filePath)
     {
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true,
-        };
         using var reader = Sep.Reader().FromFile(filePath);
 
         var res = new List<FuzzGame>();
