@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Types;
 using XboxPromotionCheckerBot.App.Infrastructure.Logger;
+using Game = XboxPromotionCheckerBot.App.Core.Types.Game;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 
@@ -18,7 +19,7 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         _logger = logger;
     }
 
-    public Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
+    public Task Notify(IReadOnlyList<Game> games, CancellationToken cancellationToken = default)
     {
         if (games is {Count: 0})
         {
@@ -42,7 +43,7 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         return Task.WhenAll(tasks);
     }
 
-    private static IEnumerable<Embed> MapEmbeds(IEnumerable<XboxGame> games)
+    private static IEnumerable<Embed> MapEmbeds(IEnumerable<Game> games)
     {
         foreach (var game in games)
         {
@@ -53,7 +54,7 @@ public sealed class DiscordGameNotifier : IGamesNotifier
         }
     }
 
-    private static Color GetColorByPromotionLevel(XboxGame game) => game.PromotionPercentage() switch
+    private static Color GetColorByPromotionLevel(Game game) => game.PromotionPercentage() switch
     {
         { Value:> 90 } => Color.Gold,
         { Value:> 70 } => Color.Red,

@@ -29,7 +29,7 @@ public sealed class FuzzyGameSearcher : IGameSearcher
     }
 
 
-    public async IAsyncEnumerable<XboxGame> FilterExistingGames(IAsyncEnumerable<XboxGame> games, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Game> FilterExistingGames(IAsyncEnumerable<Game> games, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         IndexWriterConfig indexConfig = new IndexWriterConfig(LuceneVersion, _analyzer)
         {

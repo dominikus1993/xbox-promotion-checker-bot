@@ -8,7 +8,7 @@ namespace XboxPromotionCheckerBot.App.Core.Extensions;
 
 public static class AsyncEnumerableExtensions
 {
-    public static IAsyncEnumerable<XboxGame> Pipe(this IAsyncEnumerable<XboxGame> games, IEnumerable<IGamesFilter> filters,
+    public static IAsyncEnumerable<Game> Pipe(this IAsyncEnumerable<Game> games, IEnumerable<IGamesFilter> filters,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(games);
@@ -23,7 +23,7 @@ public static class AsyncEnumerableExtensions
         return stream;
     }
     
-    public static IAsyncEnumerable<XboxGame> MergeStreams(this IEnumerable<IAsyncEnumerable<XboxGame>> games,
+    public static IAsyncEnumerable<Game> MergeStreams(this IEnumerable<IAsyncEnumerable<Game>> games,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(games);
@@ -32,7 +32,7 @@ public static class AsyncEnumerableExtensions
         return AsyncEnumerableEx.Merge(streams);
     }
     
-    public static IAsyncEnumerable<XboxGame> MergeStreams(this IEnumerable<IGamesParser> games,
+    public static IAsyncEnumerable<Game> MergeStreams(this IEnumerable<IGamesParser> games,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(games);

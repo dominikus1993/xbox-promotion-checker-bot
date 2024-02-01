@@ -65,24 +65,25 @@ public readonly record struct GamePrice(Price Price, Price? OldPrice = default)
     }
 }
 
-public sealed class XboxGame
+public sealed class Game
 {
-    private XboxGame(GameId id, Title title, Uri link, GamePrice gamePrice)
+    private Game(GameId id, Title title, Uri link, GamePrice gamePrice, string platform)
     {
         Id = id;
         Title = title;
         Link = link;
         GamePrice = gamePrice;
+        Platform = platform;
     }
 
-    private bool Equals(XboxGame other)
+    private bool Equals(Game other)
     {
         return Id.Equals(other.Id);
     }
 
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is XboxGame other && Equals(other);
+        return ReferenceEquals(this, obj) || obj is Game other && Equals(other);
     }
 
     public override int GetHashCode()
@@ -92,20 +93,21 @@ public sealed class XboxGame
 
     public GameId Id { get; }
     public Title Title { get; }
+    public string Platform { get; }
     public Uri Link { get; }
     public GamePrice GamePrice { get; }
 
     public PromotionPercentage PromotionPercentage() => GamePrice.CalculatePromotionPercentage();
 
-    public static XboxGame Create(Title title, Uri link, GamePrice gamePrice)
+    public static Game Create(Title title, Uri link, GamePrice gamePrice, string platform)
     {
         var id = IdGenerator.GenerateId(title);
-        return new XboxGame(id, title, link, gamePrice);
+        return new Game(id, title, link, gamePrice, platform);
     }
     
-    public static XboxGame Create(GameId id, Title title, Uri link, GamePrice gamePrice)
+    public static Game Create(GameId id, Title title, Uri link, GamePrice gamePrice, string platform)
     {
-        return new XboxGame(id, title, link, gamePrice);
+        return new Game(id, title, link, gamePrice, platform);
     }
 
     public bool IsValidGame()

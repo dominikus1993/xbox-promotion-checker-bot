@@ -16,25 +16,25 @@ public sealed class MongoGamesRepository : IGamesRepository
         _games = mongoDatabase.Games();
     }
 
-    public async Task<bool> Exists(XboxGame game, CancellationToken cancellationToken = default)
+    public async Task<bool> Exists(Game game, CancellationToken cancellationToken = default)
     {
         var filter = Builders<MongoXboxGame>.Filter.Eq(x => x.Id, game.Id);
         return await _games.Find(filter).CountDocumentsAsync(cancellationToken: cancellationToken) > 0;
     }
     
-    public async Task Insert(XboxGame game, CancellationToken cancellationToken = default)
+    public async Task Insert(Game game, CancellationToken cancellationToken = default)
     {
         var mongoGame = MapGame(game);
         await _games.InsertOneAsync(mongoGame, cancellationToken: cancellationToken);
     }
 
-    public async Task Insert(IEnumerable<XboxGame> game, CancellationToken cancellationToken = default)
+    public async Task Insert(IEnumerable<Game> game, CancellationToken cancellationToken = default)
     {
         var xboxGames = MapGames(game);
         await _games.InsertManyAsync(xboxGames, cancellationToken: cancellationToken);
     }
     
-    private IEnumerable<MongoXboxGame> MapGames(IEnumerable<XboxGame> games)
+    private IEnumerable<MongoXboxGame> MapGames(IEnumerable<Game> games)
     {
         foreach (var game in games)
         {
@@ -42,7 +42,7 @@ public sealed class MongoGamesRepository : IGamesRepository
         }
     }
     
-    private MongoXboxGame MapGame(XboxGame game)
+    private MongoXboxGame MapGame(Game game)
     {
         return new MongoXboxGame(game, _timeProvider);
     }

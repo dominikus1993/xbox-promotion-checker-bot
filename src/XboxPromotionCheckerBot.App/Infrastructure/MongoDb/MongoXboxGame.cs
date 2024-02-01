@@ -18,7 +18,7 @@ public sealed class MongoXboxGame
         
     }
 
-    public MongoXboxGame(XboxGame game, TimeProvider provider)
+    public MongoXboxGame(Game game, TimeProvider provider)
     {
         Id = game.Id;
         Title = game.Title;

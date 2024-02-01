@@ -12,6 +12,7 @@ namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
 public sealed partial class XboxStoreGamesParser : IGamesParser
 {
+    private const string Source = "xbox";
     [GeneratedRegex(@"(\d+,\d{2})", RegexOptions.Compiled | RegexOptions.IgnoreCase, 1000)]
     private static partial Regex PriceRegex();
     private const string XboxStoreUrl = "https://www.microsoft.com/pl-pl/store/deals/games/xbox";
@@ -25,13 +26,13 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
         _logger = logger;
     }
 
-    public IAsyncEnumerable<XboxGame> Parse(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default)
     {
         var pages = ParsePages(Pages, cancellationToken).ToArray();
         return AsyncEnumerableEx.Merge(pages);
     }
     
-    private IEnumerable<IAsyncEnumerable<XboxGame>> ParsePages(int pages, CancellationToken cancellationToken = default)
+    private IEnumerable<IAsyncEnumerable<Game>> ParsePages(int pages, CancellationToken cancellationToken = default)
     {
         for (int page = 1; page <= pages; page++)
         {
@@ -39,7 +40,7 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
         }
     }
 
-    private async IAsyncEnumerable<XboxGame> ParsePage(int page, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    private async IAsyncEnumerable<Game> ParsePage(int page, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         var url = GetPageUrl(page);
         var web = new HtmlWeb();
@@ -66,7 +67,7 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
     }
 
 
-    private XboxGame? ParseHtmlNode(HtmlNode node)
+    private Game? ParseHtmlNode(HtmlNode node)
     {
         
         var titleAndUrl = ParseTitleAndLink(node);
@@ -82,7 +83,7 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
         }
 
         var (title, link) = titleAndUrl.Value;
-        var result = XboxGame.Create(title, link, price.Value);
+        var result = Game.Create(title, link, price.Value, Source);
         
         if (result.IsValidGame())
         {

@@ -4,6 +4,6 @@ namespace XboxPromotionCheckerBot.App.Core.Repositories;
 
 public interface IGameSearcher : IDisposable
 {
-    IAsyncEnumerable<XboxGame> FilterExistingGames(IAsyncEnumerable<XboxGame> games,
+    IAsyncEnumerable<Game> FilterExistingGames(IAsyncEnumerable<Game> games,
         CancellationToken cancellationToken = default);
 }

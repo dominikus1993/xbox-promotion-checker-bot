@@ -16,7 +16,7 @@ public sealed class MongoDbGamesNotifier : IGamesNotifier
         _logger = logger;
     }
 
-    public async Task Notify(IReadOnlyList<XboxGame> games, CancellationToken cancellationToken = default)
+    public async Task Notify(IReadOnlyList<Game> games, CancellationToken cancellationToken = default)
     {
         _logger.LogSaveGamesToDatabase();
         await _gamesRepository.Insert(games, cancellationToken);

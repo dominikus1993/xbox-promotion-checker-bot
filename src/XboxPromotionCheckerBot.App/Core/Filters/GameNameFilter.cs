@@ -13,7 +13,7 @@ public sealed record FuzzGame(Guid Id, string Title)
         _normalizedTitle = Title.Normalize().ToUpperInvariant();
     }
 
-    public bool Contains(XboxGame game)
+    public bool Contains(Game game)
     {
         var title = game.Title.Normalize().ToUpperInvariant();
         return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
@@ -29,7 +29,7 @@ public sealed class GameNameFilter : IGamesFilter
         _games = games.ToArray();
     }
 
-    public IAsyncEnumerable<XboxGame> Filter(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
     {
         return games.Where(x =>
         {

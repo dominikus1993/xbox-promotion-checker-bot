@@ -23,6 +23,6 @@ public sealed class ParseGamesFilterAndSendItUseCaseTests
         
         // Assert
         gamesParser.Received(1).Parse(Arg.Any<CancellationToken>());
-        await gamesBroadcaster.Received(1).Broadcast(Arg.Any<IAsyncEnumerable<XboxGame>>(), Arg.Any<CancellationToken>());
+        await gamesBroadcaster.Received(1).Broadcast(Arg.Any<IAsyncEnumerable<Game>>(), Arg.Any<CancellationToken>());
     }
 }
