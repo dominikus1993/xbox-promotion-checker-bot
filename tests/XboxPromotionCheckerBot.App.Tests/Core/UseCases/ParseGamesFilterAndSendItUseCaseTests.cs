@@ -16,7 +16,7 @@ public sealed class ParseGamesFilterAndSendItUseCaseTests
         var gamesParser = Substitute.For<IGamesParser>();
         var gamesFilters = Substitute.For<IEnumerable<IGamesFilter>>();
         var gamesBroadcaster = Substitute.For<IGamesBroadcaster>();
-        var useCase = new ParseGamesFilterAndSendItUseCase(gamesParser, gamesFilters, gamesBroadcaster);
+        var useCase = new ParseGamesFilterAndSendItUseCase([gamesParser], gamesFilters, gamesBroadcaster);
         
         // Act
         await useCase.Execute();

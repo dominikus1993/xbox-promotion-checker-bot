@@ -11,20 +11,20 @@ namespace XboxPromotionCheckerBot.App.Core.UseCases;
 
 public sealed class ParseGamesFilterAndSendItUseCase
 {
-    private readonly IGamesParser _gamesParser;
+    private readonly IEnumerable<IGamesParser> _gamesParsers;
     private readonly IEnumerable<IGamesFilter> _gamesFilters;
     private readonly IGamesBroadcaster _gamesBroadcaster;
 
-    public ParseGamesFilterAndSendItUseCase(IGamesParser gamesParser, IEnumerable<IGamesFilter> gamesFilters, IGamesBroadcaster gamesBroadcaster)
+    public ParseGamesFilterAndSendItUseCase(IEnumerable<IGamesParser> gamesParsers, IEnumerable<IGamesFilter> gamesFilters, IGamesBroadcaster gamesBroadcaster)
     {
-        _gamesParser = gamesParser;
+        _gamesParsers = gamesParsers;
         _gamesFilters = gamesFilters;
         _gamesBroadcaster = gamesBroadcaster;
     }
 
     public async Task Execute(CancellationToken cancellationToken = default)
     {
-        var games = _gamesParser.Parse(cancellationToken);
+        var games = _gamesParsers.MergeStreams(cancellationToken: cancellationToken);
         
         games = games.Pipe(_gamesFilters, cancellationToken);
 
