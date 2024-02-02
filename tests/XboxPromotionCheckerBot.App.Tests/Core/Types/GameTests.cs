@@ -18,12 +18,12 @@ public sealed class PromotionPercentageData : TheoryData<Game, PromotionPercenta
 {
     public PromotionPercentageData()
     {
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(300, 200)), new PromotionPercentage(0d));
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20)), new PromotionPercentage(50d));
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(99, 100)), new PromotionPercentage(1d));
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10)), PromotionPercentage.Zero);
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 100)), new PromotionPercentage(90d));
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(134.99m, 269.99m)), new PromotionPercentage(50d));
-        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(0, 0)), new PromotionPercentage(0));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(300, 200),"xbox"), new PromotionPercentage(0d));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20), "xbox"), new PromotionPercentage(50d));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(99, 100), "xbox"), new PromotionPercentage(1d));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10), "xbox"), PromotionPercentage.Zero);
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 100), "xbox"), new PromotionPercentage(90d));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(134.99m, 269.99m), "xbox"), new PromotionPercentage(50d));
+        Add(Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(0, 0), "xbox"), new PromotionPercentage(0));
     }
 }

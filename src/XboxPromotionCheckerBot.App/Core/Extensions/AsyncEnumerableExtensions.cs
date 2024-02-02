@@ -36,8 +36,8 @@ public static class AsyncEnumerableExtensions
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(games);
-        var streams = games.Select(x => x.Parse(cancellationToken)).ToArray();
+        var streams = games.Select(x => x.Parse(cancellationToken));
         
-        return AsyncEnumerableEx.Merge(streams);
+        return MergeStreams(streams, cancellationToken);
     }
 }

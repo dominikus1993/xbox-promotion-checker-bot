@@ -30,7 +30,7 @@ public class GamePriceFilterTests
     [Fact]
     public async Task TestPriceFilterWhenSourceIsNotEmpty()
     {
-        var game = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20));
+        var game = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20), "steam");
         var games = new[] { game, }.ToAsyncEnumerable();
         var subject = await _priceFilter.Filter(games).ToArrayAsync();
         Assert.NotEmpty(subject);
@@ -41,8 +41,8 @@ public class GamePriceFilterTests
     [Fact]
     public async Task TestPriceFilterWhenSourceIsNotEmptyAndSomeGameHasSmallerPromotionThan40Percent()
     {
-        var game = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20));
-        var game2 = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(19, 20));
+        var game = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(10, 20), "steam");
+        var game2 = Game.Create(Guid.NewGuid(), "x", new Uri("http://test.pl"), new GamePrice(19, 20), "steam");
         var games = new[] { game, game2}.ToAsyncEnumerable();
         var subject = await _priceFilter.Filter(games).ToArrayAsync();
         Assert.NotEmpty(subject);
