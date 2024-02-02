@@ -19,7 +19,7 @@ public sealed class MongoGamesRepository : IGamesRepository
     public async Task<bool> Exists(Game game, CancellationToken cancellationToken = default)
     {
         var filter = Builders<MongoXboxGame>.Filter.Eq(x => x.Id, game.Id);
-        return await _games.Find(filter).CountDocumentsAsync(cancellationToken: cancellationToken) > 0;
+        return await _games.Find(filter).AnyAsync(cancellationToken: cancellationToken);
     }
     
     public async Task Insert(Game game, CancellationToken cancellationToken = default)
