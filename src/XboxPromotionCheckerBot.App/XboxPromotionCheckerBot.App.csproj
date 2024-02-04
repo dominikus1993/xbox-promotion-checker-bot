@@ -16,6 +16,7 @@
     <PackageReference Include="Lucene.Net.Analysis.Common" />
     <PackageReference Include="Lucene.Net.QueryParser" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
     <PackageReference Include="Microsoft.Extensions.Telemetry.Abstractions" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
     <PackageReference Include="MongoDB.Driver" />

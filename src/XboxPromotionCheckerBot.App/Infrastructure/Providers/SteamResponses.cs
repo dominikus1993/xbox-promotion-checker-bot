@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
-public class SteamAppData
+public sealed class SteamAppData
 {
     [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("success")]
@@ -14,40 +14,7 @@ public class SteamAppData
     public Data Data { get; set; }
 }
 
-public class Achievements
-{
-    [JsonProperty("total", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("total")]
-    public int? Total { get; set; }
-
-    [JsonProperty("highlighted", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("highlighted")]
-    public List<Highlighted> Highlighted { get; } = new List<Highlighted>();
-}
-
-public class Category
-{
-    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("id")]
-    public int? Id { get; set; }
-
-    [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("description")]
-    public string Description { get; set; }
-}
-
-public class ContentDescriptors
-{
-    [JsonProperty("ids", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("ids")]
-    public List<int?> Ids { get; } = new List<int?>();
-
-    [JsonProperty("notes", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("notes")]
-    public string Notes { get; set; }
-}
-
-public class Data
+public sealed class Data
 {
     [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("type")]
@@ -97,30 +64,6 @@ public class Data
     [JsonPropertyName("capsule_imagev5")]
     public string CapsuleImagev5 { get; set; }
 
-    [JsonProperty("website", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("website")]
-    public object Website { get; set; }
-
-    [JsonProperty("pc_requirements", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("pc_requirements")]
-    public PcRequirements PcRequirements { get; set; }
-
-    [JsonProperty("mac_requirements", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("mac_requirements")]
-    public List<object> MacRequirements { get; } = new List<object>();
-
-    [JsonProperty("linux_requirements", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("linux_requirements")]
-    public List<object> LinuxRequirements { get; } = new List<object>();
-
-    [JsonProperty("developers", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("developers")]
-    public List<string> Developers { get; } = new List<string>();
-
-    [JsonProperty("publishers", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("publishers")]
-    public List<string> Publishers { get; } = new List<string>();
-
     [JsonProperty("price_overview", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("price_overview")]
     public PriceOverview PriceOverview { get; set; }
@@ -136,26 +79,10 @@ public class Data
     [JsonProperty("platforms", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("platforms")]
     public Platforms Platforms { get; set; }
-
-    [JsonProperty("categories", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("categories")]
-    public List<Category> Categories { get; } = new List<Category>();
-
+    
     [JsonProperty("genres", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("genres")]
     public List<Genre> Genres { get; } = new List<Genre>();
-
-    [JsonProperty("screenshots", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("screenshots")]
-    public List<Screenshot> Screenshots { get; } = new List<Screenshot>();
-
-    [JsonProperty("movies", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("movies")]
-    public List<Movie> Movies { get; } = new List<Movie>();
-
-    [JsonProperty("achievements", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("achievements")]
-    public Achievements Achievements { get; set; }
 
     [JsonProperty("support_info", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("support_info")]
@@ -168,10 +95,6 @@ public class Data
     [JsonProperty("background_raw", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("background_raw")]
     public string BackgroundRaw { get; set; }
-
-    [JsonProperty("content_descriptors", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("content_descriptors")]
-    public ContentDescriptors ContentDescriptors { get; set; }
 }
 
 public class Genre
@@ -194,40 +117,6 @@ public class Highlighted
     [JsonProperty("path", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("path")]
     public string Path { get; set; }
-}
-
-public class Movie
-{
-    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("id")]
-    public int? Id { get; set; }
-
-    [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    [JsonProperty("thumbnail", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("thumbnail")]
-    public string Thumbnail { get; set; }
-
-    [JsonProperty("mp4", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("mp4")]
-    public Mp4 Mp4 { get; set; }
-
-    [JsonProperty("highlight", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("highlight")]
-    public bool? Highlight { get; set; }
-}
-
-public class Mp4
-{
-    [JsonProperty("480", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("480")]
-    public string _480 { get; set; }
-
-    [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("max")]
-    public string Max { get; set; }
 }
 
 public class PackageGroup
@@ -263,17 +152,6 @@ public class PackageGroup
     [JsonProperty("subs", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("subs")]
     public List<Sub> Subs { get; } = new List<Sub>();
-}
-
-public class PcRequirements
-{
-    [JsonProperty("minimum", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("minimum")]
-    public string Minimum { get; set; }
-
-    [JsonProperty("recommended", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("recommended")]
-    public string Recommended { get; set; }
 }
 
 public class Platforms
@@ -316,21 +194,6 @@ public class PriceOverview
     [JsonProperty("final_formatted", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("final_formatted")]
     public string? FinalFormatted { get; set; }
-}
-
-public class Screenshot
-{
-    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("id")]
-    public int? Id { get; set; }
-
-    [JsonProperty("path_thumbnail", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("path_thumbnail")]
-    public string PathThumbnail { get; set; }
-
-    [JsonProperty("path_full", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("path_full")]
-    public string PathFull { get; set; }
 }
 
 public class Sub

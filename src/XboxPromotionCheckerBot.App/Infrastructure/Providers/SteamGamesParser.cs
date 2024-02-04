@@ -29,7 +29,7 @@ public sealed class SteamGamesParser : IGamesParser
     private const string Platform = "steam";
     private readonly HttpClient _httpClient;
     private readonly GameNameFilter _gameNameFilter;
-    private ILogger<SteamGamesParser> _logger;
+    private readonly ILogger<SteamGamesParser> _logger;
 
     public SteamGamesParser(HttpClient httpClient, GameNameFilter gameNameFilter, ILogger<SteamGamesParser> logger)
     {
