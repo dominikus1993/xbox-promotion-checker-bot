@@ -50,17 +50,16 @@ public sealed class GameNameFilter : IGamesFilter
         });
     }
     
-    internal IAsyncEnumerable<SteamApp> FilterSteamApps(IAsyncEnumerable<SteamApp> games, CancellationToken cancellationToken = default)
+    internal IEnumerable<SteamApp> FilterSteamApps(IEnumerable<SteamApp> games)
     {
-        return games.Where(x =>
+        foreach (var x in games)
         {
-            foreach (var game in _games.AsSpan())
+            foreach (var game in _games)
             {
-                if (game.Contains(x)) 
-                    return true;
+                if (game.Contains(x))
+                    yield return x;
             }
-
-            return false;
-        });
+            
+        }
     }
 }
