@@ -28,10 +28,6 @@ public sealed class Data
     [JsonPropertyName("steam_appid")]
     public int? SteamAppid { get; set; }
 
-    [JsonProperty("required_age", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("required_age")]
-    public int? RequiredAge { get; set; }
-
     [JsonProperty("is_free", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("is_free")]
     public bool? IsFree { get; set; }
@@ -68,17 +64,9 @@ public sealed class Data
     [JsonPropertyName("price_overview")]
     public PriceOverview PriceOverview { get; set; }
 
-    [JsonProperty("packages", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("packages")]
-    public List<int?> Packages { get; } = new List<int?>();
-
     [JsonProperty("package_groups", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("package_groups")]
     public List<PackageGroup> PackageGroups { get; } = new List<PackageGroup>();
-
-    [JsonProperty("platforms", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("platforms")]
-    public Platforms Platforms { get; set; }
     
     [JsonProperty("genres", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("genres")]
@@ -152,21 +140,6 @@ public class PackageGroup
     [JsonProperty("subs", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("subs")]
     public List<Sub> Subs { get; } = new List<Sub>();
-}
-
-public class Platforms
-{
-    [JsonProperty("windows", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("windows")]
-    public bool? Windows { get; set; }
-
-    [JsonProperty("mac", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("mac")]
-    public bool? Mac { get; set; }
-
-    [JsonProperty("linux", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonPropertyName("linux")]
-    public bool? Linux { get; set; }
 }
 
 public class PriceOverview
