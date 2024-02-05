@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Filters;
@@ -55,15 +56,18 @@ public sealed class SteamGamesParser : IGamesParser
     private async Task<IEnumerable<SteamApp>> GetAppList(CancellationToken cancellationToken = default)
     {
         var result =
-            await _httpClient.GetAsync("http://api.steampowered.com/ISteamApps/GetAppList/v2/", cancellationToken: cancellationToken);
+            await _httpClient.GetAsync("http://api.steampowered.com/ISteamApps/GetAppList/v2/",
+                cancellationToken: cancellationToken);
 
         if (!result.IsSuccessStatusCode)
         {
-            _logger.LogWarning("Failed to get app list from Steam, {StatusCode}, {ReasonPhrase}", result.StatusCode, result.ReasonPhrase);
+            _logger.LogWarning("Failed to get app list from Steam, {StatusCode}, {ReasonPhrase}", result.StatusCode,
+                result.ReasonPhrase);
             return Enumerable.Empty<SteamApp>();
         }
-        
-        var response = await result.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.SteamAppResponse, cancellationToken: cancellationToken);
+
+        var response = await result.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.SteamAppResponse,
+            cancellationToken: cancellationToken);
 
         if (response?.AppList?.Apps is null or { Count: 0 })
         {
@@ -82,18 +86,21 @@ public sealed class SteamGamesParser : IGamesParser
 
         if (!details.IsSuccessStatusCode)
         {
-            _logger.LogWarning("Failed to get details for app {AppId}, {StatusCode}, {ReasonPhrase}", app.AppId, details.StatusCode, details.ReasonPhrase);
+            _logger.LogWarning("Failed to get details for app {AppId}, {StatusCode}, {ReasonPhrase}", app.AppId,
+                details.StatusCode, details.ReasonPhrase);
             return null;
         }
 
-        var result = await details.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.DictionaryStringSteamAppData, cancellationToken);
+        var result =
+            await details.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.DictionaryStringSteamAppData,
+                cancellationToken);
 
         if (result is null || !result.TryGetValue(appId, out var data) || !data.Success)
         {
             _logger.LogWarning("Failed to get details for app {AppId}", app.AppId);
             return null;
         }
-        
+
         var price = ParsePrice(data.Data.PriceOverview);
 
         if (!price.HasValue)
@@ -101,8 +108,9 @@ public sealed class SteamGamesParser : IGamesParser
             _logger.LogWarning("Failed to parse price for app {AppId}", app.AppId);
             return null;
         }
-        
-        return Game.Create(data.Data.Name, new Uri($"https://store.steampowered.com/app/{app.AppId}"), price.Value, Platform);
+
+        return Game.Create(data.Data.Name, new Uri($"https://store.steampowered.com/app/{app.AppId}"), price.Value,
+            Platform);
     }
 
     private static GamePrice? ParsePrice(PriceOverview? overview)
@@ -111,12 +119,14 @@ public sealed class SteamGamesParser : IGamesParser
         {
             return null;
         }
-        
-        var price = overview.FinalFormatted?.Replace("zł", string.Empty, StringComparison.InvariantCultureIgnoreCase).Replace(",", ".", StringComparison.InvariantCultureIgnoreCase);
-        if (!string.IsNullOrEmpty(price) && decimal.TryParse(price, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var value))
+
+        var price = FormatPrice(overview.FinalFormatted);
+        if (!string.IsNullOrEmpty(price) && decimal.TryParse(price, NumberStyles.AllowDecimalPoint,
+                CultureInfo.InvariantCulture, out var value))
         {
-            var oldPrice = overview.InitialFormatted?.Replace("zł", string.Empty, StringComparison.InvariantCultureIgnoreCase).Replace(",", ".", StringComparison.InvariantCultureIgnoreCase);
-            if (!string.IsNullOrEmpty(oldPrice) && decimal.TryParse(oldPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var oldValue))
+            var oldPrice = FormatPrice(overview.InitialFormatted);
+            if (!string.IsNullOrEmpty(oldPrice) && decimal.TryParse(oldPrice, NumberStyles.AllowDecimalPoint,
+                    CultureInfo.InvariantCulture, out var oldValue))
             {
                 return new GamePrice(value, oldValue);
             }
@@ -126,4 +136,9 @@ public sealed class SteamGamesParser : IGamesParser
 
         return null;
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string? FormatPrice(string? price) => price
+        ?.Replace("zł", string.Empty, StringComparison.InvariantCultureIgnoreCase)
+        .Replace(",", ".", StringComparison.InvariantCultureIgnoreCase);
 }
