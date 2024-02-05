@@ -101,6 +101,12 @@ public sealed class SteamGamesParser : IGamesParser
             return null;
         }
 
+        if (data is {Success: false})
+        {
+            _logger.LogWarning("Failed to get details for app {AppId}", app.AppId);
+            return null;
+        }
+
         var price = ParsePrice(data.Data.PriceOverview);
 
         if (!price.HasValue)
