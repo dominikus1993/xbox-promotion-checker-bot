@@ -22,6 +22,11 @@ public sealed record FuzzGame(Guid Id, string Title)
     
     internal bool Contains(SteamApp game)
     {
+        if (string.IsNullOrEmpty(game.Name))
+        {
+            return false;
+        }
+        
         var title = game.Name.Normalize().ToUpperInvariant();
         return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
     }

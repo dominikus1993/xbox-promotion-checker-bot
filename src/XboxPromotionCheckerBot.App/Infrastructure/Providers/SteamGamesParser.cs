@@ -21,7 +21,7 @@ internal sealed class SteamAppResponse
 internal sealed class SteamApp
 {
     [JsonPropertyName("appid")] public int AppId { get; set; }
-    [JsonPropertyName("name")] public string Name { get; set; }
+    [JsonPropertyName("name")] public string? Name { get; set; }
 }
 
 public sealed class SteamGamesParser : IGamesParser
@@ -38,42 +38,11 @@ public sealed class SteamGamesParser : IGamesParser
         _logger = logger;
     }
 
-    public IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default)
     {
-        var apps = GetAppList(cancellationToken);
+        var apps = await GetAppList(cancellationToken);
 
-        return GetGames(apps, cancellationToken);
-    }
-
-    private async IAsyncEnumerable<SteamApp> GetAppList(CancellationToken cancellationToken = default)
-    {
-        var result =
-            await _httpClient.GetAsync("http://api.steampowered.com/ISteamApps/GetAppList/v2/", cancellationToken: cancellationToken);
-
-        if (!result.IsSuccessStatusCode)
-        {
-            _logger.LogWarning("Failed to get app list from Steam, {StatusCode}, {ReasonPhrase}", result.StatusCode, result.ReasonPhrase);
-            yield break;
-        }
-        
-        var response = await result.Content.ReadFromJsonAsync<SteamAppResponse>(cancellationToken: cancellationToken);
-
-        if (response?.AppList?.Apps is null or { Count: 0 })
-        {
-            _logger.LogWarning("No apps found in the response");
-            yield break;
-        }
-        
-        foreach (var app in _gameNameFilter.FilterSteamApps(response.AppList.Apps))
-        {
-            yield return app;
-        }
-    }
-
-    private async IAsyncEnumerable<Game> GetGames(IAsyncEnumerable<SteamApp> apps,
-        CancellationToken cancellationToken = default)
-    {
-        await foreach (var app in apps.WithCancellation(cancellationToken))
+        foreach (var app in apps)
         {
             var game = await GetGame(app, cancellationToken);
             if (game is not null)
@@ -81,6 +50,28 @@ public sealed class SteamGamesParser : IGamesParser
                 yield return game;
             }
         }
+    }
+
+    private async Task<IEnumerable<SteamApp>> GetAppList(CancellationToken cancellationToken = default)
+    {
+        var result =
+            await _httpClient.GetAsync("http://api.steampowered.com/ISteamApps/GetAppList/v2/", cancellationToken: cancellationToken);
+
+        if (!result.IsSuccessStatusCode)
+        {
+            _logger.LogWarning("Failed to get app list from Steam, {StatusCode}, {ReasonPhrase}", result.StatusCode, result.ReasonPhrase);
+            return Enumerable.Empty<SteamApp>();
+        }
+        
+        var response = await result.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.SteamAppResponse, cancellationToken: cancellationToken);
+
+        if (response?.AppList?.Apps is null or { Count: 0 })
+        {
+            _logger.LogWarning("No apps found in the response");
+            return Enumerable.Empty<SteamApp>();
+        }
+
+        return _gameNameFilter.FilterSteamApps(response.AppList.Apps);
     }
 
     private async Task<Game?> GetGame(SteamApp app, CancellationToken cancellationToken = default)
@@ -95,7 +86,7 @@ public sealed class SteamGamesParser : IGamesParser
             return null;
         }
 
-        var result = await details.Content.ReadFromJsonAsync<Dictionary<string, SteamAppData>>(cancellationToken);
+        var result = await details.Content.ReadFromJsonAsync(SteamSerializationConfig.Default.DictionaryStringSteamAppData, cancellationToken);
 
         if (result is null || !result.TryGetValue(appId, out var data) || !data.Success)
         {
