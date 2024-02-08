@@ -7,14 +7,14 @@ namespace XboxPromotionCheckerBot.App.Tests.Core.Extensions;
 
 internal sealed class Filter1 : IGamesFilter
 {
-    private readonly Func<XboxGame, bool> _predicate;
+    private readonly Func<Game, bool> _predicate;
 
-    public Filter1(Func<XboxGame, bool> predicate)
+    public Filter1(Func<Game, bool> predicate)
     {
         _predicate = predicate;
     }
     
-    public async IAsyncEnumerable<XboxGame> Filter(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
     {
         await foreach (var game in games.WithCancellation(cancellationToken))
         {
@@ -28,14 +28,14 @@ internal sealed class Filter1 : IGamesFilter
 
 internal sealed class Filter2 : IGamesFilter
 {
-    private readonly Func<XboxGame, bool> _predicate;
+    private readonly Func<Game, bool> _predicate;
 
-    public Filter2(Func<XboxGame, bool> predicate)
+    public Filter2(Func<Game, bool> predicate)
     {
         _predicate = predicate;
     }
 
-    public async IAsyncEnumerable<XboxGame> Filter(IAsyncEnumerable<XboxGame> games, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
     {
         await foreach (var game in games.WithCancellation(cancellationToken))
         {
@@ -51,7 +51,7 @@ public class AsyncEnumerableExtensionsTests
 {
     [Theory]
     [AutoData]
-    public async Task TestWhenFilterEnumerableIsEmpty(IEnumerable<XboxGame> games)
+    public async Task TestWhenFilterEnumerableIsEmpty(IEnumerable<Game> games)
     {
         var filters = Enumerable.Empty<IGamesFilter>();
 
@@ -62,7 +62,7 @@ public class AsyncEnumerableExtensionsTests
     
     [Theory]
     [AutoData]
-    public async Task TestWhenFilterEnumerableIsNull(IEnumerable<XboxGame> games)
+    public async Task TestWhenFilterEnumerableIsNull(IEnumerable<Game> games)
     {
         var result = await Assert.ThrowsAsync<ArgumentNullException>(async () => await games.ToAsyncEnumerable().Pipe(null!).ToListAsync());
         
@@ -73,7 +73,7 @@ public class AsyncEnumerableExtensionsTests
     [AutoData]
     public async Task TestWhenGamesAreNull()
     {
-        IAsyncEnumerable<XboxGame> games = null!;
+        IAsyncEnumerable<Game> games = null!;
         var filters = Enumerable.Empty<IGamesFilter>();
         var result = await Assert.ThrowsAsync<ArgumentNullException>(async () => await games.Pipe(filters).ToListAsync());
         
@@ -82,7 +82,7 @@ public class AsyncEnumerableExtensionsTests
     
     [Theory]
     [AutoData]
-    public async Task Test(IEnumerable<XboxGame> games)
+    public async Task Test(IEnumerable<Game> games)
     {
         var filters = new IGamesFilter[] {new Filter1(_ => true), new Filter2(_ => true)};
 

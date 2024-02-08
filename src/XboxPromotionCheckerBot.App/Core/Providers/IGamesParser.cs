@@ -6,5 +6,5 @@ namespace XboxPromotionCheckerBot.App.Core.Providers;
 
 public interface IGamesParser
 {
-    IAsyncEnumerable<XboxGame> Parse(CancellationToken cancellationToken = default);
+    IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default);
 }

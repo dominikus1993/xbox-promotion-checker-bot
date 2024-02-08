@@ -17,7 +17,7 @@ public class MongoGamesRepositoryTests : IClassFixture<MongoDbFixture>
 
     [Theory]
     [AutoData]
-    public async Task TestWhenRecordNotExists(XboxGame game)
+    public async Task TestWhenRecordNotExists(Game game)
     {
         var exists = await _gamesRepository.Exists(game);
         Assert.False(exists);
@@ -25,7 +25,7 @@ public class MongoGamesRepositoryTests : IClassFixture<MongoDbFixture>
     
     [Theory]
     [AutoData]
-    public async Task TestWhenRecordExists(XboxGame game)
+    public async Task TestWhenRecordExists(Game game)
     {
         await _gamesRepository.Insert(game);
         
@@ -35,7 +35,7 @@ public class MongoGamesRepositoryTests : IClassFixture<MongoDbFixture>
     
     [Theory]
     [AutoData]
-    public async Task TestInsertManyAndSearchWhenRecordExists(XboxGame[] games)
+    public async Task TestInsertManyAndSearchWhenRecordExists(Game[] games)
     {
         await _gamesRepository.Insert(games);
 

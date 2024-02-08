@@ -44,13 +44,21 @@ public static class WebApplicationBuilderExtensions
             var cfg = sp.GetRequiredService<IConfiguration>();
             return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath")!);
         });
+        services.AddSingleton<GameNameFilter>(sp =>
+        {
+            var cfg = sp.GetRequiredService<IConfiguration>();
+            return FuzzyGameSearcherFactory.Produce(cfg.GetConnectionString("FuzzyGamesFilePath")!);
+        });
         services.AddScoped<IGamesRepository, MongoGamesRepository>();
         services.AddScoped<IGamesFilter, GamePriceFilter>();
         services.AddScoped<IGamesFilter, GameLastSendFilter>();
-        
         services.AddScoped<IGamesNotifier, DiscordGameNotifier>();
         services.AddScoped<IGamesNotifier, MongoDbGamesNotifier>();
         services.AddScoped<IGamesParser, XboxStoreGamesParser>();
+        services.AddHttpClient<IGamesParser, SteamGamesParser>(client =>
+        {
+            client.DefaultRequestHeaders.UserAgent.Add(new("Safari", "605.1.15"));
+        });
         return services;
     }
 }

@@ -12,7 +12,7 @@ public sealed class FuzzyGameSearcherTests
         FuzzGame[] games = [new FuzzGame("Elden Ring"), new FuzzGame("skyrim"), new FuzzGame("stellaris")];
         var searcher = new GameNameFilter(games);
 
-        var subject = await searcher.Filter(new []{ XboxGame.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20))}.ToAsyncEnumerable()).ToListAsync();
+        var subject = await searcher.Filter(new []{ Game.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20), "xbox")}.ToAsyncEnumerable()).ToListAsync();
         
         Assert.NotEmpty(subject);
     }
@@ -23,7 +23,7 @@ public sealed class FuzzyGameSearcherTests
         FuzzGame[] games = [new FuzzGame("Elden Ring"), new FuzzGame("skyrim"), new FuzzGame("cyberpunk")];
         var searcher = new GameNameFilter(games);
 
-        var subject = await searcher.Filter(new []{ XboxGame.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("Cyberpunk 2077 Complete Edition", new Uri("http://localhost"), new GamePrice(10, 20))}.ToAsyncEnumerable()).ToListAsync();
+        var subject = await searcher.Filter(new []{ Game.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20), "xbox"), Game.Create("Cyberpunk 2077 Complete Edition", new Uri("http://localhost"), new GamePrice(10, 20), "xbox")}.ToAsyncEnumerable()).ToListAsync();
         
         Assert.Single(subject);
     }
@@ -34,7 +34,7 @@ public sealed class FuzzyGameSearcherTests
         FuzzGame[] games = [new FuzzGame("Elden Ring"), new FuzzGame("The Elder Scroll V"), new FuzzGame("Stellaris Enchanced")];
         var searcher = new GameNameFilter(games);
 
-        var subject = await searcher.Filter(new []{XboxGame.Create("Cyberpunk 2077 Complete Edition", new Uri("http://localhost"), new GamePrice(10, 20))}.ToAsyncEnumerable()).ToListAsync();
+        var subject = await searcher.Filter(new []{Game.Create("Cyberpunk 2077 Complete Edition", new Uri("http://localhost"), new GamePrice(10, 20), "xbox")}.ToAsyncEnumerable()).ToListAsync();
         
         Assert.Empty(subject);
     }
@@ -44,7 +44,7 @@ public sealed class FuzzyGameSearcherTests
     {
         FuzzGame[] games = [new FuzzGame("stellaris"), new FuzzGame("cyberpunk")];
         var searcher = new GameNameFilter(games);
-        XboxGame[] gamesFromSomething = [XboxGame.Create("Cyberpunk 2077", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("Assasins Creed", new Uri("http://localhost"), new GamePrice(10, 20)), XboxGame.Create("STORY OF SEASONS: Friends of Mineral Town - Digital Edition", new Uri("http://localhost"), new GamePrice(10, 20))];
+        Game[] gamesFromSomething = [Game.Create("Cyberpunk 2077", new Uri("http://localhost"), new GamePrice(10, 20), "xbox"), Game.Create("Stellaris Enchanced", new Uri("http://localhost"), new GamePrice(10, 20), "xbox"), Game.Create("Assasins Creed", new Uri("http://localhost"), new GamePrice(10, 20), "xbox"), Game.Create("STORY OF SEASONS: Friends of Mineral Town - Digital Edition", new Uri("http://localhost"), new GamePrice(10, 20), "xbox")];
         var subject = await searcher.Filter(gamesFromSomething.ToAsyncEnumerable()).ToListAsync();
         
         Assert.NotEmpty(subject);
