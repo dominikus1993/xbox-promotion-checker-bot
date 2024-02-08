@@ -1,5 +1,6 @@
 using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 using XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 
 namespace XboxPromotionCheckerBot.App.Tests.Infrastructure.Repositories;

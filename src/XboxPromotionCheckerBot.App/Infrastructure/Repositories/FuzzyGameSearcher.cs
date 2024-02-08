@@ -11,6 +11,7 @@ using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Core.Types;
 using XboxPromotionCheckerBot.App.Infrastructure.Extensions;
+using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Repositories;
 

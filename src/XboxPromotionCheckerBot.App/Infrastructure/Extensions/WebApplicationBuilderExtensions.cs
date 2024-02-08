@@ -7,6 +7,7 @@ using XboxPromotionCheckerBot.App.Core.Notifications;
 using XboxPromotionCheckerBot.App.Core.Providers;
 using XboxPromotionCheckerBot.App.Core.Repositories;
 using XboxPromotionCheckerBot.App.Infrastructure.Factories;
+using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 using XboxPromotionCheckerBot.App.Infrastructure.MongoDb;
 using XboxPromotionCheckerBot.App.Infrastructure.Notifiers;
 using XboxPromotionCheckerBot.App.Infrastructure.Providers;

@@ -1,7 +1,8 @@
-using XboxPromotionCheckerBot.App.Core.Repositories;
+using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
-namespace XboxPromotionCheckerBot.App.Core.Filters;
+namespace XboxPromotionCheckerBot.App.Infrastructure.Filters;
 
 public sealed record FuzzGame(Guid Id, string Title)
 {
@@ -18,14 +19,14 @@ public sealed record FuzzGame(Guid Id, string Title)
         return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
     }
     
-    internal bool Contains(string gameName)
+    internal bool Contains(SteamApp game)
     {
-        if (string.IsNullOrEmpty(gameName))
+        if (string.IsNullOrEmpty(game.Name))
         {
             return false;
         }
         
-        var title = gameName.Normalize().ToUpperInvariant();
+        var title = game.Name.Normalize().ToUpperInvariant();
         return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
     }
 }
@@ -53,13 +54,13 @@ public sealed class GameNameFilter : IGamesFilter
         });
     }
     
-    internal IEnumerable<T> FilterSteamApps<T>(IEnumerable<T> games, Func<T, FuzzGame, bool> contains)
+    internal IEnumerable<SteamApp> FilterSteamApps(IEnumerable<SteamApp> games)
     {
         foreach (var x in games)
         {
             foreach (var game in _games)
             {
-                if (contains(x, game))
+                if (game.Contains(x))
                     yield return x;
             }
             

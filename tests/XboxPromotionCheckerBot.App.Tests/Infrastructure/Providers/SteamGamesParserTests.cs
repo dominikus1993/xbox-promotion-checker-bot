@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using XboxPromotionCheckerBot.App.Core.Filters;
+using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 using XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
 namespace XboxPromotionCheckerBot.App.Tests.Infrastructure.Providers;

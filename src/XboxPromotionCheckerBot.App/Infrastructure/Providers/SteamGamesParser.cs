@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using XboxPromotionCheckerBot.App.Core.Filters;
 using XboxPromotionCheckerBot.App.Core.Providers;
 using XboxPromotionCheckerBot.App.Core.Types;
+using XboxPromotionCheckerBot.App.Infrastructure.Filters;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Providers;
 
@@ -75,7 +76,7 @@ public sealed class SteamGamesParser : IGamesParser
             return Enumerable.Empty<SteamApp>();
         }
 
-        return _gameNameFilter.FilterSteamApps(response.AppList.Apps, (app, game) => game.Contains(app.Name));
+        return _gameNameFilter.FilterSteamApps(response.AppList.Apps);
     }
 
     private async Task<Game?> GetGame(SteamApp app, CancellationToken cancellationToken = default)
