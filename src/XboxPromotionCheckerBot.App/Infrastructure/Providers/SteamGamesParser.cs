@@ -75,7 +75,7 @@ public sealed class SteamGamesParser : IGamesParser
             return Enumerable.Empty<SteamApp>();
         }
 
-        return _gameNameFilter.FilterSteamApps(response.AppList.Apps);
+        return _gameNameFilter.FilterSteamApps(response.AppList.Apps, (app, game) => game.Contains(app.Name));
     }
 
     private async Task<Game?> GetGame(SteamApp app, CancellationToken cancellationToken = default)
