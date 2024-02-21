@@ -125,8 +125,8 @@
       },
       "Discord.Net.Core": {
         "type": "Transitive",
-        "resolved": "3.13.0",
-        "contentHash": "Fojxu9Ssi19odtaT6BEqPaZu95kCJxjH+gzsaXAQ9E6g82N2y6bNweM1jMg8En2fxyHZ8M9KbopQVWAy4xEyLA==",
+        "resolved": "3.13.1",
+        "contentHash": "MoEOBCTS6XrBoObKU6Aq9plpbB5ytN9ktu76Ae/GRFu6n8TYqerREcJv5xlLs59BLL5dK2Act18itJ/Kmq+3DQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.2",
           "System.Collections.Immutable": "5.0.0",
@@ -136,10 +136,10 @@
       },
       "Discord.Net.Rest": {
         "type": "Transitive",
-        "resolved": "3.13.0",
-        "contentHash": "dnXHAzNidok1C4CwX/KldTC3XeFEy05Y39Q0uMRPfFG86EOeKb6D/kRr4kFYw1WNVs252Xyjfiql8KAx6SigpA==",
+        "resolved": "3.13.1",
+        "contentHash": "vWL2jYOg6AN+PtAuWJtIeulf6ZT+La8P8ACoUeZncNIqi35HZ1bQ/KlN9iVi8B4tYxpPUpwQnc+XVZ0AgvzlGQ==",
         "dependencies": {
-          "Discord.Net.Core": "3.13.0"
+          "Discord.Net.Core": "3.13.1"
         }
       },
       "DnsClient": {
@@ -209,11 +209,11 @@
       },
       "Microsoft.Extensions.Compliance.Abstractions": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "4Q0RX9Q2OoJ2xX2XVgMfHuENEd56IfQxEXwW35G5sLjLTPyg7ptmAoD+cuZtkM9kX8UlRD4NtFSpzFgC0aUpzw==",
+        "resolved": "8.2.0",
+        "contentHash": "b9LoxIURVX89FBwNSZdQWW7mclyr4SMz10YvryaAgB7GGtnFbpq5xetav6OvJg2YneMde16RFkinwDNUeLKtEQ==",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
-          "Microsoft.Extensions.ObjectPool": "8.0.1"
+          "Microsoft.Extensions.ObjectPool": "8.0.2"
         }
       },
       "Microsoft.Extensions.Configuration": {
@@ -461,13 +461,13 @@
       },
       "Microsoft.Extensions.ObjectPool": {
         "type": "Transitive",
-        "resolved": "8.0.1",
-        "contentHash": "X21b8D6z58EG34OMLH955750mFaEaGs5xLGe9Vyi3059Cgb3sk+p2k/JlQXaieEBRrk+SVlFzDei3Q6PdVzJOA=="
+        "resolved": "8.0.2",
+        "contentHash": "LA7lDy048CVjGCwsPqRFVwH8vl5ooHmSFji13Oczw+mOnGhqenWXttkWcJ5dhIR0bhayZrQz4BaSPEVtE8Tt0A=="
       },
       "Microsoft.Extensions.Options": {
         "type": "Transitive",
-        "resolved": "8.0.1",
-        "contentHash": "wmpp+BSU3oGifaev6Z9rrlwHoITLFfpVOSbgBrOXjkbJSCXnZVCsoRGE5c3fJFI4VlNgnNkNlI9y+5jC4fmOEA==",
+        "resolved": "8.0.2",
+        "contentHash": "dWGKvhFybsaZpGmzkGCbNNwBD1rVlWzrZKANLW/CcbFJpCEceMCGzT7zZwHOGBCbwM0SzBuceMj5HN1LKV1QqA==",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.Extensions.Primitives": "8.0.0"
@@ -1616,15 +1616,15 @@
         "type": "Project",
         "dependencies": {
           "Cocona": "[2.2.0, )",
-          "CsvHelper": "[30.1.0, )",
-          "Discord.Net.Webhook": "[3.13.0, )",
-          "HtmlAgilityPack": "[1.11.58, )",
+          "CsvHelper": "[31.0.0, )",
+          "Discord.Net.Webhook": "[3.13.1, )",
+          "HtmlAgilityPack": "[1.11.59, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
           "Lucene.Net.Analysis.Common": "[4.8.0-beta00016, )",
           "Lucene.Net.QueryParser": "[4.8.0-beta00016, )",
           "Microsoft.Extensions.Configuration.UserSecrets": "[8.0.0, )",
           "Microsoft.Extensions.Http": "[8.0.0, )",
-          "Microsoft.Extensions.Telemetry.Abstractions": "[8.1.0, )",
+          "Microsoft.Extensions.Telemetry.Abstractions": "[8.2.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.23.1, )",
           "Sep": "[0.4.0, )",
@@ -1646,28 +1646,28 @@
       },
       "CsvHelper": {
         "type": "CentralTransitive",
-        "requested": "[30.1.0, )",
-        "resolved": "30.1.0",
-        "contentHash": "R7sRLng2mOBOCtpg9q3B8Wna7qw4CARq9d68t4rBh09obGjEP2OC2RzGojtnIN0LBau15VRMmh1MfYpQwk2Kbw==",
+        "requested": "[31.0.0, )",
+        "resolved": "31.0.0",
+        "contentHash": "PypRJq7AugnCJjq6Zu5EqFDTfRv7Gh+MtSH2T/kwiGmg1UHAflq4cE8j3uMkvXSxaayVtcwi+8hC0w+30YzzWA==",
         "dependencies": {
           "System.Linq.Async": "4.0.0"
         }
       },
       "Discord.Net.Webhook": {
         "type": "CentralTransitive",
-        "requested": "[3.13.0, )",
-        "resolved": "3.13.0",
-        "contentHash": "DiyysohtKVx2rdDpfRMIbcDnG9RYQPUIevPvY12xEkgXajrHYkVoQz8h+5+hUvJ/HNnDmMuuu2xCaYEXeJGu2w==",
+        "requested": "[3.13.1, )",
+        "resolved": "3.13.1",
+        "contentHash": "MccahSOxxM6YsM8KA3uEejsN6/KmBZFADw5bOdmHW/LoZt64hzktvf3rzY60nAy5jJaMtBtn1EX5l9zwe6QgXA==",
         "dependencies": {
-          "Discord.Net.Core": "3.13.0",
-          "Discord.Net.Rest": "3.13.0"
+          "Discord.Net.Core": "3.13.1",
+          "Discord.Net.Rest": "3.13.1"
         }
       },
       "HtmlAgilityPack": {
         "type": "CentralTransitive",
-        "requested": "[1.11.58, )",
-        "resolved": "1.11.58",
-        "contentHash": "/LzjIKoAWdyXOn6o+zJTN2qpNIwfaDWbSQ974pVRwnzHsUFohIOSILdtkPrSO6YC38MNj4nDbpr1RkVBDE1RWQ=="
+        "requested": "[1.11.59, )",
+        "resolved": "1.11.59",
+        "contentHash": "0tMaGzTJ5uFFMCYvprZ4hRYg6Dm5E+/WeMFJiD5K83Fe/Y6kyLaRKcfrfUwfb1j428XzB4/2RR7sdxoQX5eaEA=="
       },
       "Lucene.Net": {
         "type": "CentralTransitive",
@@ -1727,14 +1727,14 @@
       },
       "Microsoft.Extensions.Telemetry.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[8.1.0, )",
-        "resolved": "8.1.0",
-        "contentHash": "YvUy1WY/NgWLwra755K206C+VaMgqfQqH2dBJ4OgPp2tCSmsR/RnWH6hHbqic0NdbQuKoGPmFajv3azemz18WQ==",
+        "requested": "[8.2.0, )",
+        "resolved": "8.2.0",
+        "contentHash": "Vy/jcsXuyfp6HYypuTPEIfP/SUvG9LrCs9DnwFDbnJqogA5jxCmP/ylfO5fEkocwF5j0rg4/g34saImaORBnyA==",
         "dependencies": {
-          "Microsoft.Extensions.Compliance.Abstractions": "8.1.0",
+          "Microsoft.Extensions.Compliance.Abstractions": "8.2.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Microsoft.Extensions.ObjectPool": "8.0.1",
-          "Microsoft.Extensions.Options": "8.0.1",
+          "Microsoft.Extensions.ObjectPool": "8.0.2",
+          "Microsoft.Extensions.Options": "8.0.2",
           "System.Diagnostics.DiagnosticSource": "8.0.0"
         }
       },
