@@ -1616,7 +1616,7 @@
         "type": "Project",
         "dependencies": {
           "Cocona": "[2.2.0, )",
-          "CsvHelper": "[31.0.0, )",
+          "CsvHelper": "[31.0.2, )",
           "Discord.Net.Webhook": "[3.13.1, )",
           "HtmlAgilityPack": "[1.11.59, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
@@ -1646,12 +1646,9 @@
       },
       "CsvHelper": {
         "type": "CentralTransitive",
-        "requested": "[31.0.0, )",
-        "resolved": "31.0.0",
-        "contentHash": "PypRJq7AugnCJjq6Zu5EqFDTfRv7Gh+MtSH2T/kwiGmg1UHAflq4cE8j3uMkvXSxaayVtcwi+8hC0w+30YzzWA==",
-        "dependencies": {
-          "System.Linq.Async": "4.0.0"
-        }
+        "requested": "[31.0.2, )",
+        "resolved": "31.0.2",
+        "contentHash": "ndlIN77XcFm6qqGlNPzl0XjVupMCBVhVSiO+1+X2UhJtnnvkx9f//7FOvlkLuEQ76NC3Y7owa8IOhgtKVa4H7Q=="
       },
       "Discord.Net.Webhook": {
         "type": "CentralTransitive",
