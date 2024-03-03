@@ -28,7 +28,10 @@ public static class AsyncEnumerableExtensions
     {
         ArgumentNullException.ThrowIfNull(games);
         var streams = games.ToArray();
-
+        if (streams is {Length: 0})
+        {
+            return AsyncEnumerable.Empty<Game>();
+        }
         return AsyncEnumerableEx.Merge(streams);
     }
     
