@@ -13,21 +13,15 @@ public sealed record FuzzGame(Guid Id, string Title)
         _normalizedTitle = Title.Normalize().ToUpperInvariant();
     }
 
-    public bool Contains(Game game)
+    public bool Contains(string? title)
     {
-        var title = game.Title.Normalize().ToUpperInvariant();
-        return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
-    }
-    
-    internal bool Contains(SteamApp game)
-    {
-        if (string.IsNullOrEmpty(game.Name))
+        if (string.IsNullOrEmpty(title))
         {
             return false;
         }
         
-        var title = game.Name.Normalize().ToUpperInvariant();
-        return title.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
+        var normalizedTitle = title.Normalize().ToUpperInvariant();
+        return normalizedTitle.Contains(_normalizedTitle, StringComparison.InvariantCultureIgnoreCase);
     }
 }
 
@@ -42,28 +36,27 @@ public sealed class GameNameFilter : IGamesFilter
 
     public IAsyncEnumerable<Game> Filter(IAsyncEnumerable<Game> games, CancellationToken cancellationToken = default)
     {
-        return games.Where(x =>
-        {
-            foreach (var game in _games.AsSpan())
-            {
-                if (game.Contains(x)) 
-                    return true;
-            }
-
-            return false;
-        });
+        return games.Where(x => Contains(x.Title));
     }
     
     internal IEnumerable<SteamApp> FilterSteamApps(IEnumerable<SteamApp> games)
     {
-        foreach (var x in games)
+        return games.Where(x => Contains(x.Name));
+    }
+
+    private bool Contains(string? title)
+    {
+        if (string.IsNullOrEmpty(title))
         {
-            foreach (var game in _games)
-            {
-                if (game.Contains(x))
-                    yield return x;
-            }
-            
+            return false;
         }
+        
+        foreach (var game in _games.AsSpan())
+        {
+            if (game.Contains(title))
+                return true;
+        }
+
+        return false;
     }
 }
