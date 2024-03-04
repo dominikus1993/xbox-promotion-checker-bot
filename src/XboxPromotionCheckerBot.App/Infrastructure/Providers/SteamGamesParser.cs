@@ -40,7 +40,7 @@ public sealed class SteamGamesParser : IGamesParser
         _logger = logger;
     }
 
-    public async IAsyncEnumerable<Game> Parse(CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Game> Parse([EnumeratorCancellation]CancellationToken cancellationToken = default)
     {
         var apps = await GetAppList(cancellationToken);
 

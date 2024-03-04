@@ -18,7 +18,7 @@ public sealed class SteamAppData
 
     [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
     [JsonPropertyName("data")]
-    public Data Data { get; set; }
+    public Data? Data { get; set; }
 }
 
 public sealed class Data
