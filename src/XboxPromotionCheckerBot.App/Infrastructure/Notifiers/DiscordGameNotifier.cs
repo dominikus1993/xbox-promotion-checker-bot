@@ -47,7 +47,7 @@ public sealed class DiscordGameNotifier : IGamesNotifier
     {
         foreach (var game in games)
         {
-            var description = $"Witam gra potaniala z {game.GamePrice.OldPrice} do {game.GamePrice.Price} co daje promke {game.PromotionPercentage} procent";
+            var description = $"Witam gra potaniala z {game.GamePrice.OldPrice} do {game.GamePrice.Price} co daje promke {game.PromotionPercentage()} procent";
             var builder = new EmbedBuilder().WithColor(GetColorByPromotionLevel(game)).WithUrl(game.Link.ToString())
                 .WithTitle(game.Title).WithDescription(description);
             yield return builder.Build();
