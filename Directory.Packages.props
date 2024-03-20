@@ -30,7 +30,7 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="System.Interactive.Async" Version="6.0.1" />
     <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
-    <PackageVersion Include="Testcontainers.MongoDb" Version="3.7.0" />
+    <PackageVersion Include="Testcontainers.MongoDb" Version="3.8.0" />
     <PackageVersion Include="WireMock.Net" Version="1.5.45" />
     <PackageVersion Include="WireMock.Net.xUnit" Version="1.5.45" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
