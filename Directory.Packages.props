@@ -3,7 +3,7 @@
     <PackageVersion Include="AutoFixture.Xunit2" Version="4.18.1" />
     <PackageVersion Include="Cocona" Version="2.2.0" />
     <PackageVersion Include="CsvHelper" Version="31.0.2" />
-    <PackageVersion Include="Discord.Net.Webhook" Version="3.13.1" />
+    <PackageVersion Include="Discord.Net.Webhook" Version="3.14.1" />
     <PackageVersion Include="HtmlAgilityPack" Version="1.11.59" />
     <PackageVersion Include="Lucene.Net" Version="4.8.0-beta00016" />
     <PackageVersion Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00016" />
@@ -21,7 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="Open.ChannelExtensions" Version="6.2.2" />
-    <PackageVersion Include="Sep" Version="0.4.3" />
+    <PackageVersion Include="Sep" Version="0.4.4" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.48.0.56517">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,7 +30,7 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="System.Interactive.Async" Version="6.0.1" />
     <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
-    <PackageVersion Include="Testcontainers.MongoDb" Version="3.7.0" />
+    <PackageVersion Include="Testcontainers.MongoDb" Version="3.8.0" />
     <PackageVersion Include="WireMock.Net" Version="1.5.45" />
     <PackageVersion Include="WireMock.Net.xUnit" Version="1.5.45" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />

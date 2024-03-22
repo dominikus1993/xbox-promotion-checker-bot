@@ -54,11 +54,11 @@
       },
       "Testcontainers.MongoDb": {
         "type": "Direct",
-        "requested": "[3.7.0, )",
-        "resolved": "3.7.0",
-        "contentHash": "Cy8dlgvZSW3U6rrmLKwoiAnPpy167rAAKFVGfAPNwX358UJNrlW9isnxFDcAWwhYTogS26DNnRXx3RKiUQOOWQ==",
+        "requested": "[3.8.0, )",
+        "resolved": "3.8.0",
+        "contentHash": "YY43Jeq6L/JsWp0WTDv1CDB/JWGMI6eHZaAZFvNcB2jl6CPDu5MJno97r/0d9E5p2ceZB6LY1EIpTId8hnDNTA==",
         "dependencies": {
-          "Testcontainers": "3.7.0"
+          "Testcontainers": "3.8.0"
         }
       },
       "xunit": {
@@ -100,11 +100,6 @@
           "AWSSDK.Core": "[3.7.100.14, 4.0.0)"
         }
       },
-      "BouncyCastle.Cryptography": {
-        "type": "Transitive",
-        "resolved": "2.2.1",
-        "contentHash": "A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ=="
-      },
       "Castle.Core": {
         "type": "Transitive",
         "resolved": "5.1.1",
@@ -125,21 +120,21 @@
       },
       "Discord.Net.Core": {
         "type": "Transitive",
-        "resolved": "3.13.1",
-        "contentHash": "MoEOBCTS6XrBoObKU6Aq9plpbB5ytN9ktu76Ae/GRFu6n8TYqerREcJv5xlLs59BLL5dK2Act18itJ/Kmq+3DQ==",
+        "resolved": "3.14.1",
+        "contentHash": "SI5H5xdCbx13ub1v1SY7u0O8+sA1eeeQfMYlhjGkrQV7z52vJdkxgaKBz70zQiy+RG08Ro9zKXMRt2xsmCaL5g==",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.2",
-          "System.Collections.Immutable": "5.0.0",
-          "System.Interactive.Async": "5.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "System.Collections.Immutable": "6.0.0",
+          "System.Interactive.Async": "6.0.1",
           "System.ValueTuple": "4.5.0"
         }
       },
       "Discord.Net.Rest": {
         "type": "Transitive",
-        "resolved": "3.13.1",
-        "contentHash": "vWL2jYOg6AN+PtAuWJtIeulf6ZT+La8P8ACoUeZncNIqi35HZ1bQ/KlN9iVi8B4tYxpPUpwQnc+XVZ0AgvzlGQ==",
+        "resolved": "3.14.1",
+        "contentHash": "veat0FfYD7E5SgxhwHibZZ1Zkf9Yv3nPRwdOUkTXZlGfeC3pSwKoIJ+rX6Jg1xdKHHFSeZJXaanJzfOAIUj99w==",
         "dependencies": {
-          "Discord.Net.Core": "3.13.1"
+          "Discord.Net.Core": "3.14.1"
         }
       },
       "DnsClient": {
@@ -624,8 +619,8 @@
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
-        "resolved": "13.0.2",
-        "contentHash": "R2pZ3B0UjeyHShm9vG+Tu0EBb2lC8b0dFzV9gVn50ofHXh9Smjk6kTn7A/FdAsC8B5cKib1OnGYOXxRBz5XQDg=="
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -804,8 +799,11 @@
       },
       "System.Collections.Immutable": {
         "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "FXkLXiK0sVVewcso0imKQoOxjoPAj42R8HtjjbSjVPAzwDfzoyoznWxgA3c38LDbN9SJux1xXoXYAhz98j7r2g=="
+        "resolved": "6.0.0",
+        "contentHash": "l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
       },
       "System.ComponentModel": {
         "type": "Transitive",
@@ -1548,17 +1546,14 @@
       },
       "Testcontainers": {
         "type": "Transitive",
-        "resolved": "3.7.0",
-        "contentHash": "Nn9/mVOiYEC1mdE0Kr2xQfVAV9mssLedalC6OnC59kHOudx2IhVgenHc983LIdMIhsYF9ywVnyW7HrJE7qVuJg==",
+        "resolved": "3.8.0",
+        "contentHash": "R0+4VTGtFm+Q50+dP7Rm+ZB6thjKdBF3mGYbh5dEf/qt+r35MdFx8tMsE0VIbtaqgJMsOSD06CUZB2wPqBe2cw==",
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.2.1",
           "Docker.DotNet": "3.125.15",
           "Docker.DotNet.X509": "3.125.15",
-          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "6.0.4",
           "SSH.NET": "2023.0.0",
-          "SharpZipLib": "1.4.2",
-          "System.Text.Json": "6.0.9"
+          "SharpZipLib": "1.4.2"
         }
       },
       "xunit.abstractions": {
@@ -1611,7 +1606,7 @@
         "dependencies": {
           "Cocona": "[2.2.0, )",
           "CsvHelper": "[31.0.2, )",
-          "Discord.Net.Webhook": "[3.13.1, )",
+          "Discord.Net.Webhook": "[3.14.1, )",
           "HtmlAgilityPack": "[1.11.59, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
           "Lucene.Net.Analysis.Common": "[4.8.0-beta00016, )",
@@ -1621,7 +1616,7 @@
           "Microsoft.Extensions.Telemetry.Abstractions": "[8.3.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.24.0, )",
-          "Sep": "[0.4.3, )",
+          "Sep": "[0.4.4, )",
           "System.Interactive.Async": "[6.0.1, )",
           "System.Linq.Async": "[6.0.1, )"
         }
@@ -1646,12 +1641,12 @@
       },
       "Discord.Net.Webhook": {
         "type": "CentralTransitive",
-        "requested": "[3.13.1, )",
-        "resolved": "3.13.1",
-        "contentHash": "MccahSOxxM6YsM8KA3uEejsN6/KmBZFADw5bOdmHW/LoZt64hzktvf3rzY60nAy5jJaMtBtn1EX5l9zwe6QgXA==",
+        "requested": "[3.14.1, )",
+        "resolved": "3.14.1",
+        "contentHash": "sAMzUKzQvVTz2IRueOh2RBlIkieO84J+dOp9sC4kB1GQ/46w6Xp6NO/kud+PqVI8DwyA2sH35d+ykoyKVhIj/A==",
         "dependencies": {
-          "Discord.Net.Core": "3.13.1",
-          "Discord.Net.Rest": "3.13.1"
+          "Discord.Net.Core": "3.14.1",
+          "Discord.Net.Rest": "3.14.1"
         }
       },
       "HtmlAgilityPack": {
@@ -1749,9 +1744,9 @@
       },
       "Sep": {
         "type": "CentralTransitive",
-        "requested": "[0.4.3, )",
-        "resolved": "0.4.3",
-        "contentHash": "uFSKdq0/MWDjDRWik1Ofeh6Gl0NyqeLuajNn4WHd/g8/0eW/ov2XJ5V6rfgpncqENggM+b85X5GW7npUq0MiMQ==",
+        "requested": "[0.4.4, )",
+        "resolved": "0.4.4",
+        "contentHash": "4wOXOqgmIAq2J7Fi5vYROyOTE2rbNDtC3aNziskNFEKf/I9rW/qaSIgZ4qISKO5oNinhRQV1NHacNqWPqAK3EA==",
         "dependencies": {
           "csFastFloat": "4.1.0"
         }
