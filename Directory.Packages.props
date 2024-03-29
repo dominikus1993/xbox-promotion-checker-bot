@@ -21,7 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="Open.ChannelExtensions" Version="6.2.2" />
-    <PackageVersion Include="Sep" Version="0.4.4" />
+    <PackageVersion Include="Sep" Version="0.4.5" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.48.0.56517">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
