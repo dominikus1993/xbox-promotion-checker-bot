@@ -16,9 +16,9 @@
       },
       "CsvHelper": {
         "type": "Direct",
-        "requested": "[31.0.3, )",
-        "resolved": "31.0.3",
-        "contentHash": "ygck8DR4mG/VDA/LgIVVGpEtXXPDVaaNZNJGrOAJ4pckVw4MbAQ3n/u6YFDv3bwlQhlxTmPhCyk5E4hxe96Crg=="
+        "requested": "[31.0.4, )",
+        "resolved": "31.0.4",
+        "contentHash": "m4ikjUAn4XOD1tShxxk4ui42sHxjHdX52P7fPQ9K7tzJkPTEwiCbvEz3k73mTGSSaPTUCOp9VziQC757IqKLew=="
       },
       "Discord.Net.Webhook": {
         "type": "Direct",
@@ -124,11 +124,11 @@
       },
       "Sep": {
         "type": "Direct",
-        "requested": "[0.5.0, )",
-        "resolved": "0.5.0",
-        "contentHash": "RjnaJDFsca7p65z1djRtMI+QCstQCJ1cAa1QM2bsOirNSWEnT+WGO8CIoYQPZZ5f7fBBrZSjyow9G0m3OgPRdw==",
+        "requested": "[0.5.1, )",
+        "resolved": "0.5.1",
+        "contentHash": "OAhQtoAm/sGdAq+I6NpBRfAkNvXT5ynBGmLOABg2tnVyvVOcLz6DL5K+REMxTsLi0dXtR5FSZTa8WJOnlezHIA==",
         "dependencies": {
-          "csFastFloat": "4.1.2"
+          "csFastFloat": "4.1.3"
         }
       },
       "System.Interactive.Async": {
@@ -169,8 +169,8 @@
       },
       "csFastFloat": {
         "type": "Transitive",
-        "resolved": "4.1.2",
-        "contentHash": "81RzYNH9+XUhQxWeC0tSOU0ekHVexBsm5ikhGqNuXu54WSy8l/q4ohEB9ll6sPpKl6g6OuCIf7/zY93tm9wlKA=="
+        "resolved": "4.1.3",
+        "contentHash": "ofZxS4UvPJJCqCuCpbJLL7rW9CI8xX+tOSrQRA0KKWUWrBwCn3LL5vonRaCQKaNrVhE5q1dastJDKbU00cK0eA=="
       },
       "Discord.Net.Core": {
         "type": "Transitive",
