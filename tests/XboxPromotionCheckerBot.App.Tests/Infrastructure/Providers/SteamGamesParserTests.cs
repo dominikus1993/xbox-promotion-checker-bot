@@ -12,7 +12,7 @@ public sealed class SteamGamesParserTests
     public async Task TestParse()
     {
         using var client = new HttpClient();
-        var parser = new SteamGamesParser(client, new GameNameFilter([new FuzzGame("cyberpunk 2077")]), NullLogger<SteamGamesParser>.Instance);
+        var parser = new SteamGamesParser(client, new GameNameFilter([new FuzzGame("cyberpunk"), new FuzzGame("dave the diver")]), NullLogger<SteamGamesParser>.Instance);
         var subject = await parser.Parse().ToListAsync();
 
         Assert.NotNull(subject);
