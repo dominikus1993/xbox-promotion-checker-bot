@@ -115,8 +115,8 @@
       },
       "csFastFloat": {
         "type": "Transitive",
-        "resolved": "4.1.2",
-        "contentHash": "81RzYNH9+XUhQxWeC0tSOU0ekHVexBsm5ikhGqNuXu54WSy8l/q4ohEB9ll6sPpKl6g6OuCIf7/zY93tm9wlKA=="
+        "resolved": "4.1.4",
+        "contentHash": "aYuOo553+dsOK5lguvPNhp2bTi1Ik8b79yUxPUkrxhlZkW43s0bIApWh6M7NVC/p1w09JaXJpi1uZCXG51z5mw=="
       },
       "Discord.Net.Core": {
         "type": "Transitive",
@@ -1616,7 +1616,7 @@
           "Microsoft.Extensions.Telemetry.Abstractions": "[8.4.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.25.0, )",
-          "Sep": "[0.5.1, )",
+          "Sep": "[0.5.2, )",
           "System.Interactive.Async": "[6.0.1, )",
           "System.Linq.Async": "[6.0.1, )"
         }
@@ -1635,9 +1635,9 @@
       },
       "CsvHelper": {
         "type": "CentralTransitive",
-        "requested": "[31.0.3, )",
-        "resolved": "31.0.3",
-        "contentHash": "ygck8DR4mG/VDA/LgIVVGpEtXXPDVaaNZNJGrOAJ4pckVw4MbAQ3n/u6YFDv3bwlQhlxTmPhCyk5E4hxe96Crg=="
+        "requested": "[31.0.4, )",
+        "resolved": "31.0.4",
+        "contentHash": "m4ikjUAn4XOD1tShxxk4ui42sHxjHdX52P7fPQ9K7tzJkPTEwiCbvEz3k73mTGSSaPTUCOp9VziQC757IqKLew=="
       },
       "Discord.Net.Webhook": {
         "type": "CentralTransitive",
@@ -1743,11 +1743,11 @@
       },
       "Sep": {
         "type": "CentralTransitive",
-        "requested": "[0.5.0, )",
-        "resolved": "0.5.0",
-        "contentHash": "RjnaJDFsca7p65z1djRtMI+QCstQCJ1cAa1QM2bsOirNSWEnT+WGO8CIoYQPZZ5f7fBBrZSjyow9G0m3OgPRdw==",
+        "requested": "[0.5.2, )",
+        "resolved": "0.5.2",
+        "contentHash": "Kf+yRNAc7SHtIkUJf6UHbDGamCtvDN0XtTi2UXGxHImMuGofdu/WDWKwUmt6xlveLzv9R+XcArQ6isCNt7U9dg==",
         "dependencies": {
-          "csFastFloat": "4.1.2"
+          "csFastFloat": "4.1.4"
         }
       },
       "System.Interactive.Async": {

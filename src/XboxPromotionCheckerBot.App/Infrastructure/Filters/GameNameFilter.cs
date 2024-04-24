@@ -41,7 +41,7 @@ public sealed class GameNameFilter : IGamesFilter
     
     internal IEnumerable<SteamApp> FilterSteamApps(IEnumerable<SteamApp> games)
     {
-        return games.Where(x => !string.IsNullOrEmpty(x.Name)).Where(x => Contains(x.Name));
+        return games.Where(static x => !string.IsNullOrEmpty(x.Name)).Where(x => Contains(x.Name));
     }
 
     private bool Contains(string? title)

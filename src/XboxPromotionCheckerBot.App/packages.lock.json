@@ -124,11 +124,11 @@
       },
       "Sep": {
         "type": "Direct",
-        "requested": "[0.5.1, )",
-        "resolved": "0.5.1",
-        "contentHash": "OAhQtoAm/sGdAq+I6NpBRfAkNvXT5ynBGmLOABg2tnVyvVOcLz6DL5K+REMxTsLi0dXtR5FSZTa8WJOnlezHIA==",
+        "requested": "[0.5.2, )",
+        "resolved": "0.5.2",
+        "contentHash": "Kf+yRNAc7SHtIkUJf6UHbDGamCtvDN0XtTi2UXGxHImMuGofdu/WDWKwUmt6xlveLzv9R+XcArQ6isCNt7U9dg==",
         "dependencies": {
-          "csFastFloat": "4.1.3"
+          "csFastFloat": "4.1.4"
         }
       },
       "System.Interactive.Async": {
@@ -169,8 +169,8 @@
       },
       "csFastFloat": {
         "type": "Transitive",
-        "resolved": "4.1.3",
-        "contentHash": "ofZxS4UvPJJCqCuCpbJLL7rW9CI8xX+tOSrQRA0KKWUWrBwCn3LL5vonRaCQKaNrVhE5q1dastJDKbU00cK0eA=="
+        "resolved": "4.1.4",
+        "contentHash": "aYuOo553+dsOK5lguvPNhp2bTi1Ik8b79yUxPUkrxhlZkW43s0bIApWh6M7NVC/p1w09JaXJpi1uZCXG51z5mw=="
       },
       "Discord.Net.Core": {
         "type": "Transitive",
