@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -43,8 +44,13 @@ public sealed partial class XboxStoreGamesParser : IGamesParser
     private async IAsyncEnumerable<Game> ParsePage(int page, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         var url = GetPageUrl(page);
-        var web = new HtmlWeb();
+        var web = new HtmlWeb()
+        {
+            UserAgent =
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+        };
         var doc = await web.LoadFromWebAsync(url.ToString(), cancellationToken);
+        
         if (doc is null)
         {
             _logger.LogNoGames(page);

@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.Extensions.Logging;
 
 namespace XboxPromotionCheckerBot.App.Infrastructure.Logger;
@@ -21,4 +22,7 @@ public static partial class InfrastructureLogging
     
     [LoggerMessage(LogLevel.Warning, "Can't parse url {Uri}")]
     public static partial void LogCantParseUrl(this ILogger logger, string uri);
+    
+    [LoggerMessage(LogLevel.Warning, "Can't load page {Uri}, status code {StatusCode}")]
+    public static partial void LogCantLoadPage(this ILogger logger, Uri uri, HttpStatusCode statusCode);
 }
