@@ -56,10 +56,6 @@ public static class WebApplicationBuilderExtensions
         services.AddScoped<IGamesNotifier, DiscordGameNotifier>();
         services.AddScoped<IGamesNotifier, MongoDbGamesNotifier>();
         services.AddScoped<IGamesParser, XboxStoreGamesParser>();
-        services.AddHttpClient<IGamesParser, SteamGamesParser>(client =>
-        {
-            client.DefaultRequestHeaders.UserAgent.Add(new("Safari", "605.1.15"));
-        });
         return services;
     }
 }

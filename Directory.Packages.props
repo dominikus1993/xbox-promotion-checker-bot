@@ -2,9 +2,9 @@
   <ItemGroup>
     <PackageVersion Include="AutoFixture.Xunit2" Version="4.18.1" />
     <PackageVersion Include="Cocona" Version="2.2.0" />
-    <PackageVersion Include="CsvHelper" Version="31.0.4" />
+    <PackageVersion Include="CsvHelper" Version="32.0.1" />
     <PackageVersion Include="Discord.Net.Webhook" Version="3.14.1" />
-    <PackageVersion Include="HtmlAgilityPack" Version="1.11.60" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.11.61" />
     <PackageVersion Include="Lucene.Net" Version="4.8.0-beta00016" />
     <PackageVersion Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00016" />
     <PackageVersion Include="Lucene.Net.QueryParser" Version="4.8.0-beta00016" />
@@ -36,8 +36,8 @@
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageVersion Include="Shouldly" Version="4.2.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <PackageVersion Include="xunit" Version="2.7.1" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.8">
+    <PackageVersion Include="xunit" Version="2.8.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>

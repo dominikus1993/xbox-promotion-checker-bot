@@ -20,5 +20,6 @@ public class XboxStoreGamesParserTests
         Assert.NotNull(subject);
         Assert.NotEmpty(subject);
         Assert.All(subject, game => Assert.True(game.IsValidGame()));
+        Assert.All(subject, game => Assert.True(game.GamePrice.Price > 0));
     }
 }
