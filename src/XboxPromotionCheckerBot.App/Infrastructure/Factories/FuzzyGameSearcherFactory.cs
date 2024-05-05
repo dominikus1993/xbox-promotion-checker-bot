@@ -19,8 +19,11 @@ public static class FuzzyGameSearcherFactory
         var res = new List<FuzzGame>();
         foreach (var row in reader)
         {
-            var title = row["Title"].Parse<string>();
-            res.Add(new FuzzGame(title));
+            var titleColumn = row["Title"];
+            if (titleColumn.TryParse<string>(out var title))
+            {
+                res.Add(new FuzzGame(title));
+            }
         }
         
         return new GameNameFilter(res);
