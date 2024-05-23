@@ -120,8 +120,8 @@
       },
       "Discord.Net.Core": {
         "type": "Transitive",
-        "resolved": "3.14.1",
-        "contentHash": "SI5H5xdCbx13ub1v1SY7u0O8+sA1eeeQfMYlhjGkrQV7z52vJdkxgaKBz70zQiy+RG08Ro9zKXMRt2xsmCaL5g==",
+        "resolved": "3.15.0",
+        "contentHash": "hEwKaZ7lqLSpG7SEon6x1BkC/JSjHfjHWQ+9wZ2IcE+0fdnD/bC5QkIpJQDA3mqYb6HAlymoA6zIPnMpufsJDQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "System.Collections.Immutable": "6.0.0",
@@ -131,10 +131,10 @@
       },
       "Discord.Net.Rest": {
         "type": "Transitive",
-        "resolved": "3.14.1",
-        "contentHash": "veat0FfYD7E5SgxhwHibZZ1Zkf9Yv3nPRwdOUkTXZlGfeC3pSwKoIJ+rX6Jg1xdKHHFSeZJXaanJzfOAIUj99w==",
+        "resolved": "3.15.0",
+        "contentHash": "s2kZAK79+zUhTThjm5YOKqJs/ry7KSRKQPI8EwbYlme5Qz1ACZYQRPmt0t/yHW4utP/hb2AwCw9fNizpmscalQ==",
         "dependencies": {
-          "Discord.Net.Core": "3.14.1"
+          "Discord.Net.Core": "3.15.0"
         }
       },
       "DnsClient": {
@@ -204,11 +204,11 @@
       },
       "Microsoft.Extensions.Compliance.Abstractions": {
         "type": "Transitive",
-        "resolved": "8.4.0",
-        "contentHash": "WBPhQCz84/PFR5vm6lVPOYh4e7lcIQ2EyhYl84hVoZHC1vtvVAZsb4htEVx1LEPkLIiwnIdiLSzXxqS7+hkkDA==",
+        "resolved": "8.5.0",
+        "contentHash": "qhucZR8EK6CDTwSyouRRgvaIXSgnptQEXj96N/vj3YEGDQW0oascIws4hj0S2MwjmTyxbgBxhWsZs1Ib/6SHtw==",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1",
-          "Microsoft.Extensions.ObjectPool": "8.0.4"
+          "Microsoft.Extensions.ObjectPool": "8.0.5"
         }
       },
       "Microsoft.Extensions.Configuration": {
@@ -456,8 +456,8 @@
       },
       "Microsoft.Extensions.ObjectPool": {
         "type": "Transitive",
-        "resolved": "8.0.4",
-        "contentHash": "6FPHZ6lxtsrlFKE1LeHEco0BxevHSDdxngh37GxwGqiHm8zQz78ttM2OIevqQ8IAvtB01+5xEWBcYsjvSnhhoQ=="
+        "resolved": "8.0.5",
+        "contentHash": "CellAeXnw3uI8NBMgh4ZjB4TKtNPPvOMFKFmjPxDZVHv3iRPwHDTyuhDoPb6d1ythC6r1j0hO/Q6GsVHYf9DdQ=="
       },
       "Microsoft.Extensions.Options": {
         "type": "Transitive",
@@ -1605,15 +1605,15 @@
         "type": "Project",
         "dependencies": {
           "Cocona": "[2.2.0, )",
-          "CsvHelper": "[32.0.1, )",
-          "Discord.Net.Webhook": "[3.14.1, )",
+          "CsvHelper": "[32.0.3, )",
+          "Discord.Net.Webhook": "[3.15.0, )",
           "HtmlAgilityPack": "[1.11.61, )",
           "Lucene.Net": "[4.8.0-beta00016, )",
           "Lucene.Net.Analysis.Common": "[4.8.0-beta00016, )",
           "Lucene.Net.QueryParser": "[4.8.0-beta00016, )",
           "Microsoft.Extensions.Configuration.UserSecrets": "[8.0.0, )",
           "Microsoft.Extensions.Http": "[8.0.0, )",
-          "Microsoft.Extensions.Telemetry.Abstractions": "[8.4.0, )",
+          "Microsoft.Extensions.Telemetry.Abstractions": "[8.5.0, )",
           "Microsoft.IO.RecyclableMemoryStream": "[3.0.0, )",
           "MongoDB.Driver": "[2.25.0, )",
           "Sep": "[0.5.2, )",
@@ -1635,18 +1635,18 @@
       },
       "CsvHelper": {
         "type": "CentralTransitive",
-        "requested": "[32.0.1, )",
-        "resolved": "32.0.1",
-        "contentHash": "1sPpPUlSGCU2BRZmU+NZ2Le/AO2BBQTRZPZvNmfIgrDiVgLC6oD6b9QDFFf5AHhNsU+cAAbGoAcnnWq5a7VPlw=="
+        "requested": "[32.0.3, )",
+        "resolved": "32.0.3",
+        "contentHash": "JNDkd4Wc2Tim5IuyL8Ai13RhzRvaHItseEvlJ2YRkx2SMBFrIsW8a5+/o4/O1jsb6mlviihR6Hfyn+nqY6CurA=="
       },
       "Discord.Net.Webhook": {
         "type": "CentralTransitive",
-        "requested": "[3.14.1, )",
-        "resolved": "3.14.1",
-        "contentHash": "sAMzUKzQvVTz2IRueOh2RBlIkieO84J+dOp9sC4kB1GQ/46w6Xp6NO/kud+PqVI8DwyA2sH35d+ykoyKVhIj/A==",
+        "requested": "[3.15.0, )",
+        "resolved": "3.15.0",
+        "contentHash": "lI0ss7ccT2vbXsW6hfp/reBS3+DZDrtCpF3dfhlbJSe5G455ElD0y86wXb4DzutpH28uFjijYkHRAzPrbVY2JQ==",
         "dependencies": {
-          "Discord.Net.Core": "3.14.1",
-          "Discord.Net.Rest": "3.14.1"
+          "Discord.Net.Core": "3.15.0",
+          "Discord.Net.Rest": "3.15.0"
         }
       },
       "HtmlAgilityPack": {
@@ -1713,13 +1713,13 @@
       },
       "Microsoft.Extensions.Telemetry.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[8.4.0, )",
-        "resolved": "8.4.0",
-        "contentHash": "jiv/2aoe2zkI0Atl+WXChwy6CbjHByxUBLnF6OihMAPELgmKaSywLqcJo5VcbRYA0EGhmQJM/RaGVH3J2TAkxw==",
+        "requested": "[8.5.0, )",
+        "resolved": "8.5.0",
+        "contentHash": "uamn8rhmqZco33NhtMwyLbKsjyVXHvbt9ZkuRR09a+Yw1FJ5WgnmG7CCNLgrWFBMxYXGxtjk+z35+7ov3chntA==",
         "dependencies": {
-          "Microsoft.Extensions.Compliance.Abstractions": "8.4.0",
+          "Microsoft.Extensions.Compliance.Abstractions": "8.5.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
-          "Microsoft.Extensions.ObjectPool": "8.0.4",
+          "Microsoft.Extensions.ObjectPool": "8.0.5",
           "Microsoft.Extensions.Options": "8.0.2"
         }
       },
