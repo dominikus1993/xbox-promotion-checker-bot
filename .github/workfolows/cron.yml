@@ -1,0 +1,25 @@
+name: Run Bot 
+
+on:
+  schedule:
+    - cron: "00 11 * * 6,1,3,5"
+env:
+  DISCORD_WEBHOOK_TOKEN: "${{ secrets.DISCORD_WEBHOOK_TOKEN }}"
+  DISCORD_WEBHOOK_ID: "${{ secrets.DISCORD_WEBHOOK_ID }}"
+  MONGO_CONNECTION_STRING: "${{ secrets.MONGO_CONNECTION_STRING }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.23'
+        check-latest: true
+        cache: true
+
+    - name: Go Run
+      run: make runbin
