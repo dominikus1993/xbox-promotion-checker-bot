@@ -14,8 +14,6 @@ import (
 	"golang.org/x/exp/slog"
 )
 
-const polishCurrency = "zł"
-
 var decimalRegExp = regexp.MustCompile(`[^0-9.,-]`)
 var emptySpace = []byte("")
 var commaRegExp = regexp.MustCompile(`,`)
