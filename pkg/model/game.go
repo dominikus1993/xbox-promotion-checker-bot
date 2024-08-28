@@ -14,14 +14,13 @@ const baseMicrosoftPath = "https://www.microsoft.com/"
 var errUrlIsEmptyErr = errors.New("uri is empty")
 
 type PromotionPrice = float64
-
 type RegularPrice = float64
-
 type Title = string
 type Link = string
+type GameID = string
 
 type XboxStoreGame struct {
-	ID       string
+	ID       GameID
 	Title    Title
 	link     Link
 	price    PromotionPrice

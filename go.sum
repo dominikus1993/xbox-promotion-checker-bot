@@ -68,6 +68,10 @@ github.com/docker/go-units v0.5.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDD
 github.com/dominikus1993/go-toolkit v0.0.12/go.mod h1:Qw+kC/ZiXYiKUEADMwquWIMKAW6T8xiTlwOuQW8mdaQ=
 github.com/dominikus1993/go-toolkit v0.0.15 h1:5vrmP71DpkP6HuLBXyLDsjOhecvMm5X2Jgq1x/FfkGI=
 github.com/dominikus1993/go-toolkit v0.0.15/go.mod h1:ORKz6XAw9z5z08dUKSBopzwfloxEwXyfzE8xf1lhMhY=
+github.com/dominikus1993/go-toolkit v0.0.16 h1:lbBvI8gkAc+d6WabpmiKZqkY+rH1YQNY8wAuA8bZvBE=
+github.com/dominikus1993/go-toolkit v0.0.16/go.mod h1:7CTdkEXteZPq1mxo9rlWtZE/F8/RGWRwQZS/44FFnrY=
+github.com/dominikus1993/go-toolkit v0.0.17 h1:y5POiMMulmAfRb+MFM92zjHYmjdfqInSVA0FOT3ciwI=
+github.com/dominikus1993/go-toolkit v0.0.17/go.mod h1:7CTdkEXteZPq1mxo9rlWtZE/F8/RGWRwQZS/44FFnrY=
 github.com/dominikus1993/integrationtestcontainers-go v0.0.11/go.mod h1:EHSj7OjmyPW4lgIsaq96+vQzrvlfLMzYh7CO4wnFAVw=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=

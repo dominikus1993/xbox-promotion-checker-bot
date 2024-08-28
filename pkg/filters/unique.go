@@ -15,5 +15,5 @@ func NewUniqeFilter() *uniqueFilter {
 }
 
 func (f *uniqueFilter) Filter(ctx context.Context, games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
-	return channels.UniqBy(games, func(game data.XboxStoreGame) string { return game.ID }, 10)
+	return channels.UniqBy(games, func(game data.XboxStoreGame) data.GameID { return game.ID }, 10)
 }
