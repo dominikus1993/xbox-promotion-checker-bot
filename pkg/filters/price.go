@@ -17,6 +17,10 @@ func NewPriceFilter(promotionPercentage float64) *PriceFilter {
 
 func (f *PriceFilter) Filter(ctx context.Context, games <-chan data.XboxStoreGame) <-chan data.XboxStoreGame {
 	return channels.Filter(games, func(game data.XboxStoreGame) bool {
-		return game.CalculatePromotionPercentage() >= f.promotionPercentage
+		return pricePredicate(game, f.promotionPercentage)
 	}, 10)
+}
+
+func pricePredicate(game data.XboxStoreGame, promotionPercentage float64) bool {
+	return game.CalculatePromotionPercentage() >= promotionPercentage
 }
