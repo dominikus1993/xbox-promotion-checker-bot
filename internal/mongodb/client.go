@@ -19,6 +19,12 @@ func NewClient(ctx context.Context, connectionString, database, collection strin
 	// Set client options
 	clientOptions := options.Client().ApplyURI(connectionString)
 
+	err := clientOptions.Validate()
+
+	if err != nil {
+		return nil, err
+	}
+
 	// connect to MongoDB
 	client, err := mongo.Connect(ctx, clientOptions)
 
